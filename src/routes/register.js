@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { registerAuth } from '../controllers/authentication.controller.js'
 
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -10,3 +11,5 @@ registerRouter.get('/', (req, res) => {
   const registerHtmlPath = path.join(__dirname, '..', 'views', 'register.html')
   res.sendFile(registerHtmlPath)
 })
+
+registerRouter.post('/', registerAuth)

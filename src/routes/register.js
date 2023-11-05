@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { registerAuth } from '../controllers/authentication.controller.js'
+import { registerAuth } from '../controllers/authRegister.js'
 
 import path from 'path'
 import { fileURLToPath } from 'url'

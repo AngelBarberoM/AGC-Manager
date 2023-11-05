@@ -1,5 +1,5 @@
 import { Router } from 'express'
-// import { RegisterController } from '../controllers/register.js'
+import { loginAuth } from '../controllers/authLogin.js'
 
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -12,7 +12,4 @@ loginRouter.get('/', (req, res) => {
   res.sendFile(loginHtmlPath)
 })
 
-loginRouter.post('/', (req, res) => {
-  console.log(req.body)
-  res.send('recived')
-})
+loginRouter.post('/', loginAuth)

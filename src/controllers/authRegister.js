@@ -1,9 +1,5 @@
 import { AGCdbModel } from '../models/mysql/AGCdb.js'
 import bcryptjs from 'bcryptjs'
-// import jsonwebtoken from 'jsonwebtoken'
-import dotenv from 'dotenv'
-
-dotenv.config()
 
 export async function registerAuth (req, res) {
   const username = req.body.username
@@ -38,25 +34,8 @@ export async function registerAuth (req, res) {
 
   // Comprobamos si el usuario ha sido creado correctamente
   if (newUser) {
-    return res.status(201).send({ status: 'ok', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/login' })
+    return res.status(201).send({ status: 'success', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/login' })
   } else {
     return res.status(400).send({ status: 'Error', message: `El usuario ${newUser.username} no ha sido creado correctamente ` })
   }
-}
-
-export async function loginAuth (req, res) {
-  const username = req.body.username
-  const password = req.body.password
-
-  if (!username || !password) {
-    return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
-  }
-  // Comprobamos si existe usuario
-  const existeUsuario = await AGCdbModel.getByUsername(username)
-
-  if (!existeUsuario) {
-    return res.status(400).send({ status: 'Error', message: 'Este usuario no existe' })
-  }
-
-  res.send('recived')
 }

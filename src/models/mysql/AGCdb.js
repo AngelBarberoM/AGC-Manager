@@ -12,7 +12,17 @@ const connection = await mysql.createConnection(connectionString)
 
 export class AGCdbModel {
   static async getByEmail (email) {
-    const [users] = await connection.query('SELECT email from users WHERE email = ?', [email])
+    const [users] = await connection.query('SELECT BIN_TO_UUID(id) as id, username, email, password from users WHERE email = ?', [email])
+
+    if (users.length > 0) {
+      return users[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getByUsername (username) {
+    const [users] = await connection.query('SELECT BIN_TO_UUID(id) as id, username, email, password from users WHERE username = ?', [username])
 
     if (users.length > 0) {
       return users[0]

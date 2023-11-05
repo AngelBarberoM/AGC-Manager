@@ -31,6 +31,16 @@ export class AGCdbModel {
     }
   }
 
+  static async getById (id) {
+    const [users] = await connection.query('SELECT BIN_TO_UUID(id) as id, id, email, password from users WHERE id = UUID_TO_BIN(?)', [id])
+
+    if (users.length > 0) {
+      return users[0]
+    } else {
+      return null
+    }
+  }
+
   static async createUser ({ username, email, password }) {
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult

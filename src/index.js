@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: 'false' }))
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public', 'css')))
+app.use(express.static(path.join(__dirname, 'public', 'js')))
+app.use(express.static(path.join(__dirname, 'public', 'img')))
 app.disable('x-powered-by')
 
 // Middlewares

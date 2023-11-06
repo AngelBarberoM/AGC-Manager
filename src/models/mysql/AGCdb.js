@@ -11,7 +11,18 @@ const connectionString = process.env.DATABASE_URL ?? DEFAULT_CONFIG
 const connection = await mysql.createConnection(connectionString)
 
 export class AGCdbModel {
-  static async getByEmail (email) {
+  static async getNumberUsers () {
+    const [users] = await connection.query('SELECT COUNT(id) as Numero from users ')
+    console.log(users[0].Numero)
+
+    if (users[0].Numero !== 0) {
+      return users[0].Numero
+    } else {
+      return null
+    }
+  }
+
+  static async getUserByEmail (email) {
     const [users] = await connection.query('SELECT BIN_TO_UUID(id) as id, username, email, password from users WHERE email = ?', [email])
 
     if (users.length > 0) {
@@ -21,7 +32,7 @@ export class AGCdbModel {
     }
   }
 
-  static async getByUsername (username) {
+  static async getUserByUsername (username) {
     const [users] = await connection.query('SELECT BIN_TO_UUID(id) as id, username, email, password from users WHERE username = ?', [username])
 
     if (users.length > 0) {
@@ -31,7 +42,7 @@ export class AGCdbModel {
     }
   }
 
-  static async getById (id) {
+  static async getUserById (id) {
     const [users] = await connection.query('SELECT BIN_TO_UUID(id) as id, id, email, password from users WHERE id = UUID_TO_BIN(?)', [id])
 
     if (users.length > 0) {

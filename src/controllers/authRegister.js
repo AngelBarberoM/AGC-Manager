@@ -7,6 +7,14 @@ export async function registerAuth (req, res) {
   const password = req.body.password
   const confirmedPassword = req.body.confirmedPassword
 
+  // Comprobamos si el numero de usuarios registrados en el sistema es mayor que 3,
+  // ya que no tiene sentido que todo el mundo pueda registrarse
+  const numberUsers = await AGCdbModel.getNumberUsers()
+
+  if (numberUsers >= 3) {
+    return res.status(429).send({ status: 'Error', message: 'Límite de usuarios alcanzado. No se pueden admitir más registros en este momento' })
+  }
+
   // Comprobamos si todos los campos del formulario han sido rellenados
   if (!username || !email || !password || !confirmedPassword) {
     return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
@@ -22,7 +30,7 @@ export async function registerAuth (req, res) {
   const hashPassword = await bcryptjs.hash(password, salt)
 
   // Comprobamos si existe usuario
-  const existeUsuario = await AGCdbModel.getByEmail(email)
+  const existeUsuario = await AGCdbModel.getUserByEmail(email)
 
   if (existeUsuario) {
     return res.status(400).send({ status: 'Error', message: 'Este usuario ya exisite' })

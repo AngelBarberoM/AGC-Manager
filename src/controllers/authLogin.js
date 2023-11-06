@@ -13,7 +13,7 @@ export async function loginAuth (req, res) {
     return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
   }
   // Comprobamos si existe usuario
-  const existeUsuario = await AGCdbModel.getByUsername(username)
+  const existeUsuario = await AGCdbModel.getUserByUsername(username)
 
   if (!existeUsuario) {
     return res.status(400).send({ status: 'Error', message: 'Usuario o contraseña incorrectos' })
@@ -36,5 +36,5 @@ export async function loginAuth (req, res) {
     path: '/'
   }
   res.cookie('jwt', token, cookieOption)
-  res.send({ status: 'success', message: 'Usuario loggeado', redirect: '/' })
+  res.send({ status: 'success', message: 'Usuario loggeado', redirect: '/home' })
 }

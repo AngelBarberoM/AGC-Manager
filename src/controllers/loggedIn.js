@@ -5,7 +5,7 @@ export async function onlyPublic (req, res, next) {
   const loggedIn = await isLoggedIn(req)
 
   if (!loggedIn) return next()
-  else res.redirect('/')
+  else res.redirect('/home')
 }
 
 export async function onlyLoggedIn (req, res, next) {
@@ -22,7 +22,7 @@ async function isLoggedIn (req) {
     const decodedCookie = jsonwebtoken.verify(cookieJWT, process.env.JWT_SECRET)
 
     // Comprobamos si el usuario con id decodificado de la cookie existe
-    const usuario = await AGCdbModel.getById(decodedCookie.id)
+    const usuario = await AGCdbModel.getUserById(decodedCookie.id)
 
     if (usuario) {
       return true

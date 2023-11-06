@@ -42,7 +42,7 @@ export async function registerAuth (req, res) {
 
   // Comprobamos si el usuario ha sido creado correctamente
   if (newUser) {
-    return res.status(201).send({ status: 'success', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/login' })
+    return res.status(201).send({ status: 'ok', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/login' })
   } else {
     return res.status(400).send({ status: 'Error', message: `El usuario ${newUser.username} no ha sido creado correctamente ` })
   }

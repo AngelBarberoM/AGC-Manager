@@ -36,5 +36,5 @@ export async function loginAuth (req, res) {
     path: '/'
   }
   res.cookie('jwt', token, cookieOption)
-  res.send({ status: 'success', message: 'Usuario loggeado', redirect: '/home' })
+  res.send({ status: 'ok', message: 'Usuario loggeado', redirect: '/home' })
 }

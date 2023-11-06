@@ -13,7 +13,6 @@ const connection = await mysql.createConnection(connectionString)
 export class AGCdbModel {
   static async getNumberUsers () {
     const [users] = await connection.query('SELECT COUNT(id) as Numero from users ')
-    console.log(users[0].Numero)
 
     if (users[0].Numero !== 0) {
       return users[0].Numero

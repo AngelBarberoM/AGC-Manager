@@ -1,4 +1,5 @@
-import { AGCdbModel } from '../models/mysql/AGCdb.js'
+// import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import { UsersModel } from '../models/mysql/users.js'
 import { validateUser } from '../schemas/AGC.js'
 import bcryptjs from 'bcryptjs'
 
@@ -23,7 +24,7 @@ export async function registerAuth (req, res) {
 
   // Comprobamos si el numero de usuarios registrados en el sistema es mayor que 3,
   // ya que no tiene sentido que todo el mundo pueda registrarse
-  const numberUsers = await AGCdbModel.getNumberUsers()
+  const numberUsers = await UsersModel.getNumberUsers()
 
   if (numberUsers >= 3) {
     return res.status(429).send({ status: 'Error', message: 'Límite de usuarios alcanzado. No se pueden admitir más registros en este momento' })
@@ -39,7 +40,7 @@ export async function registerAuth (req, res) {
   const hashPassword = await bcryptjs.hash(password, salt)
 
   // Comprobamos si existe usuario
-  const existeUsuario = await AGCdbModel.getUserByEmail(email)
+  const existeUsuario = await UsersModel.getUserByEmail(email)
 
   if (existeUsuario) {
     return res.status(400).send({ status: 'Error', message: 'Este usuario ya exisite' })
@@ -47,7 +48,7 @@ export async function registerAuth (req, res) {
 
   // Creamos el nuevo usuario
 
-  const newUser = await AGCdbModel.createUser({ username, email, password: hashPassword })
+  const newUser = await UsersModel.createUser({ username, email, password: hashPassword })
 
   // Comprobamos si el usuario ha sido creado correctamente
   if (newUser) {

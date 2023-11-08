@@ -1,4 +1,5 @@
-import { AGCdbModel } from '../models/mysql/AGCdb.js'
+// import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import { UsersModel } from '../models/mysql/users.js'
 import { validatePartialUser } from '../schemas/AGC.js'
 import bcryptjs from 'bcryptjs'
 import jsonwebtoken from 'jsonwebtoken'
@@ -23,7 +24,7 @@ export async function loginAuth (req, res) {
   }
 
   // Comprobamos si existe usuario
-  const existeUsuario = await AGCdbModel.getUserByUsername(username)
+  const existeUsuario = await UsersModel.getUserByUsername(username)
 
   if (!existeUsuario) {
     return res.status(400).send({ status: 'Error', message: 'Usuario o contraseña incorrectos' })

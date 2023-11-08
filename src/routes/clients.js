@@ -16,8 +16,14 @@ clientsRouter.get('/', onlyLoggedIn, (req, res) => {
   res.sendFile(clientsHtmlPath)
 })
 
-clientsRouter.get('/allClients', onlyLoggedIn, clientsController.getAllClients)
-clientsRouter.get('/:id', onlyLoggedIn, clientsController.getClientById)
-clientsRouter.delete('/:id', onlyLoggedIn, clientsController.deleteClient)
+clientsRouter.get('/allClients', clientsController.getAllClients)
+clientsRouter.get('/:id', clientsController.getClientById)
+clientsRouter.delete('/:id', clientsController.deleteClient)
 clientsRouter.post('/', clientsController.createClient)
-clientsRouter.patch('/:id', onlyLoggedIn, clientsController.updateClient)
+clientsRouter.patch('/:id', clientsController.updateClient)
+
+// clientsRouter.get('/allClients', onlyLoggedIn, clientsController.getAllClients)
+// clientsRouter.get('/:id', onlyLoggedIn, clientsController.getClientById)
+// clientsRouter.delete('/:id', onlyLoggedIn, clientsController.deleteClient)
+// clientsRouter.post('/', onlyLoggedIn, clientsController.createClient)
+// clientsRouter.patch('/:id', onlyLoggedIn, clientsController.updateClient)

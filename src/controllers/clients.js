@@ -1,9 +1,10 @@
-import { AGCdbModel } from '../models/mysql/AGCdb.js'
+// import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import { ClientsModel } from '../models/mysql/clients.js'
 import { validateClient, validatePartialClient } from '../schemas/AGC.js'
 
 export class ClientsController {
   getAllClients = async (req, res) => {
-    const clients = await AGCdbModel.getAllClients()
+    const clients = await ClientsModel.getAllClients()
 
     if (!clients) {
       return res.status(400).send({ status: 'Error', message: 'No existen clientes para mostrar' })
@@ -14,7 +15,7 @@ export class ClientsController {
   getClientById = async (req, res) => {
     const { id } = req.params
 
-    const clients = await AGCdbModel.getClientById({ id })
+    const clients = await ClientsModel.getClientById({ id })
 
     if (!clients) {
       return res.status(400).send({ status: 'Error', message: 'No existe cliente para mostrar' })
@@ -26,30 +27,31 @@ export class ClientsController {
     const validate = validateClient(req.body)
 
     if (!validate.success) {
-      return res.status(400).send({ status: 'Error', message: 'Error Client Schema' })
+      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      // return res.status(400).send({ status: 'Error', message: 'Error Client Schema' })
     }
 
-    const newMovie = await AGCdbModel.createClient({ input: validate.data })
+    const newClient = await ClientsModel.createClient({ input: validate.data })
 
-    res.status(201).json(newMovie)
+    res.status(201).json(newClient)
   }
 
   updateClient = async (req, res) => {
     const validate = validatePartialClient(req.body)
 
     if (!validate.success) {
-      return res.status(400).send({ status: 'Error', message: 'Error Client Schema' })
+      return res.status(400).json({ error: JSON.parse(validate.error.message) })
     }
 
     const { id } = req.params
 
-    const clients = await AGCdbModel.getClientById({ id })
+    const clients = await ClientsModel.getClientById({ id })
 
     if (!clients) {
       return res.status(400).send({ status: 'Error', message: 'No existe cliente para actualizar' })
     }
 
-    const updatedClient = await AGCdbModel.updateClient({ id, input: validate.data })
+    const updatedClient = await ClientsModel.updateClient({ id, input: validate.data })
 
     if (!updatedClient) {
       return res.status(400).send({ status: 'Error', message: 'No se ha podido actualizar' })
@@ -61,12 +63,12 @@ export class ClientsController {
   deleteClient = async (req, res) => {
     const { id } = req.params
 
-    const deletedClient = await AGCdbModel.deleteClient({ id })
+    const deletedClient = await ClientsModel.deleteClient({ id })
 
     if (!deletedClient.success) {
       return res.status(404).send({ status: 'Error', message: 'Client not found' })
     }
 
-    return res.json({ message: 'Movie deleted' })
+    return res.json({ message: 'Client deleted' })
   }
 }

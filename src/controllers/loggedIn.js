@@ -1,4 +1,5 @@
-import { AGCdbModel } from '../models/mysql/AGCdb.js'
+// import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import { UsersModel } from '../models/mysql/users.js'
 import jsonwebtoken from 'jsonwebtoken'
 
 export async function onlyPublic (req, res, next) {
@@ -22,7 +23,7 @@ async function isLoggedIn (req) {
     const decodedCookie = jsonwebtoken.verify(cookieJWT, process.env.JWT_SECRET)
 
     // Comprobamos si el usuario con id decodificado de la cookie existe
-    const usuario = await AGCdbModel.getUserById(decodedCookie.id)
+    const usuario = await UsersModel.getUserById(decodedCookie.id)
 
     if (usuario) {
       return true

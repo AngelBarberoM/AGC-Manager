@@ -1,0 +1,57 @@
+### Recuperar todos los usuarios
+GET http://localhost:1234/users/allUsers
+
+### Recuperar un usuario por id
+GET http://localhost:1234/users/66c12ff9-7e88-11ee-ba91-d0c5d3070aa6
+
+
+### Crear un usuario con POST
+POST http://localhost:1234/users
+Content-Type: application/json
+{
+  "username": "hola",
+  "email": "hola@hola.com",
+  "password": "hola",
+  "confirmedPassword": "hola"
+}
+
+### Actualizar un usuario
+PATCH http://localhost:1234/users/03fc5d69-7e89-11ee-ba91-d0c5d3070aa6
+Content-Type: application/json
+{
+  "dni": "82342184R"
+}
+
+### Eliminar un usuario
+DELETE  http://localhost:1234/users/03fc5d69-7e89-11ee-ba91-d0c5d3070aa6
+
+##############################################################################################################################
+
+### Recuperar todos los clientes
+GET http://localhost:1234/clients/allclients
+
+### Recuperar un cliente por id
+GET http://localhost:1234/clients/8724c4ad-7e7d-11ee-ba91-d0c5d3070aa6
+
+
+### Crear un cliente con POST
+POST http://localhost:1234/clients
+Content-Type: application/json
+{
+  "nombreEmpresa": "Empresa3",
+  "dni": "34246453T",
+  "nombre": "Francis",
+  "apellidos": "Gustavo Martinez",
+  "email": "francis@gmail.com",
+  "telefono": 764346983
+}
+
+### Actualizar un cliente
+PATCH http://localhost:1234/clients/8724c4ad-7e7d-11ee-ba91-d0c5d3070aa6
+Content-Type: application/json
+{
+  "dni": "82342184R"
+}
+
+### Eliminar un cliente
+DELETE  http://localhost:1234/clients/8724c4ad-7e7d-11ee-ba91-d0c5d3070aa6

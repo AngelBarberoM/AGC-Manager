@@ -2,8 +2,9 @@ import { Router } from 'express'
 import { registerRouter } from './register.js'
 import { loginRouter } from './login.js'
 import { homeRouter } from './home.js'
+import { clientsRouter } from './clients.js'
 import { isLoggedOut } from '../controllers/loggedout.js'
-import { onlyPublic } from '../controllers/loggedIn.js'
+import { onlyPublic, onlyLoggedIn } from '../controllers/loggedIn.js'
 
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -11,20 +12,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const pagesRouter = Router()
 
-// Página Inicial
+// Main Page
 pagesRouter.get('/', onlyPublic, (req, res) => {
   const mainHtmlPath = path.join(__dirname, '..', 'views', 'main.html')
   res.sendFile(mainHtmlPath)
 })
 
-// Página principal
+// Home Page
 pagesRouter.get('/home', homeRouter)
 
-// Página login
+// Login Page
 pagesRouter.use('/login', loginRouter)
 
-// Página registro
+// Register Page
 pagesRouter.use('/register', registerRouter)
 
-// Función cerrar sesión
-pagesRouter.use('/logout', isLoggedOut)
+// LogOut
+pagesRouter.use('/logout', onlyLoggedIn, isLoggedOut)
+
+// Clients Page
+pagesRouter.use('/clients', clientsRouter)

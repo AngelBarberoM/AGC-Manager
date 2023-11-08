@@ -15,7 +15,6 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
       username, password
     })
   })
-  console.log(res)
 
   if (!res.ok) {
     return mensajeError.classList.toggle('escondido', false)

@@ -17,7 +17,6 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
       username, email, password, confirmedPassword
     })
   })
-  console.log(res)
 
   if (!res.ok) {
     return mensajeError.classList.toggle('escondido', false)

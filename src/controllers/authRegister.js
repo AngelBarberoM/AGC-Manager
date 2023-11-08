@@ -1,4 +1,5 @@
 import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import { validateUser } from '../schemas/AGC.js'
 import bcryptjs from 'bcryptjs'
 
 export async function registerAuth (req, res) {
@@ -7,17 +8,25 @@ export async function registerAuth (req, res) {
   const password = req.body.password
   const confirmedPassword = req.body.confirmedPassword
 
+  // Comprobamos si todos los campos del formulario han sido rellenados
+  if (!username || !email || !password || !confirmedPassword) {
+    return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
+  }
+
+  // Comprobamos el esquema del usuario
+  const validate = validateUser(req.body)
+
+  if (!validate.success) {
+    // 422 Unprocessable Entity
+    return res.status(400).send({ status: 'Error', message: 'Error User Schema' })
+  }
+
   // Comprobamos si el numero de usuarios registrados en el sistema es mayor que 3,
   // ya que no tiene sentido que todo el mundo pueda registrarse
   const numberUsers = await AGCdbModel.getNumberUsers()
 
   if (numberUsers >= 3) {
     return res.status(429).send({ status: 'Error', message: 'Límite de usuarios alcanzado. No se pueden admitir más registros en este momento' })
-  }
-
-  // Comprobamos si todos los campos del formulario han sido rellenados
-  if (!username || !email || !password || !confirmedPassword) {
-    return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
   }
 
   // Comprobamos si las contraseñas introducidas son la misma

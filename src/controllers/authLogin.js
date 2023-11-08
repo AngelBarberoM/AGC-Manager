@@ -1,4 +1,5 @@
 import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import { validatePartialUser } from '../schemas/AGC.js'
 import bcryptjs from 'bcryptjs'
 import jsonwebtoken from 'jsonwebtoken'
 import dotenv from 'dotenv'
@@ -12,6 +13,15 @@ export async function loginAuth (req, res) {
   if (!username || !password) {
     return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
   }
+
+  // Comprobamos el esquema del usuario
+  const validate = validatePartialUser(req.body)
+
+  if (!validate.success) {
+    // 422 Unprocessable Entity
+    return res.status(400).send({ status: 'Error', message: 'Error User Schema' })
+  }
+
   // Comprobamos si existe usuario
   const existeUsuario = await AGCdbModel.getUserByUsername(username)
 

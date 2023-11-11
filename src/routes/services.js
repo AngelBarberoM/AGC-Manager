@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { servicesModel } from '../models/mysql/services.js'
+import { ServicesModel } from '../models/mysql/services.js'
 import { onlyLoggedIn } from '../controllers/loggedIn.js'
 import { ServicesController } from '../controllers/services.js'
 
@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const servicesRouter = Router()
 
-const servicesController = new ServicesController({ servicesModel })
+const servicesController = new ServicesController({ ServicesModel })
 
 servicesRouter.get('/', onlyLoggedIn, (req, res) => {
   const servicesHtmlPath = path.join(__dirname, '..', 'views', 'services.html')

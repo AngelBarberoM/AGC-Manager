@@ -24,7 +24,7 @@ export class ClientsModel {
   }
 
   static async getAllClients () {
-    const [clients] = await connection.query('SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion FROM clients')
+    const [clients] = await connection.query('SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion FROM clients')
 
     if (clients.length > 0) {
       return clients
@@ -35,7 +35,7 @@ export class ClientsModel {
 
   static async getClientById ({ id }) {
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
       FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -51,17 +51,18 @@ export class ClientsModel {
 
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult
+
     try {
       await connection.query(
         `INSERT INTO clients (clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion) 
-        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?);`, [nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion]
+        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?, ?, ?);`, [nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion]
       )
     } catch (e) {
       throw new Error('Error creating client')
     }
 
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
       FROM clients WHERE clientId = UUID_TO_BIN(?)`, [uuid]
     )
 
@@ -74,7 +75,7 @@ export class ClientsModel {
 
   static async updateClient ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
       FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -106,7 +107,7 @@ export class ClientsModel {
     }
 
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
       FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -127,7 +128,7 @@ export class ClientsModel {
     }
 
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
       FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 

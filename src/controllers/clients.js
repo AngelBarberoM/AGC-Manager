@@ -34,9 +34,9 @@ export class ClientsController {
     const newClient = await ClientsModel.createClient({ input: validate.data })
 
     if (newClient) {
-      return res.status(201).json({ status: 'ok', message: `Cliente ${newClient.nombre} creado correctamente`, redirect: '/login' })
+      return res.status(201).json({ status: 'ok', message: `Cliente ${newClient.nombre} con id ${newClient.clientId} creado correctamente`, redirect: '/clients' })
     } else {
-      return res.status(400).json({ status: 'Error', message: `El cliente ${newClient.nombre} no ha sido creado correctamente ` })
+      return res.status(400).json({ status: 'Error', message: `El cliente ${validate.data.nombre} no ha sido creado correctamente ` })
     }
   }
 

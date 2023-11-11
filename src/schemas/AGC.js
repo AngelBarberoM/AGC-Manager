@@ -38,10 +38,12 @@ const clientSchema = z.object({
     invalid_type_error: 'Telefono must be a string',
     required_error: 'Telefono is required'
   }).length(9, { message: 'Must be exactly 9 characters long' }).regex(/^[6-7-9]\d{8}$/),
-  fechaNacimiento: z.date({
-    invalid_type_error: 'Fecha Nacimiento must be a date',
+  fechaNacimiento: z.string({
+    invalid_type_error: 'Fecha Nacimiento must be a string',
     required_error: 'Fecha Nacimiento is required'
-  }).min(new Date('1900-01-01'), { message: 'Too old' }),
+  }).refine(value => new Date(value) >= new Date('1900-01-01'), {
+    message: 'Fecha Nacimiento must be greater than 1900-01-01.'
+  }),
   direccion: z.string({
     invalid_type_error: 'Direccion must be a string',
     required_error: 'Direccion is required'
@@ -58,14 +60,18 @@ const serviceSchema = z.object({
     invalid_type_error: 'Descripcion must be a string',
     required_error: 'Descripcion is required'
   }),
-  fechaServicio: z.date({
-    invalid_type_error: 'Fecha Servicio must be a date',
+  fechaServicio: z.string({
+    invalid_type_error: 'Fecha Servicio must be a string',
     required_error: 'Fecha Servicio is required'
-  }).min(new Date(), { message: 'Fecha Servicio must be greater or equal than the current date' }),
-  fechaCreacion: z.date({
-    invalid_type_error: 'Fecha Creacion must be a date',
+  }).refine(value => new Date(value) >= new Date(), {
+    message: 'Fecha Servicio must be greater than the current date.'
+  }),
+  fechaCreacion: z.string({
+    invalid_type_error: 'Fecha Creacion must be a string',
     required_error: 'Fecha Creacion is required'
-  }).min(new Date(), { message: 'Fecha Creacion must be greater or equal than the current date' }),
+  }).refine(value => new Date(value) >= new Date('2020-01-01'), {
+    message: 'Fecha Creacion must be greater than 2020-01-01.'
+  }),
   clientId: z.string().uuid({
     invalid_type_error: 'clientId must be a UUID',
     required_error: 'clientId is required'
@@ -73,14 +79,18 @@ const serviceSchema = z.object({
 })
 
 const contractSchema = z.object({
-  fechaInicio: z.date({
-    invalid_type_error: 'Fecha Inicio must be a date',
+  fechaInicio: z.string({
+    invalid_type_error: 'Fecha Inicio must be a string',
     required_error: 'Fecha Inicio is required'
-  }).min(new Date('2000-01-01'), { message: 'Fecha Inicio must be greater than the 2000-01-01' }),
-  fechaFin: z.date({
-    invalid_type_error: 'Fecha Fin must be a date',
+  }).refine(value => new Date(value) >= new Date('2000-01-01'), {
+    message: 'Fecha Inicio must be greater than 2000-01-01.'
+  }),
+  fechaFin: z.string({
+    invalid_type_error: 'Fecha Fin must be a string',
     required_error: 'Fecha Fin is required'
-  }).min(new Date('2000-01-01'), { message: 'Fecha Fin must be greater than the 2000-01-01' }),
+  }).refine(value => new Date(value) >= new Date('2000-01-01'), {
+    message: 'Fecha Fin must be greater than Fecha Inicio.'
+  }),
   sueldoHora: z.number({
     invalid_type_error: 'Sueldo Hora must be a number',
     required_error: 'Sueldo Hora is required'
@@ -117,10 +127,12 @@ const administrativeSchema = z.object({
       invalid_type_error: 'Tipo Servicio must be a enum',
       required_error: 'Tipo Servicio is required'
     }),
-  fechaNacimiento: z.date({
-    invalid_type_error: 'Fecha Nacimiento must be a date',
+  fechaNacimiento: z.string({
+    invalid_type_error: 'Fecha Nacimiento must be a string',
     required_error: 'Fecha Nacimiento is required'
-  }).min(new Date('1900-01-01'), { message: 'Too old' }),
+  }).refine(value => new Date(value) >= new Date('1900-01-01'), {
+    message: 'Fecha Nacimiento must be greater than 1900-01-01.'
+  }),
   direccion: z.string({
     invalid_type_error: 'Direccion must be a string',
     required_error: 'Direccion is required'
@@ -157,10 +169,12 @@ const driverSchema = z.object({
       invalid_type_error: 'Sexo must be a enum',
       required_error: 'Sexo is required'
     }),
-  fechaNacimiento: z.date({
-    invalid_type_error: 'Fecha Nacimiento must be a date',
+  fechaNacimiento: z.string({
+    invalid_type_error: 'Fecha Nacimiento must be a string',
     required_error: 'Fecha Nacimiento is required'
-  }).min(new Date('1900-01-01'), { message: 'Too old' }),
+  }).refine(value => new Date(value) >= new Date('1900-01-01'), {
+    message: 'Fecha Nacimiento must be greater than 1900-01-01.'
+  }),
   direccion: z.string({
     invalid_type_error: 'Direccion must be a string',
     required_error: 'Direccion is required'
@@ -170,18 +184,21 @@ const driverSchema = z.object({
       invalid_type_error: 'Permiso Conducir must be a enum',
       required_error: 'Permiso Conducir is required'
     }),
-  tarjetaCAP: z.boolean({
-    required_error: 'Tarjeta CAP is required',
-    invalid_type_error: 'Tarjeta CAP must be a boolean'
-  }),
-  tarjetaTacografo: z.boolean({
-    required_error: 'Tarjeta Tacografo is required',
-    invalid_type_error: 'Tarjeta Tacografo must be a boolean'
-  }),
-  certificadoAntecedentes: z.boolean({
-    required_error: 'Certificado Antecedentes is required',
-    invalid_type_error: 'Certificado Antecedentes must be a boolean'
-  }),
+  tarjetaCAP: z.enum(['Si', 'No'],
+    {
+      invalid_type_error: 'Tarjeta CAP must be a enum',
+      required_error: 'Tarjeta CAP is required'
+    }),
+  tarjetaTacografo: z.enum(['Si', 'No'],
+    {
+      invalid_type_error: 'Tarjeta Tacograf must be a enum',
+      required_error: 'Tarjeta Tacografo is required'
+    }),
+  certificadoAntecedentes: z.enum(['Si', 'No'],
+    {
+      invalid_type_error: 'Certificado Antecedentes must be a enum',
+      required_error: 'Certificado Antecedentes is required'
+    }),
   contractId: z.string().uuid({
     invalid_type_error: 'contractId must be a UUID',
     required_error: 'contractId is required'
@@ -233,6 +250,24 @@ export function validatePartialClient (input) {
   return clientSchema.partial().safeParse(input)
 }
 
+// Service
+export function validateService (input) {
+  return serviceSchema.safeParse(input)
+}
+
+export function validatePartialService (input) {
+  return serviceSchema.partial().safeParse(input)
+}
+
+// Contract
+export function validateContract (input) {
+  return contractSchema.safeParse(input)
+}
+
+export function validatePartialContract (input) {
+  return contractSchema.partial().safeParse(input)
+}
+
 // Administrative
 export function validateAdministrative (input) {
   return administrativeSchema.safeParse(input)
@@ -258,22 +293,4 @@ export function validateBus (input) {
 
 export function validatePartialBus (input) {
   return busSchema.partial().safeParse(input)
-}
-
-// Service
-export function validateService (input) {
-  return serviceSchema.safeParse(input)
-}
-
-export function validatePartialService (input) {
-  return serviceSchema.partial().safeParse(input)
-}
-
-// Type Service
-export function validateContract (input) {
-  return contractSchema.safeParse(input)
-}
-
-export function validatePartialContract (input) {
-  return contractSchema.partial().safeParse(input)
 }

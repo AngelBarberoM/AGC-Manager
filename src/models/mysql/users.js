@@ -24,7 +24,7 @@ export class UsersModel {
   }
 
   static async getAllUsers () {
-    const [users] = await connection.query('SELECT username, email, password FROM users')
+    const [users] = await connection.query('SELECT BIN_TO_UUID(userId) as userId, username, email, password FROM users')
 
     if (users.length > 0) {
       return users
@@ -88,7 +88,7 @@ export class UsersModel {
     }
 
     const [users] = await connection.query(
-      `SELECT BIN_TO_UUID(userId), username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
       FROM users WHERE userId = UUID_TO_BIN(?);`, [uuid]
     )
 
@@ -97,7 +97,7 @@ export class UsersModel {
 
   static async updateUser ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -115,11 +115,11 @@ export class UsersModel {
         [username, email, password, id]
       )
     } catch (e) {
-      throw new Error('Error updating client')
+      throw new Error('Error updating user')
     }
 
     const [users] = await connection.query(
-      `SELECT username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -136,11 +136,11 @@ export class UsersModel {
         'DELETE FROM users WHERE userId = UUID_TO_BIN(?)', [id]
       )
     } catch (e) {
-      throw new Error('Error deleting client')
+      throw new Error('Error deleting user')
     }
 
     const [users] = await connection.query(
-      `SELECT username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 

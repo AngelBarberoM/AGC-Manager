@@ -2,9 +2,9 @@
 GET http://localhost:1234/users/allUsers
 
 ### Recuperar un usuario por id
-GET http://localhost:1234/users/66c12ff9-7e88-11ee-ba91-d0c5d3070aa6
+GET http://localhost:1234/users/3399cc76-7fe3-11ee-83f6-d0c5d3070aa6
 
-### Crear un usuario con POST
+### Crear un usuario
 POST http://localhost:1234/users
 Content-Type: application/json
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un usuario
-PATCH http://localhost:1234/users/c717e413-7e8e-11ee-a831-d0c5d3070aa6
+PATCH http://localhost:1234/users/aa6830c2-80b0-11ee-9eda-d0c5d3070aa6
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### Eliminar un usuario
-DELETE  http://localhost:1234/users/75f6a4b5-7ed7-11ee-aa1c-d0c5d3070aa6
+DELETE  http://localhost:1234/users/aa6830c2-80b0-11ee-9eda-d0c5d3070aa6
 
 ##############################################################################################################################
 
@@ -32,9 +32,9 @@ DELETE  http://localhost:1234/users/75f6a4b5-7ed7-11ee-aa1c-d0c5d3070aa6
 GET http://localhost:1234/clients/allclients
 
 ### Recuperar un cliente por id
-GET http://localhost:1234/clients/8724c4ad-7e7d-11ee-ba91-d0c5d3070aa6
+GET http://localhost:1234/clients/1de2100e-80b5-11ee-9eda-d0c5d3070aa6
 
-### Crear un cliente con POST
+### Crear un cliente
 POST http://localhost:1234/clients
 Content-Type: application/json
 
@@ -44,20 +44,190 @@ Content-Type: application/json
   "nombre": "Francis",
   "apellidos": "Gustavo Martinez",
   "email": "francis@gmail.com",
-  "telefono": 764346983,
-  "fechaNacimiento": "2000-07-31",
+  "telefono": "643469843",
+  "fechaNacimiento": "2000-01-01",
   "direccion": "C/San Sebastian, 32, 7e, 52353"
 }
 
 ### Actualizar un cliente
-PATCH http://localhost:1234/clients/66c32308-7e88-11ee-ba91-d0c5d3070aa6
+PATCH http://localhost:1234/clients/1de2100e-80b5-11ee-9eda-d0c5d3070aa6
 Content-Type: application/json
 
 {
-  "dni": "82342184R"
+  "dni": "82342184T",
+  "nombre": "Carlos"
 }
 
 ### Eliminar un cliente
-DELETE  http://localhost:1234/clients/91b47d4b-7e90-11ee-a831-d0c5d3070aa6
+DELETE  http://localhost:1234/clients/1f722823-80db-11ee-b214-d0c5d3070aa6
 
 ##############################################################################################################################
+
+### Recuperar todos los servicios
+GET http://localhost:1234/services/allservices
+
+### Recuperar un servicio por id
+GET http://localhost:1234/services/049b14c2-80c0-11ee-9eda-d0c5d3070aa6
+
+### Crear un servicio
+POST http://localhost:1234/services
+Content-Type: application/json
+
+{
+  "tipoServicio": "transfer",
+  "descripcion": "transfer dia 22",
+  "fechaServicio": "2024-11-12",
+  "fechaCreacion": "2020-01-01",
+  "clientId": "ff3804e5-7fac-11ee-920d-d0c5d3070aa6"
+}
+
+### Actualizar un servicio
+PATCH http://localhost:1234/services/d4f6674b-80c0-11ee-9eda-d0c5d3070aa6
+Content-Type: application/json
+
+{
+  "fechaServicio": "2025-06-17",
+  "descripcion": "hola esto es una prueba de actualizar un servicio"
+}
+
+### Eliminar un servicio
+DELETE  http://localhost:1234/services/a28bf738-80db-11ee-b214-d0c5d3070aa6
+
+##############################################################################################################################
+
+### Recuperar todos los contratos
+GET http://localhost:1234/contracts/allcontracts
+
+### Recuperar un contrato por id
+GET http://localhost:1234/contracts/9f0310e1-7fe3-11ee-83f6-d0c5d3070aa6
+
+### Crear un contrato
+POST http://localhost:1234/contracts
+Content-Type: application/json
+
+{
+  "fechaInicio":  "2000-01-01",
+  "fechaFin": "2000-01-01",
+  "sueldoHora": 9,
+  "horasSemana": 40
+}
+
+### Actualizar un contrato
+PATCH http://localhost:1234/contracts/dd859045-80dd-11ee-b214-d0c5d3070aa6
+Content-Type: application/json
+
+{
+  "fechaFin": "2045-09-27"
+}
+
+### Eliminar un contrato
+DELETE  http://localhost:1234/contracts/001c13cc-80c1-11ee-9eda-d0c5d3070aa6
+
+##############################################################################################################################
+
+### Recuperar todos los administrativos
+GET http://localhost:1234/administratives/alladministratives
+
+### Recuperar un administrativo por id
+GET http://localhost:1234/administratives/b1e8f663-7fad-11ee-920d-d0c5d3070aa6
+
+### Crear un administrativo
+POST http://localhost:1234/administratives
+Content-Type: application/json
+
+{
+  "dni":  "32424623F",
+  "nombre": "Prueba",
+  "apellidos": "Prueba Prueba",
+  "email": "prueba@prueba.es",
+  "telefono": "923424232",
+  "sexo": "otros",
+  "fechaNacimiento": "2002-03-11",
+  "direccion": "C/Juan luis, 4, 2t, 23432",
+  "contractId": "fda9eca0-80cb-11ee-bd18-d0c5d3070aa6"
+}
+
+### Actualizar un administrativo
+PATCH http://localhost:1234/administratives/0fdad3fb-80ca-11ee-bd18-d0c5d3070aa6
+Content-Type: application/json
+
+{
+  "apellidos": "Lorenzo Caballero",
+  "email": "arturoPrueba@gmail.com",
+  "sexo": "femenino"
+}
+
+### Eliminar un administrativo
+DELETE  http://localhost:1234/administratives/6e1bc3e8-80cf-11ee-bd18-d0c5d3070aa6
+
+##############################################################################################################################
+
+### Recuperar todos los conductores
+GET http://localhost:1234/drivers/alldrivers
+
+### Recuperar un conductor por id
+GET http://localhost:1234/drivers/b1e8fe07-7fad-11ee-920d-d0c5d3070aa6
+
+### Crear un conductor
+POST http://localhost:1234/drivers
+Content-Type: application/json
+
+{
+  "dni":  "32424623F",
+  "nombre": "Prueba",
+  "apellidos": "Prueba Prueba",
+  "email": "prueba@prueba.es",
+  "telefono": "723423523",
+  "sexo":"otros",
+  "fechaNacimiento": "2000-03-11",
+  "direccion": "C/Juan Luis, 4, 2t, 23432",
+  "permisoConducir": "B",
+  "tarjetaCAP": "No",
+  "tarjetaTacografo": "No",
+  "certificadoAntecedentes": "No",
+  "contractId": "fda9eca0-80cb-11ee-bd18-d0c5d3070aa6"
+}
+
+### Actualizar un conductor
+PATCH http://localhost:1234/drivers/2d059ab1-80cc-11ee-bd18-d0c5d3070aa6
+Content-Type: application/json
+
+{
+  "tarjetaCAP": "Si",
+  "nombre": "Genaro"
+}
+
+### Eliminar un conductor
+DELETE  http://localhost:1234/drivers/2d059ab1-80cc-11ee-bd18-d0c5d3070aa6
+
+##############################################################################################################################
+
+### Recuperar todos los bus
+GET http://localhost:1234/bus/allbus
+
+### Recuperar un bus por id
+GET http://localhost:1234/bus/de63a8d2-7fe4-11ee-83f6-d0c5d3070aa6
+
+### Crear un bus
+POST http://localhost:1234/bus
+Content-Type: application/json
+
+{
+  "matricula":  "1234FGH",
+  "marca": "Scania",
+  "modelo": "Prueba12314 ",
+  "plazas": 62,
+  "employeeId": "b1e8fe07-7fad-11ee-920d-d0c5d3070aa6"
+}
+
+### Actualizar un bus
+PATCH http://localhost:1234/bus/6720fd95-80cd-11ee-bd18-d0c5d3070aa6
+Content-Type: application/json
+
+{
+  "plazas": 27,
+  "modelo": "Actualizado"
+}
+
+### Eliminar un bus
+DELETE  http://localhost:1234/bus/6720fd95-80cd-11ee-bd18-d0c5d3070aa6

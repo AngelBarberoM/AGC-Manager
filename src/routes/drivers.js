@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { driversModel } from '../models/mysql/drivers.js'
+import { DriversModel } from '../models/mysql/drivers.js'
 import { onlyLoggedIn } from '../controllers/loggedIn.js'
 import { DriversController } from '../controllers/drivers.js'
 
@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const driversRouter = Router()
 
-const driversController = new DriversController({ driversModel })
+const driversController = new DriversController({ DriversModel })
 
 driversRouter.get('/', onlyLoggedIn, (req, res) => {
   const driversHtmlPath = path.join(__dirname, '..', 'views', 'drivers.html')

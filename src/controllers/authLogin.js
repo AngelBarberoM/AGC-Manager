@@ -12,7 +12,7 @@ export async function loginAuth (req, res) {
   const password = req.body.password
 
   if (!username || !password) {
-    return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
+    return res.status(400).json({ status: 'Error', message: 'Los campos están incompletos' })
   }
 
   // Comprobamos el esquema del usuario
@@ -20,21 +20,20 @@ export async function loginAuth (req, res) {
 
   if (!validate.success) {
     // 422 Unprocessable Entity
-    return res.status(400).send({ status: 'Error', message: 'Error User Schema' })
+    return res.status(400).json({ status: 'Error', message: 'Error User Schema' })
   }
 
   // Comprobamos si existe usuario
-  const existeUsuario = await UsersModel.getUserByUsername(username)
+  const existeUsuario = await UsersModel.getUserByUsername({ username })
 
   if (!existeUsuario) {
-    return res.status(400).send({ status: 'Error', message: 'Usuario o contraseña incorrectos' })
+    return res.status(400).json({ status: 'Error', message: 'Usuario o contraseña incorrectos' })
   }
-
   // Comprobamos si la contraseña introducida es la correcta
   const loginCorrecto = await bcryptjs.compare(password, existeUsuario.password)
 
   if (!loginCorrecto) {
-    return res.status(400).send({ status: 'Error', message: 'Usuario o contraseña incorrectos' })
+    return res.status(400).json({ status: 'Error', message: 'Usuario o contraseña incorrectos' })
   }
 
   const token = jsonwebtoken.sign(
@@ -47,5 +46,5 @@ export async function loginAuth (req, res) {
     path: '/'
   }
   res.cookie('jwt', token, cookieOption)
-  res.send({ status: 'ok', message: 'Usuario loggeado', redirect: '/home' })
+  res.json({ status: 'ok', message: 'Usuario loggeado', redirect: '/home' })
 }

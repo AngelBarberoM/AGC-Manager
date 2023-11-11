@@ -14,7 +14,7 @@ export class UsersModel {
   // USERS
 
   static async getNumberUsers () {
-    const [users] = await connection.query('SELECT COUNT(id) as Numero FROM users')
+    const [users] = await connection.query('SELECT COUNT(userId) as Numero FROM users')
 
     if (users[0].Numero !== 0) {
       return users[0].Numero
@@ -33,10 +33,10 @@ export class UsersModel {
     }
   }
 
-  static async getUserByEmail (email) {
+  static async getUserByEmail ({ email }) {
     const [users] = await connection.query(
-    `SELECT BIN_TO_UUID(id) as id, username, email, password 
-    FROM users WHERE email = ?`, [email]
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      FROM users WHERE email = ?`, [email]
     )
 
     if (users.length > 0) {
@@ -46,10 +46,10 @@ export class UsersModel {
     }
   }
 
-  static async getUserByUsername (username) {
+  static async getUserByUsername ({ username }) {
     const [users] = await connection.query(
-    `SELECT BIN_TO_UUID(id) as id, username, email, password 
-    FROM users WHERE username = ?`, [username]
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      FROM users WHERE username = ?`, [username]
     )
 
     if (users.length > 0) {
@@ -61,8 +61,8 @@ export class UsersModel {
 
   static async getUserById ({ id }) {
     const [users] = await connection.query(
-    `SELECT BIN_TO_UUID(id) as id, username, email, password 
-    FROM users WHERE id = UUID_TO_BIN(?)`, [id]
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
     if (users.length > 0) {
@@ -80,16 +80,16 @@ export class UsersModel {
 
     try {
       await connection.query(
-      `INSERT INTO users (id, username, email, password) 
-      VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?);`, [username, email, password]
+        `INSERT INTO users (userId, username, email, password) 
+        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?);`, [username, email, password]
       )
     } catch (e) {
       throw new Error('Error creating user')
     }
 
     const [users] = await connection.query(
-    `SELECT BIN_TO_UUID(id), username, email, password 
-    FROM users WHERE id = UUID_TO_BIN(?);`, [uuid]
+      `SELECT BIN_TO_UUID(userId), username, email, password 
+      FROM users WHERE userId = UUID_TO_BIN(?);`, [uuid]
     )
 
     return users[0]
@@ -97,8 +97,8 @@ export class UsersModel {
 
   static async updateUser ({ id, input }) {
     const [datos] = await connection.query(
-    `SELECT username, email, password 
-    FROM users WHERE id = UUID_TO_BIN(?)`, [id]
+      `SELECT username, email, password 
+      FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
     const username = input.username ?? datos[0].username
@@ -107,20 +107,20 @@ export class UsersModel {
 
     try {
       await connection.query(
-      `UPDATE users
-      SET username = ?,
-        email = ?,
-        password = ?
-      WHERE id = UUID_TO_BIN(?)`,
-      [username, email, password, id]
+        `UPDATE users
+        SET username = ?,
+          email = ?,
+          password = ?
+        WHERE userId = UUID_TO_BIN(?)`,
+        [username, email, password, id]
       )
     } catch (e) {
       throw new Error('Error updating client')
     }
 
     const [users] = await connection.query(
-    `SELECT username, email, password 
-    FROM users WHERE id = UUID_TO_BIN(?)`, [id]
+      `SELECT username, email, password 
+      FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
     if (users.length > 0) {
@@ -133,7 +133,7 @@ export class UsersModel {
   static async deleteUser ({ id }) {
     try {
       await connection.query(
-        'DELETE FROM users WHERE id = UUID_TO_BIN(?)', [id]
+        'DELETE FROM users WHERE userId = UUID_TO_BIN(?)', [id]
       )
     } catch (e) {
       throw new Error('Error deleting client')
@@ -141,8 +141,9 @@ export class UsersModel {
 
     const [users] = await connection.query(
       `SELECT username, email, password 
-    FROM users WHERE id = UUID_TO_BIN(?)`, [id]
+      FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
+
     if (users.length > 0) {
       return false
     } else {

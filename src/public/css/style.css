@@ -41,6 +41,38 @@ label {
   margin-top: 5px;
   color: #333;
 }
+/* Estilos para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilos para el encabezado de la tabla */
+th {
+  background-color: #3498db; /* Fondo azul para las celdas del encabezado */
+  color: white; /* Texto blanco en las celdas del encabezado */
+  font-weight: bold; /* Texto en negrita */
+  padding: 10px; /* Espaciado interno */
+  text-align: left; /* Alineación izquierda del texto */
+  border-bottom: 2px solid #ddd; /* Borde inferior */
+}
+
+/* Estilos para las filas pares de la tabla */
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Fondo gris claro para filas pares */
+}
+
+/* Estilos para las filas impares de la tabla */
+tr:nth-child(odd) {
+  background-color: #ffffff; /* Fondo blanco para filas impares */
+}
+
+/* Estilos para las celdas de la tabla */
+td {
+  padding: 8px; /* Espaciado interno de las celdas */
+  border-bottom: 1px solid #ddd; /* Borde inferior de las celdas */
+}
 
 input[type="text"],
 input[type="email"],

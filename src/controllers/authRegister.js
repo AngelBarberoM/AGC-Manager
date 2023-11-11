@@ -11,7 +11,7 @@ export async function registerAuth (req, res) {
 
   // Comprobamos si todos los campos del formulario han sido rellenados
   if (!username || !email || !password || !confirmedPassword) {
-    return res.status(400).send({ status: 'Error', message: 'Los campos están incompletos' })
+    return res.status(400).json({ status: 'Error', message: 'Los campos están incompletos' })
   }
 
   // Comprobamos el esquema del usuario
@@ -19,7 +19,7 @@ export async function registerAuth (req, res) {
 
   if (!validate.success) {
     // 422 Unprocessable Entity
-    return res.status(400).send({ status: 'Error', message: 'Error User Schema' })
+    return res.status(400).json({ status: 'Error', message: 'Error User Schema' })
   }
 
   // Comprobamos si el numero de usuarios registrados en el sistema es mayor que 3,
@@ -27,12 +27,12 @@ export async function registerAuth (req, res) {
   const numberUsers = await UsersModel.getNumberUsers()
 
   if (numberUsers >= 3) {
-    return res.status(429).send({ status: 'Error', message: 'Límite de usuarios alcanzado. No se pueden admitir más registros en este momento' })
+    return res.status(429).json({ status: 'Error', message: 'Límite de usuarios alcanzado. No se pueden admitir más registros en este momento' })
   }
 
   // Comprobamos si las contraseñas introducidas son la misma
   if (password !== confirmedPassword) {
-    return res.status(400).send({ status: 'Error', message: 'Las contraseñas introducidas son incorrectas' })
+    return res.status(400).json({ status: 'Error', message: 'Las contraseñas introducidas son incorrectas' })
   }
 
   // Ciframos la contraseña del usuario por su seguridad y privacidad
@@ -40,20 +40,20 @@ export async function registerAuth (req, res) {
   const hashPassword = await bcryptjs.hash(password, salt)
 
   // Comprobamos si existe usuario
-  const existeUsuario = await UsersModel.getUserByEmail(email)
+  const existeUsuario = await UsersModel.getUserByEmail({ email })
 
   if (existeUsuario) {
-    return res.status(400).send({ status: 'Error', message: 'Este usuario ya exisite' })
+    return res.status(400).json({ status: 'Error', message: 'Este usuario ya exisite' })
   }
 
   // Creamos el nuevo usuario
 
-  const newUser = await UsersModel.createUser({ username, email, password: hashPassword })
+  const newUser = await UsersModel.createUser({ input: { username, email, password: hashPassword } })
 
   // Comprobamos si el usuario ha sido creado correctamente
   if (newUser) {
-    return res.status(201).send({ status: 'ok', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/login' })
+    return res.status(201).json({ status: 'ok', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/login' })
   } else {
-    return res.status(400).send({ status: 'Error', message: `El usuario ${newUser.username} no ha sido creado correctamente ` })
+    return res.status(400).json({ status: 'Error', message: `El usuario ${newUser.username} no ha sido creado correctamente ` })
   }
 }

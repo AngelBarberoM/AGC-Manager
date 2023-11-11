@@ -70,9 +70,6 @@ export class UsersController {
     } else {
       return res.status(400).json({ status: 'Error', message: `El usuario ${newUser.username} no ha sido creado correctamente ` })
     }
-    // const newUser = await UsersModel.createUser({ input: validate.data })
-    // console.log('Nuevo usuario:', newUser)
-    // res.status(201).json(newUser)
   }
 
   updateUser = async (req, res) => {
@@ -103,7 +100,6 @@ export class UsersController {
     const { id } = req.params
 
     const deletedUser = await UsersModel.deleteUser({ id })
-    console.log('deleted', deletedUser)
 
     if (deletedUser === false) {
       return res.status(404).json({ status: 'Error', message: 'User not found' })

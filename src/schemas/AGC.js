@@ -10,9 +10,9 @@ const userSchema = z.object({
   email: z.string().email(),
   password: z.string({
     invalid_type_error: 'Password must be a string',
-    required_error: 'Password is required.'
+    required_error: 'Password is required'
   }),
-  confirmedPassword: z.string({ required_error: 'Confirmed password is required.' })
+  confirmedPassword: z.string({ required_error: 'Confirmed password is required' })
 })
 
 // Esquema de cliente
@@ -20,37 +20,197 @@ const clientSchema = z.object({
   nombreEmpresa: z.string(),
   dni: z.string({
     invalid_type_error: 'DNI must be a string',
-    required_error: 'DNI is required.'
-  }),
+    required_error: 'DNI is required'
+  }).length(9, { message: 'Must be exactly 9 characters long' }),
   nombre: z.string({
     invalid_type_error: 'Name must be a string',
-    required_error: 'Name is required.'
+    required_error: 'Name is required'
   }),
-  apellidos: z.string(),
+  apellidos: z.string({
+    invalid_type_error: 'Apellidos must be a string',
+    required_error: 'Apellidos is required'
+  }),
   email: z.string({
     invalid_type_error: 'Email must be a string',
-    required_error: 'Email is required.'
-  }).email(),
-  telefono: z.number({
-    required_error: 'Phone number is required',
-    invalid_type_error: 'Phone number must be a number'
-  }).int().min(600000000).max(999999999)
-})
-
-const employeeSchema = z.object({
-
-})
-
-const busSchema = z.object({
-
+    required_error: 'Email is required'
+  }).email({ required_error: 'String must be a Email format' }),
+  telefono: z.string({
+    invalid_type_error: 'Telefono must be a string',
+    required_error: 'Telefono is required'
+  }).length(9, { message: 'Must be exactly 9 characters long' }).regex(/^[6-7-9]\d{8}$/),
+  fechaNacimiento: z.date({
+    invalid_type_error: 'Fecha Nacimiento must be a date',
+    required_error: 'Fecha Nacimiento is required'
+  }).min(new Date('1900-01-01'), { message: 'Too old' }),
+  direccion: z.string({
+    invalid_type_error: 'Direccion must be a string',
+    required_error: 'Direccion is required'
+  })
 })
 
 const serviceSchema = z.object({
-
+  tipoServicio: z.enum(['ruta', 'transfer', 'escolar', 'excursion', 'turismo', 'largaDistancia', 'transportePublicoLocal', 'eventos', 'eventosEspeciales', 'eventosDeportivos', 'alquilerAutobus', 'transporteCrucero'],
+    {
+      invalid_type_error: 'Tipo Servicio must be a enum',
+      required_error: 'Tipo Servicio is required'
+    }),
+  descripcion: z.string({
+    invalid_type_error: 'Descripcion must be a string',
+    required_error: 'Descripcion is required'
+  }),
+  fechaServicio: z.date({
+    invalid_type_error: 'Fecha Servicio must be a date',
+    required_error: 'Fecha Servicio is required'
+  }).min(new Date(), { message: 'Fecha Servicio must be greater or equal than the current date' }),
+  fechaCreacion: z.date({
+    invalid_type_error: 'Fecha Creacion must be a date',
+    required_error: 'Fecha Creacion is required'
+  }).min(new Date(), { message: 'Fecha Creacion must be greater or equal than the current date' }),
+  clientId: z.string().uuid({
+    invalid_type_error: 'clientId must be a UUID',
+    required_error: 'clientId is required'
+  })
 })
 
-const typeServiceSchema = z.object({
+const contractSchema = z.object({
+  fechaInicio: z.date({
+    invalid_type_error: 'Fecha Inicio must be a date',
+    required_error: 'Fecha Inicio is required'
+  }).min(new Date('2000-01-01'), { message: 'Fecha Inicio must be greater than the 2000-01-01' }),
+  fechaFin: z.date({
+    invalid_type_error: 'Fecha Fin must be a date',
+    required_error: 'Fecha Fin is required'
+  }).min(new Date('2000-01-01'), { message: 'Fecha Fin must be greater than the 2000-01-01' }),
+  sueldoHora: z.number({
+    invalid_type_error: 'Sueldo Hora must be a number',
+    required_error: 'Sueldo Hora is required'
+  }).min(6.75, { message: 'Sueldo Hora must be greater or equal than 6.75' }),
+  horasSemana: z.number({
+    invalid_type_error: 'Horas Semana must be a int',
+    required_error: 'Horas Semana is required'
+  }).int().min(40, { message: 'Horas Semana must be equal than 40' }).max(40, { message: 'Sueldo Hora must be equal than 40' })
+})
 
+const administrativeSchema = z.object({
+  dni: z.string({
+    invalid_type_error: 'DNI must be a string',
+    required_error: 'DNI is required'
+  }).length(9, { message: 'Must be exactly 9 characters long' }),
+  nombre: z.string({
+    invalid_type_error: 'Name must be a string',
+    required_error: 'Name is required'
+  }),
+  apellidos: z.string({
+    invalid_type_error: 'Apellidos must be a string',
+    required_error: 'Apellidos is required'
+  }),
+  email: z.string({
+    invalid_type_error: 'Email must be a string',
+    required_error: 'Email is required'
+  }).email({ required_error: 'String must be a Email format' }),
+  telefono: z.string({
+    invalid_type_error: 'Telefono must be a string',
+    required_error: 'Telefono is required'
+  }).length(9, { message: 'Must be exactly 9 characters long' }).regex(/^[6-7-9]\d{8}$/),
+  sexo: z.enum(['masculino', 'femenino', 'otros'],
+    {
+      invalid_type_error: 'Tipo Servicio must be a enum',
+      required_error: 'Tipo Servicio is required'
+    }),
+  fechaNacimiento: z.date({
+    invalid_type_error: 'Fecha Nacimiento must be a date',
+    required_error: 'Fecha Nacimiento is required'
+  }).min(new Date('1900-01-01'), { message: 'Too old' }),
+  direccion: z.string({
+    invalid_type_error: 'Direccion must be a string',
+    required_error: 'Direccion is required'
+  }),
+  contractId: z.string().uuid({
+    invalid_type_error: 'contractId must be a UUID',
+    required_error: 'contractId is required'
+  })
+})
+
+const driverSchema = z.object({
+  dni: z.string({
+    invalid_type_error: 'DNI must be a string',
+    required_error: 'DNI is required'
+  }).length(9, { message: 'Must be exactly 9 characters long' }),
+  nombre: z.string({
+    invalid_type_error: 'Name must be a string',
+    required_error: 'Name is required'
+  }),
+  apellidos: z.string({
+    invalid_type_error: 'Apellidos must be a string',
+    required_error: 'Apellidos is required'
+  }),
+  email: z.string({
+    invalid_type_error: 'Email must be a string',
+    required_error: 'Email is required'
+  }).email({ required_error: 'String must be a Email format' }),
+  telefono: z.string({
+    invalid_type_error: 'Telefono must be a string',
+    required_error: 'Telefono is required'
+  }).length(9, { message: 'Must be exactly 9 characters long' }).regex(/^[6-7-9]\d{8}$/),
+  sexo: z.enum(['masculino', 'femenino', 'otros'],
+    {
+      invalid_type_error: 'Sexo must be a enum',
+      required_error: 'Sexo is required'
+    }),
+  fechaNacimiento: z.date({
+    invalid_type_error: 'Fecha Nacimiento must be a date',
+    required_error: 'Fecha Nacimiento is required'
+  }).min(new Date('1900-01-01'), { message: 'Too old' }),
+  direccion: z.string({
+    invalid_type_error: 'Direccion must be a string',
+    required_error: 'Direccion is required'
+  }),
+  permisoConducir: z.enum(['AM', 'A1', 'A2', 'A', 'B', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'D1E', 'DE'],
+    {
+      invalid_type_error: 'Permiso Conducir must be a enum',
+      required_error: 'Permiso Conducir is required'
+    }),
+  tarjetaCAP: z.boolean({
+    required_error: 'Tarjeta CAP is required',
+    invalid_type_error: 'Tarjeta CAP must be a boolean'
+  }),
+  tarjetaTacografo: z.boolean({
+    required_error: 'Tarjeta Tacografo is required',
+    invalid_type_error: 'Tarjeta Tacografo must be a boolean'
+  }),
+  certificadoAntecedentes: z.boolean({
+    required_error: 'Certificado Antecedentes is required',
+    invalid_type_error: 'Certificado Antecedentes must be a boolean'
+  }),
+  contractId: z.string().uuid({
+    invalid_type_error: 'contractId must be a UUID',
+    required_error: 'contractId is required'
+  })
+})
+const busSchema = z.object({
+  matricula: z.string({
+    invalid_type_error: 'Matricula must be a string',
+    required_error: 'Matricula is required'
+  }).length(7, { message: 'Must be exactly 7 characters long' }).refine(value => /^[0-9]{4}[B-DF-HJ-NP-TV-Z]{3}$/.test(value), {
+    message:
+      'Matricula must have the format of four numbers followed by three letters (without vowels)'
+  }),
+  marca: z.string({
+    invalid_type_error: 'Marca must be a string',
+    required_error: 'Marca is required'
+  }),
+  modelo: z.string({
+    invalid_type_error: 'Modelo must be a string',
+    required_error: 'Modelo is required'
+  }),
+  plazas: z.number({
+    invalid_type_error: 'Plazas must be a number',
+    required_error: 'Plazas is required'
+  }).int().min(9, { message: 'Plazas must be greater or equal than 9' }).max(90, { message: 'Plazas must be fewer or equal than 90' }),
+  employeeId: z.string().uuid({
+    invalid_type_error: 'employeeId must be a UUID',
+    required_error: 'employeeId is required'
+  })
 })
 
 // Funciones para validar los esquemas
@@ -73,13 +233,22 @@ export function validatePartialClient (input) {
   return clientSchema.partial().safeParse(input)
 }
 
-// Employee
-export function validateEmployee (input) {
-  return employeeSchema.safeParse(input)
+// Administrative
+export function validateAdministrative (input) {
+  return administrativeSchema.safeParse(input)
 }
 
-export function validatePartialEmployee (input) {
-  return employeeSchema.partial().safeParse(input)
+export function validatePartialAdministrative (input) {
+  return administrativeSchema.partial().safeParse(input)
+}
+
+// Driver
+export function validateDriver (input) {
+  return driverSchema.safeParse(input)
+}
+
+export function validatePartialDriver (input) {
+  return driverSchema.partial().safeParse(input)
 }
 
 // Bus
@@ -101,10 +270,10 @@ export function validatePartialService (input) {
 }
 
 // Type Service
-export function validateTypeService (input) {
-  return typeServiceSchema.safeParse(input)
+export function validateContract (input) {
+  return contractSchema.safeParse(input)
 }
 
-export function validatePartialTypeService (input) {
-  return typeServiceSchema.partial().safeParse(input)
+export function validatePartialContract (input) {
+  return contractSchema.partial().safeParse(input)
 }

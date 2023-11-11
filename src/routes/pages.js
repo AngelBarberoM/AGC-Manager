@@ -2,8 +2,14 @@ import { Router } from 'express'
 import { registerRouter } from './register.js'
 import { loginRouter } from './login.js'
 import { homeRouter } from './home.js'
+
 import { usersRouter } from './users.js'
 import { clientsRouter } from './clients.js'
+import { servicesRouter } from './services.js'
+import { administrativesRouter } from './administratives.js'
+import { driversRouter } from './drivers.js'
+import { busRouter } from './bus.js'
+import { contractsRouter } from './contracts.js'
 
 import { isLoggedOut } from '../controllers/loggedout.js'
 import { onlyPublic, onlyLoggedIn } from '../controllers/loggedIn.js'
@@ -37,3 +43,18 @@ pagesRouter.use('/users', usersRouter)
 
 // Clients Page
 pagesRouter.use('/clients', clientsRouter)
+
+// Services Page
+pagesRouter.use('/services', servicesRouter)
+
+// Administratives Page
+pagesRouter.use('/administratives', administrativesRouter)
+
+// Drivers Page
+pagesRouter.use('/drivers', driversRouter)
+
+// Bus Page
+pagesRouter.use('/bus', busRouter)
+
+// Contracts Page
+pagesRouter.use('/contracts', contractsRouter)

@@ -7,7 +7,7 @@ export class ClientsController {
     const clients = await ClientsModel.getAllClients()
 
     if (!clients) {
-      return res.status(400).send({ status: 'Error', message: 'No existen clientes para mostrar' })
+      return res.status(400).json({ status: 'Error', message: 'No existen clientes para mostrar' })
     }
     res.json(clients)
   }
@@ -18,7 +18,7 @@ export class ClientsController {
     const clients = await ClientsModel.getClientById({ id })
 
     if (!clients) {
-      return res.status(400).send({ status: 'Error', message: 'No existe cliente para mostrar' })
+      return res.status(400).json({ status: 'Error', message: 'No existe cliente para mostrar' })
     }
     res.json(clients)
   }
@@ -28,12 +28,16 @@ export class ClientsController {
 
     if (!validate.success) {
       return res.status(400).json({ error: JSON.parse(validate.error.message) })
-      // return res.status(400).send({ status: 'Error', message: 'Error Client Schema' })
+      // return res.status(400).json({ status: 'Error', message: 'Error Client Schema' })
     }
 
     const newClient = await ClientsModel.createClient({ input: validate.data })
 
-    res.status(201).json(newClient)
+    if (newClient) {
+      return res.status(201).json({ status: 'ok', message: `Cliente ${newClient.nombre} creado correctamente`, redirect: '/login' })
+    } else {
+      return res.status(400).json({ status: 'Error', message: `El cliente ${newClient.nombre} no ha sido creado correctamente ` })
+    }
   }
 
   updateClient = async (req, res) => {
@@ -48,13 +52,13 @@ export class ClientsController {
     const clients = await ClientsModel.getClientById({ id })
 
     if (!clients) {
-      return res.status(400).send({ status: 'Error', message: 'No existe cliente para actualizar' })
+      return res.status(400).json({ status: 'Error', message: 'No existe cliente para actualizar' })
     }
 
     const updatedClient = await ClientsModel.updateClient({ id, input: validate.data })
 
     if (!updatedClient) {
-      return res.status(400).send({ status: 'Error', message: 'No se ha podido actualizar' })
+      return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
     return res.json(updatedClient)
@@ -65,8 +69,8 @@ export class ClientsController {
 
     const deletedClient = await ClientsModel.deleteClient({ id })
 
-    if (!deletedClient.success) {
-      return res.status(404).send({ status: 'Error', message: 'Client not found' })
+    if (deletedClient === false) {
+      return res.status(404).json({ status: 'Error', message: 'Client not found' })
     }
 
     return res.json({ message: 'Client deleted' })

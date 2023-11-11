@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import { ClientsModel } from '../models/mysql/clients.js'
 import { onlyLoggedIn } from '../controllers/loggedIn.js'
 import { ClientsController } from '../controllers/clients.js'
 
@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const clientsRouter = Router()
 
-const clientsController = new ClientsController({ AGCdbModel })
+const clientsController = new ClientsController({ ClientsModel })
 
 clientsRouter.get('/', onlyLoggedIn, (req, res) => {
   const clientsHtmlPath = path.join(__dirname, '..', 'views', 'clients.html')

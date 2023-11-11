@@ -14,7 +14,7 @@ export class ClientsModel {
   // CLIENTS
 
   static async getNumberClients () {
-    const [clients] = await connection.query('SELECT COUNT(id) as Numero FROM clients')
+    const [clients] = await connection.query('SELECT COUNT(clientId) as Numero FROM clients')
 
     if (clients[0].Numero !== 0) {
       return clients[0].Numero
@@ -24,7 +24,7 @@ export class ClientsModel {
   }
 
   static async getAllClients () {
-    const [clients] = await connection.query('SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono FROM clients')
+    const [clients] = await connection.query('SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion FROM clients')
 
     if (clients.length > 0) {
       return clients
@@ -35,8 +35,8 @@ export class ClientsModel {
 
   static async getClientById ({ id }) {
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono 
-      FROM clients WHERE id = UUID_TO_BIN(?)`, [id]
+      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
     if (clients.length > 0) {
@@ -47,22 +47,22 @@ export class ClientsModel {
   }
 
   static async createClient ({ input }) {
-    const { nombreEmpresa, dni, nombre, apellidos, email, telefono } = input
+    const { nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion } = input
 
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult
     try {
       await connection.query(
-        `INSERT INTO clients (id, nombreEmpresa, dni, nombre, apellidos, email, telefono) 
-        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?);`, [nombreEmpresa, dni, nombre, apellidos, email, telefono]
+        `INSERT INTO clients (clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion) 
+        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?);`, [nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion]
       )
     } catch (e) {
       throw new Error('Error creating client')
     }
 
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono 
-      FROM clients WHERE id = UUID_TO_BIN(?)`, [uuid]
+      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE clientId = UUID_TO_BIN(?)`, [uuid]
     )
 
     if (clients.length > 0) {
@@ -74,8 +74,8 @@ export class ClientsModel {
 
   static async updateClient ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono 
-      FROM clients WHERE id = UUID_TO_BIN(?)`, [id]
+      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
     const nombreEmpresa = input.nombreEmpresa ?? datos[0].nombreEmpresa
@@ -84,6 +84,8 @@ export class ClientsModel {
     const apellidos = input.apellidos ?? datos[0].apellidos
     const email = input.email ?? datos[0].email
     const telefono = input.telefono ?? datos[0].telefono
+    const fechaNacimiento = input.email ?? datos[0].fechaNacimiento
+    const direccion = input.telefono ?? datos[0].direccion
 
     try {
       await connection.query(
@@ -93,17 +95,19 @@ export class ClientsModel {
           nombre = ?,
           apellidos = ?,
           email = ?,
-          telefono = ?
-        WHERE id = UUID_TO_BIN(?)`,
-        [nombreEmpresa, dni, nombre, apellidos, email, telefono, id]
+          telefono = ?,
+          fechaNacimiento = ?,
+          direccion = ?
+        WHERE clientId = UUID_TO_BIN(?)`,
+        [nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion, id]
       )
     } catch (e) {
       throw new Error('Error updating client')
     }
 
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono 
-      FROM clients WHERE id = UUID_TO_BIN(?)`, [id]
+      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
     if (clients.length > 0) {
@@ -116,21 +120,21 @@ export class ClientsModel {
   static async deleteClient ({ id }) {
     try {
       await connection.query(
-        'DELETE FROM clients WHERE id = ?', [id]
+        'DELETE FROM clients WHERE clientId = UUID_TO_BIN(?)', [id]
       )
     } catch (e) {
       throw new Error('Error deleting client')
     }
 
     const [clients] = await connection.query(
-      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono 
-      FROM clients WHERE id = UUID_TO_BIN(?)`, [id]
+      `SELECT nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
     if (clients.length > 0) {
-      return clients[0]
+      return false
     } else {
-      return null
+      return true
     }
   }
 }

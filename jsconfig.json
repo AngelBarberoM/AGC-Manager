@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": [
+    //     "/src/*"
+    //   ],
+    //   "@/public": [
+    //     "src/public/*"
+    //   ],
+    //   "@/models": [
+    //     "src/models/*"
+    //   ],
+    //   "@/controllers": [
+    //     "src/controllers/*"
+    //   ],
+    //   "@/routes": [
+    //     "src/routes/*"
+    //   ],
+    //   "@/views": [
+    //     "src/views/*"
+    //   ],
+    //   "@/middlewares": [
+    //     "src/middlewares/*"
+    //   ],
+    //   "@/schemas": [
+    //     "src/schemas/*"
+    //   ]
+    // },
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ES2020",
+    "jsx": "react",
+    "allowImportingTsExtensions": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
+}

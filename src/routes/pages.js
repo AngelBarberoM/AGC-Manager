@@ -2,7 +2,8 @@ import { Router } from 'express'
 import { registerRouter } from './register.js'
 import { loginRouter } from './login.js'
 import { homeRouter } from './home.js'
-
+import { adminRouter } from './admin.js'
+import { registerUserAutorizedRouter } from './adminRegisterUserAutorized.js'
 import { usersRouter } from './users.js'
 import { clientsRouter } from './clients.js'
 import { servicesRouter } from './services.js'
@@ -12,7 +13,7 @@ import { busRouter } from './bus.js'
 import { contractsRouter } from './contracts.js'
 
 import { isLoggedOut } from '../controllers/loggedout.js'
-import { onlyPublic, onlyLoggedIn } from '../controllers/loggedIn.js'
+import { onlyPublic, loggedOut } from '../controllers/loggedIn.js'
 
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -29,6 +30,12 @@ pagesRouter.get('/', onlyPublic, (req, res) => {
 // Home Page
 pagesRouter.get('/home', homeRouter)
 
+// Admin Page
+pagesRouter.get('/admin', adminRouter)
+
+// Admin Page
+pagesRouter.get('/registerUserAutorized', registerUserAutorizedRouter)
+
 // Login Page
 pagesRouter.use('/login', loginRouter)
 
@@ -36,7 +43,7 @@ pagesRouter.use('/login', loginRouter)
 pagesRouter.use('/register', registerRouter)
 
 // LogOut
-pagesRouter.use('/logout', onlyLoggedIn, isLoggedOut)
+pagesRouter.use('/logout', loggedOut, isLoggedOut)
 
 // Users Page
 pagesRouter.use('/users', usersRouter)

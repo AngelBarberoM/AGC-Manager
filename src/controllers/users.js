@@ -35,6 +35,7 @@ export class UsersController {
     const email = validate.data.email
     const password = validate.data.password
     const confirmedPassword = validate.data.confirmedPassword
+    const tipoUsuario = validate.data.tipoUsuario
 
     // Comprobamos si el numero de usuarios registrados en el sistema es mayor que 3,
     // ya que no tiene sentido que todo el mundo pueda registrarse
@@ -62,7 +63,7 @@ export class UsersController {
 
     // Creamos el nuevo usuario
 
-    const newUser = await UsersModel.createUser({ input: { username, email, password: hashPassword } })
+    const newUser = await UsersModel.createUser({ input: { username, email, password: hashPassword, tipoUsuario } })
 
     // Comprobamos si el usuario ha sido creado correctamente
     if (newUser) {
@@ -88,7 +89,7 @@ export class UsersController {
     }
 
     const updatedUser = await UsersModel.updateUser({ id, input: validate.data })
-    console.log()
+
     if (!updatedUser) {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }

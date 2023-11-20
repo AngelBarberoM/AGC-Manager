@@ -12,7 +12,12 @@ const userSchema = z.object({
     invalid_type_error: 'Password must be a string',
     required_error: 'Password is required'
   }),
-  confirmedPassword: z.string({ required_error: 'Confirmed password is required' })
+  confirmedPassword: z.string({ required_error: 'Confirmed password is required' }),
+  tipoUsuario: z.enum(['admin', 'normal', 'autorizado'],
+    {
+      invalid_type_error: 'Tipo Servicio must be a enum',
+      required_error: 'Tipo Servicio is required'
+    })
 })
 
 // Esquema de cliente
@@ -124,8 +129,8 @@ const administrativeSchema = z.object({
   }).length(9, { message: 'Must be exactly 9 characters long' }).regex(/^[6-7-9]\d{8}$/),
   sexo: z.enum(['masculino', 'femenino', 'otros'],
     {
-      invalid_type_error: 'Tipo Servicio must be a enum',
-      required_error: 'Tipo Servicio is required'
+      invalid_type_error: 'Sexo must be a enum',
+      required_error: 'Sexo is required'
     }),
   fechaNacimiento: z.string({
     invalid_type_error: 'Fecha Nacimiento must be a string',

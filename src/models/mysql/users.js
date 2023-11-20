@@ -24,7 +24,7 @@ export class UsersModel {
   }
 
   static async getAllUsers () {
-    const [users] = await connection.query('SELECT BIN_TO_UUID(userId) as userId, username, email, password FROM users')
+    const [users] = await connection.query('SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario FROM users')
 
     if (users.length > 0) {
       return users
@@ -35,7 +35,7 @@ export class UsersModel {
 
   static async getUserByEmail ({ email }) {
     const [users] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
       FROM users WHERE email = ?`, [email]
     )
 
@@ -48,7 +48,7 @@ export class UsersModel {
 
   static async getUserByUsername ({ username }) {
     const [users] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
       FROM users WHERE username = ?`, [username]
     )
 
@@ -61,7 +61,7 @@ export class UsersModel {
 
   static async getUserById ({ id }) {
     const [users] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -73,22 +73,22 @@ export class UsersModel {
   }
 
   static async createUser ({ input }) {
-    const { username, email, password } = input
+    const { username, email, password, tipoUsuario } = input
 
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult
 
     try {
       await connection.query(
-        `INSERT INTO users (userId, username, email, password) 
-        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?);`, [username, email, password]
+        `INSERT INTO users (userId, username, email, password, tipoUsuario) 
+        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?);`, [username, email, password, tipoUsuario]
       )
     } catch (e) {
       throw new Error('Error creating user')
     }
 
     const [users] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
       FROM users WHERE userId = UUID_TO_BIN(?);`, [uuid]
     )
 
@@ -97,29 +97,31 @@ export class UsersModel {
 
   static async updateUser ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
     const username = input.username ?? datos[0].username
     const email = input.email ?? datos[0].email
     const password = input.password ?? datos[0].password
+    const tipoUsuario = input.password ?? datos[0].tipoUsuario
 
     try {
       await connection.query(
         `UPDATE users
         SET username = ?,
           email = ?,
-          password = ?
+          password = ?,
+          tipoUsuario = ?
         WHERE userId = UUID_TO_BIN(?)`,
-        [username, email, password, id]
+        [username, email, password, tipoUsuario, id]
       )
     } catch (e) {
       throw new Error('Error updating user')
     }
 
     const [users] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -140,7 +142,7 @@ export class UsersModel {
     }
 
     const [users] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password 
+      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 

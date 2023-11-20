@@ -11,18 +11,15 @@
 <body>
   <header>
     <div class="MenuDiv">
-      <a id="logo" href="/">
+      <a id="logo" href="/home">
         <picture>
           <img alt="Logo Autocares Gómez Carmona" width="190" height="50" src="img/logoAGC.webp">
         </picture>
       </a>
       <nav>
         <ul class="Menu">
-          <li>
-            <a aria-current="page" href="/logout">Cerrar Sesión</a>
-          </li>
-          <!-- <li><a href="/">Página Inicio</a></li>
-          <li><a href="/login">Login</a></li> -->
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="/home">Home</a></li>
         </ul>
       </nav>
     </div>
@@ -46,11 +43,12 @@
           <br>
           <label for="tipoUsuario">Tipo de Usuario:</label>
           <select id="tipoUsuario" name="tipoUsuario" required>
+            <option value="autorizado">Autorizado</option>
             <option value="normal">Normal</option>
           </select>
           <br>
-          <button type="submit">Registrarse</button>
-          <p class="error escondido">Error al registrarse</p>
+          <button type="submit">Registrar</button>
+          <p class="error escondido">Error al registrar</p>
       </form>
   </div>
   </main>

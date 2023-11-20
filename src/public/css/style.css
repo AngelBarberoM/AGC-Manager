@@ -25,7 +25,7 @@ header {
 
 #logo {
   border-radius: 8px;
-  transition: transform 0.3s; /* Agregada transición para suavizar el cambio de escala en el hover */
+  transition: transform 0.3s;
 }
 
 #logo img {
@@ -34,7 +34,7 @@ header {
 }
 
 #logo:hover {
-  transform: scale(1.1); /* Agregado aumento de escala en el hover */
+  transform: scale(1.1);
 }
 
 nav {
@@ -118,14 +118,14 @@ p {
 }
 
 a {
-  color: #d9534f; /* Rojo apagado */
+  color: #d9534f;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
 }
 
 p a:hover {
-  color: #c9302c; /* Color más oscuro para el efecto hover */
+  color: #c9302c;
 }
 
 form {
@@ -166,7 +166,7 @@ footer {
 footer img {
   width: 50px;
   height: auto;
-  margin-top: auto; /* Mueve la imagen hacia la parte inferior */
+  margin-top: auto;
 }
 
 button {

@@ -1,18 +1,14 @@
-fetch('/clients/allClients')
+fetch('/administratives/allAdministratives')
   .then(response => response.json())
   .then(data => {
-    const clientTable = document.getElementById('client-table')
-    const tbody = clientTable.querySelector('tbody')
+    const administrativeTable = document.getElementById('administrative-table')
+    const tbody = administrativeTable.querySelector('tbody')
 
     if (data.status === 'Error') {
       console.error('Error:', data.message)
     } else {
       data.forEach(client => {
         const row = document.createElement('tr')
-
-        const nombreEmpresaCell = document.createElement('td')
-        nombreEmpresaCell.textContent = client.nombreEmpresa
-        row.appendChild(nombreEmpresaCell)
 
         const dniCell = document.createElement('td')
         dniCell.textContent = client.dni
@@ -33,6 +29,22 @@ fetch('/clients/allClients')
         const telefonoCell = document.createElement('td')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
+
+        const sexoCell = document.createElement('td')
+        sexoCell.textContent = client.sexo
+        row.appendChild(sexoCell)
+
+        const fechaNacimientoCell = document.createElement('td')
+        fechaNacimientoCell.textContent = client.fechaNacimiento
+        row.appendChild(fechaNacimientoCell)
+
+        const direccionCell = document.createElement('td')
+        direccionCell.textContent = client.direccion
+        row.appendChild(direccionCell)
+
+        const contratoIdCell = document.createElement('td')
+        contratoIdCell.textContent = client.contractId
+        row.appendChild(contratoIdCell)
 
         tbody.appendChild(row)
       })

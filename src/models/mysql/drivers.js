@@ -24,7 +24,7 @@ export class DriversModel {
   }
 
   static async getAllDrivers () {
-    const [drivers] = await connection.query('SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) FROM drivers')
+    const [drivers] = await connection.query('SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId FROM drivers')
 
     if (drivers.length > 0) {
       return drivers

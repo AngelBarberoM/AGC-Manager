@@ -24,7 +24,7 @@ export class BusModel {
   }
 
   static async getAllBus () {
-    const [bus] = await connection.query('SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) FROM bus')
+    const [bus] = await connection.query('SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId FROM bus')
 
     if (bus.length > 0) {
       return bus

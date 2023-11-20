@@ -24,7 +24,7 @@ export class AdministrativesModel {
   }
 
   static async getAllAdministratives () {
-    const [administratives] = await connection.query('SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) FROM administratives')
+    const [administratives] = await connection.query('SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId FROM administratives')
 
     if (administratives.length > 0) {
       return administratives

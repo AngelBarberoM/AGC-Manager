@@ -6,11 +6,11 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export const registerUserAutorizedRouter = Router()
+export const registerUserRouter = Router()
 
-registerUserAutorizedRouter.get('/registerUserAutorized', onlyAdmin, (req, res) => {
-  const registerUserAutorizedHtmlPath = path.join(__dirname, '..', 'views', 'registerUserAutorized.html')
+registerUserRouter.get('/', onlyAdmin, (req, res) => {
+  const registerUserAutorizedHtmlPath = path.join(__dirname, '..', 'views', 'registerUser.html')
   res.sendFile(registerUserAutorizedHtmlPath)
 })
 
-registerUserAutorizedRouter.post('/', registerAuth)
+registerUserRouter.post('/', onlyAdmin, registerAuth)

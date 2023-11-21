@@ -1,9 +1,12 @@
 import { Router } from 'express'
-import { registerRouter } from './register.js'
+
 import { loginRouter } from './login.js'
 import { homeRouter } from './home.js'
 import { adminRouter } from './admin.js'
-import { registerUserAutorizedRouter } from './adminRegisterUserAutorized.js'
+import { registerUserRouter } from './registerUser.js'
+
+import { changePasswordRouter } from './changePassword.js'
+
 import { usersRouter } from './users.js'
 import { clientsRouter } from './clients.js'
 import { servicesRouter } from './services.js'
@@ -28,19 +31,19 @@ pagesRouter.get('/', onlyPublic, (req, res) => {
 })
 
 // Home Page
-pagesRouter.get('/home', homeRouter)
+pagesRouter.use('/home', homeRouter)
 
 // Admin Page
-pagesRouter.get('/admin', adminRouter)
+pagesRouter.use('/admin', adminRouter)
 
-// Admin Page
-pagesRouter.get('/registerUserAutorized', registerUserAutorizedRouter)
+// Admin Register User Page
+pagesRouter.use('/registerUser', registerUserRouter)
+
+// Change Password Page
+pagesRouter.use('/changePassword', changePasswordRouter)
 
 // Login Page
 pagesRouter.use('/login', loginRouter)
-
-// Register Page
-pagesRouter.use('/register', registerRouter)
 
 // LogOut
 pagesRouter.use('/logout', loggedOut, isLoggedOut)

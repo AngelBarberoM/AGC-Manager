@@ -14,7 +14,7 @@ export async function onlyAdmin (req, res, next) {
   else if (tipoUsuario === 'normal') {
     res.redirect('/home')
   } else if (tipoUsuario === 'autorizado') {
-    res.redirect('/register')
+    res.redirect('/changePassword')
   }
 }
 
@@ -29,7 +29,7 @@ export async function onlyPublic (req, res, next) {
   else if (tipoUsuario === 'normal' || tipoUsuario === 'admin') {
     res.redirect('/home')
   } else if (tipoUsuario === 'autorizado') {
-    res.redirect('/register')
+    res.redirect('/changePassword')
   }
 }
 
@@ -53,7 +53,7 @@ export async function onlyLoggedIn (req, res, next) {
 
   if (tipoUsuario === 'normal' || tipoUsuario === 'admin') return next()
   else if (tipoUsuario === 'autorizado') {
-    res.redirect('/register')
+    res.redirect('/changePassword')
   } else res.redirect('/login')
 }
 

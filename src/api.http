@@ -12,7 +12,8 @@ Content-Type: application/json
   "username": "f",
   "email": "f@f.com",
   "password": "f",
-  "confirmedPassword": "f"
+  "confirmedPassword": "f",
+  "tipoUsuario":"normal"
 }
 
 ### Actualizar un usuario

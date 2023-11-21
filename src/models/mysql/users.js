@@ -104,7 +104,7 @@ export class UsersModel {
     const username = input.username ?? datos[0].username
     const email = input.email ?? datos[0].email
     const password = input.password ?? datos[0].password
-    const tipoUsuario = input.password ?? datos[0].tipoUsuario
+    const tipoUsuario = input.tipoUsuario ?? datos[0].tipoUsuario
 
     try {
       await connection.query(

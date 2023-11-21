@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const homeRouter = Router()
 
-homeRouter.get('/home', onlyLoggedIn, (req, res) => {
+homeRouter.get('/', onlyLoggedIn, (req, res) => {
   const homeHtmlPath = path.join(__dirname, '..', 'views', 'home.html')
 
   res.sendFile(homeHtmlPath)

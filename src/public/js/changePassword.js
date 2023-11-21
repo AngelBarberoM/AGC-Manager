@@ -1,21 +1,19 @@
 const mensajeError = document.getElementsByClassName('error')[0]
 
-document.getElementById('register-form').addEventListener('submit', async (e) => {
+document.getElementById('changePassword-form').addEventListener('submit', async (e) => {
   e.preventDefault()
 
-  const username = e.target.children.username.value
-  const email = e.target.children.email.value
   const password = e.target.children.password.value
   const confirmedPassword = e.target.children.confirmedPassword.value
   const tipoUsuario = e.target.children.tipoUsuario.value
 
-  const res = await fetch('/register', {
-    method: 'POST',
+  const res = await fetch('/changePassword', {
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      username, email, password, confirmedPassword, tipoUsuario
+      password, confirmedPassword, tipoUsuario
     })
   })
 

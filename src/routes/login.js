@@ -13,4 +13,4 @@ loginRouter.get('/', onlyPublic, (req, res) => {
   res.sendFile(loginHtmlPath)
 })
 
-loginRouter.post('/', loginAuth)
+loginRouter.post('/', onlyPublic, loginAuth)

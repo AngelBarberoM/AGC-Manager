@@ -8,10 +8,10 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export async function loginAuth (req, res) {
-  const username = req.body.username
+  const email = req.body.email
   const password = req.body.password
 
-  if (!username || !password) {
+  if (!email || !password) {
     return res.status(400).json({ status: 'Error', message: 'Los campos están incompletos' })
   }
 
@@ -24,20 +24,20 @@ export async function loginAuth (req, res) {
   }
 
   // Comprobamos si existe usuario
-  const existeUsuario = await UsersModel.getUserByUsername({ username })
+  const user = await UsersModel.getUserByEmail({ email })
 
-  if (!existeUsuario) {
-    return res.status(400).json({ status: 'Error', message: 'Usuario o contraseña incorrectos' })
+  if (!user) {
+    return res.status(400).json({ status: 'Error', message: 'Correo Electrónico o contraseña incorrectos' })
   }
   // Comprobamos si la contraseña introducida es la correcta
-  const loginCorrecto = await bcryptjs.compare(password, existeUsuario.password)
+  const loginCorrecto = await bcryptjs.compare(password, user.password)
 
   if (!loginCorrecto) {
-    return res.status(400).json({ status: 'Error', message: 'Usuario o contraseña incorrectos' })
+    return res.status(400).json({ status: 'Error', message: 'Correo Electrónico o contraseña incorrectos' })
   }
 
   const token = jsonwebtoken.sign(
-    { id: existeUsuario.userId },
+    { id: user.userId },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES }
   )

@@ -24,6 +24,10 @@ export class ServicesController {
   }
 
   createService = async (req, res) => {
+    if (!req.body.clientId) {
+      req.body.clientId = 'NULL'
+    }
+
     const validate = validateService(req.body)
 
     if (!validate.success) {
@@ -31,12 +35,13 @@ export class ServicesController {
       // return res.status(400).json({ status: 'Error', message: 'Error Service Schema' })
     }
 
-    const validateClientId = await ClientsModel.getClientById({ id: validate.data.clientId })
+    if (validate.data.clientId !== 'NULL') {
+      const validateClientId = await ClientsModel.getClientById({ id: validate.data.clientId })
 
-    if (!validateClientId) {
-      return res.status(400).json({ status: 'Error', message: `El servicio ${validate.data.tipoServicio} no ha sido creado correctamente por que el clientId no es correcto ` })
+      if (!validateClientId) {
+        return res.status(400).json({ status: 'Error', message: `El servicio ${validate.data.tipoServicio} no ha sido creado correctamente por que el clientId no es correcto ` })
+      }
     }
-
     const newService = await ServicesModel.createService({ input: validate.data })
 
     if (newService) {
@@ -72,6 +77,12 @@ export class ServicesController {
 
   deleteService = async (req, res) => {
     const { id } = req.params
+
+    const services = await ServicesModel.getServiceById({ id })
+
+    if (!services) {
+      return res.status(400).json({ status: 'Error', message: 'No existe servicio para eliminar' })
+    }
 
     const deletedService = await ServicesModel.deleteService({ id })
 

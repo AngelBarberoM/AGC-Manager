@@ -46,6 +46,45 @@ export class ClientsModel {
     }
   }
 
+  static async getClientByDNI ({ dni }) {
+    const [clients] = await connection.query(
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE dni = ?`, [dni]
+    )
+
+    if (clients.length > 0) {
+      return clients[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getClientByEmail ({ email }) {
+    const [clients] = await connection.query(
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE email = ?`, [email]
+    )
+
+    if (clients.length > 0) {
+      return clients[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getClientByTelefono ({ telefono }) {
+    const [clients] = await connection.query(
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      FROM clients WHERE telefono = ?`, [telefono]
+    )
+
+    if (clients.length > 0) {
+      return clients[0]
+    } else {
+      return null
+    }
+  }
+
   static async createClient ({ input }) {
     const { nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion } = input
 

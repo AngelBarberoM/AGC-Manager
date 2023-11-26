@@ -51,13 +51,25 @@ export class ServicesModel {
 
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult
-    try {
-      await connection.query(
+
+    if (clientId !== 'NULL') {
+      try {
+        await connection.query(
         `INSERT INTO services (serviceId, tipoServicio, descripcion, fechaServicio, fechaCreacion, clientId) 
         VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, UUID_TO_BIN(?));`, [tipoServicio, descripcion, fechaServicio, fechaCreacion, clientId]
-      )
-    } catch (e) {
-      throw new Error('Error creating service')
+        )
+      } catch (e) {
+        throw new Error('Error creating service 1')
+      }
+    } else {
+      try {
+        await connection.query(
+        `INSERT INTO services (serviceId, tipoServicio, descripcion, fechaServicio, fechaCreacion) 
+        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?);`, [tipoServicio, descripcion, fechaServicio, fechaCreacion]
+        )
+      } catch (e) {
+        throw new Error('Error creating service 2')
+      }
     }
 
     const [services] = await connection.query(
@@ -74,7 +86,7 @@ export class ServicesModel {
 
   static async updateService ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, fechaServicio, fechaCreacion 
+      `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, fechaServicio, fechaCreacion, BIN_TO_UUID(clientId) as clientId 
       FROM services WHERE serviceId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -82,6 +94,7 @@ export class ServicesModel {
     const descripcion = input.descripcion ?? datos[0].descripcion
     const fechaServicio = input.fechaServicio ?? datos[0].fechaServicio
     const fechaCreacion = input.fechaCreacion ?? datos[0].fechaCreacion
+    const clientId = input.clientId ?? datos[0].clientId
 
     try {
       await connection.query(
@@ -89,9 +102,10 @@ export class ServicesModel {
         SET tipoServicio = ?,
           descripcion = ?,
           fechaServicio = ?,
-          fechaCreacion = ?
+          fechaCreacion = ?,
+          clientId = = UUID_TO_BIN(?)
         WHERE serviceId = UUID_TO_BIN(?)`,
-        [tipoServicio, descripcion, fechaServicio, fechaCreacion, id]
+        [tipoServicio, descripcion, fechaServicio, fechaCreacion, clientId, id]
       )
     } catch (e) {
       throw new Error('Error updating client')

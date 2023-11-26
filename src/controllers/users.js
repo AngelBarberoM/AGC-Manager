@@ -37,14 +37,6 @@ export class UsersController {
     const confirmedPassword = validate.data.confirmedPassword
     const tipoUsuario = validate.data.tipoUsuario
 
-    // Comprobamos si el numero de usuarios registrados en el sistema es mayor que 3,
-    // ya que no tiene sentido que todo el mundo pueda registrarse
-    const numberUsers = await UsersModel.getNumberUsers()
-
-    if (numberUsers >= 3) {
-      return res.status(429).json({ status: 'Error', message: 'Límite de usuarios alcanzado. No se pueden admitir más registros en este momento' })
-    }
-
     // Comprobamos si las contraseñas introducidas son la misma
     if (password !== confirmedPassword) {
       return res.status(400).json({ status: 'Error', message: 'Las contraseñas introducidas son incorrectas' })
@@ -54,10 +46,16 @@ export class UsersController {
     const salt = await bcryptjs.genSalt(5)
     const hashPassword = await bcryptjs.hash(password, salt)
 
-    // Comprobamos si existe usuario
-    const existeUsuario = await UsersModel.getUserByEmail(email)
+    // Comprobamos si existe usuario Email y Username
+    const existeUsuarioUsername = await UsersModel.getUserByUsername({ username })
 
-    if (existeUsuario) {
+    if (existeUsuarioUsername) {
+      return res.status(400).json({ status: 'Error', message: 'Este usuario ya exisite' })
+    }
+
+    const existeUsuarioEmail = await UsersModel.getUserByEmail({ email })
+
+    if (existeUsuarioEmail) {
       return res.status(400).json({ status: 'Error', message: 'Este usuario ya exisite' })
     }
 
@@ -99,6 +97,12 @@ export class UsersController {
 
   deleteUser = async (req, res) => {
     const { id } = req.params
+
+    const users = await UsersModel.getUserById({ id })
+
+    if (!users) {
+      return res.status(400).json({ status: 'Error', message: 'No existe usuario para eliminar' })
+    }
 
     const deletedUser = await UsersModel.deleteUser({ id })
 

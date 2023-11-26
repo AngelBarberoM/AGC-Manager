@@ -145,7 +145,7 @@ Content-Type: application/json
   "sexo": "otros",
   "fechaNacimiento": "2002-03-11",
   "direccion": "C/Juan luis, 4, 2t, 23432",
-  "contractId": "fda9eca0-80cb-11ee-bd18-d0c5d3070aa6"
+  "contractId": "9f0310e1-7fe3-11ee-83f6-d0c5d3070aa6"
 }
 
 ### Actualizar un administrativo
@@ -185,8 +185,7 @@ Content-Type: application/json
   "permisoConducir": "B",
   "tarjetaCAP": "No",
   "tarjetaTacografo": "No",
-  "certificadoAntecedentes": "No",
-  "contractId": "fda9eca0-80cb-11ee-bd18-d0c5d3070aa6"
+  "certificadoAntecedentes": "No"
 }
 
 ### Actualizar un conductor

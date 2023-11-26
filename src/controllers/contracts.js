@@ -66,6 +66,12 @@ export class ContractsController {
   deleteContract = async (req, res) => {
     const { id } = req.params
 
+    const contracts = await ContractsModel.getContractById({ id })
+
+    if (!contracts) {
+      return res.status(400).json({ status: 'Error', message: 'No existe contrato para eliminar' })
+    }
+
     const deletedContract = await ContractsModel.deleteContract({ id })
 
     if (deletedContract === false) {

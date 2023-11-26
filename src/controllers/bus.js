@@ -23,7 +23,22 @@ export class BusController {
     res.json(bus)
   }
 
+  getBusByMatricula = async (req, res) => {
+    const { matricula } = req.params
+
+    const bus = await BusModel.getBusById({ matricula })
+
+    if (!bus) {
+      return res.status(400).json({ status: 'Error', message: 'No existe autobus para mostrar' })
+    }
+    res.json(bus)
+  }
+
   createBus = async (req, res) => {
+    if (!req.body.employeeId) {
+      req.body.employeeId = 'NULL'
+    }
+
     const validate = validateBus(req.body)
 
     if (!validate.success) {
@@ -31,12 +46,19 @@ export class BusController {
       // return res.status(400).json({ status: 'Error', message: 'Error Bus Schema' })
     }
 
-    const validateEmployeeId = await DriversModel.getDriverById({ id: validate.data.employeeId })
+    const existeBusMatricula = await BusModel.getBusByMatricula({ matricula: validate.data.matricula })
 
-    if (!validateEmployeeId) {
-      return res.status(400).json({ status: 'Error', message: `El autobus ${validate.data.matricula} no ha sido creado correctamente por que el employeeId no es correcto ` })
+    if (existeBusMatricula) {
+      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
     }
 
+    if (validate.data.employeeId !== 'NULL') {
+      const validateEmployeeId = await DriversModel.getDriverById({ id: validate.data.employeeId })
+
+      if (!validateEmployeeId) {
+        return res.status(400).json({ status: 'Error', message: `El autobus ${validate.data.matricula} no ha sido creado correctamente por que el employeeId no es correcto ` })
+      }
+    }
     const newBus = await BusModel.createBus({ input: validate.data })
 
     if (newBus) {
@@ -72,6 +94,12 @@ export class BusController {
 
   deleteBus = async (req, res) => {
     const { id } = req.params
+
+    const bus = await BusModel.getBusById({ id })
+
+    if (!bus) {
+      return res.status(400).json({ status: 'Error', message: 'No existe autobus para eliminar' })
+    }
 
     const deletedBus = await BusModel.deleteBus({ id })
 

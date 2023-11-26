@@ -35,8 +35,21 @@ export class BusModel {
 
   static async getBusById ({ id }) {
     const [bus] = await connection.query(
-      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) 
+      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId 
       FROM bus WHERE busId = UUID_TO_BIN(?)`, [id]
+    )
+
+    if (bus.length > 0) {
+      return bus[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getBusByMatricula ({ matricula }) {
+    const [bus] = await connection.query(
+      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId 
+      FROM bus WHERE matricula = ?`, [matricula]
     )
 
     if (bus.length > 0) {
@@ -51,17 +64,29 @@ export class BusModel {
 
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult
-    try {
-      await connection.query(
+
+    if (employeeId !== 'NULL') {
+      try {
+        await connection.query(
         `INSERT INTO bus (busId, matricula, marca, modelo, plazas, employeeId) 
         VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, UUID_TO_BIN(?));`, [matricula, marca, modelo, plazas, employeeId]
-      )
-    } catch (e) {
-      throw new Error('Error creating bus')
+        )
+      } catch (e) {
+        throw new Error('Error creating bus 1')
+      }
+    } else {
+      try {
+        await connection.query(
+        `INSERT INTO bus (busId, matricula, marca, modelo, plazas) 
+        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?);`, [matricula, marca, modelo, plazas]
+        )
+      } catch (e) {
+        throw new Error('Error creating bus 2')
+      }
     }
 
     const [bus] = await connection.query(
-      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) 
+      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId 
       FROM bus WHERE busId = UUID_TO_BIN(?)`, [uuid]
     )
 
@@ -74,7 +99,7 @@ export class BusModel {
 
   static async updateBus ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas 
+      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId  
       FROM bus WHERE busId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -82,6 +107,7 @@ export class BusModel {
     const marca = input.marca ?? datos[0].marca
     const modelo = input.modelo ?? datos[0].modelo
     const plazas = input.plazas ?? datos[0].plazas
+    const employeeId = input.employeeId ?? datos[0].employeeId
 
     try {
       await connection.query(
@@ -89,16 +115,17 @@ export class BusModel {
         SET matricula = ?,
           marca = ?,
           modelo = ?,
-          plazas = ?
+          plazas = ?,
+          employeeId = UUID_TO_BIN(?)
         WHERE busId = UUID_TO_BIN(?)`,
-        [matricula, marca, modelo, plazas, id]
+        [matricula, marca, modelo, plazas, employeeId, id]
       )
     } catch (e) {
       throw new Error('Error updating bus')
     }
 
     const [bus] = await connection.query(
-      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) 
+      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId 
       FROM bus WHERE busId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -119,7 +146,7 @@ export class BusModel {
     }
 
     const [bus] = await connection.query(
-      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) 
+      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId 
       FROM bus WHERE busId = UUID_TO_BIN(?)`, [id]
     )
 

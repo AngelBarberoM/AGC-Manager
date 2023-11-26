@@ -35,8 +35,47 @@ export class AdministrativesModel {
 
   static async getAdministrativeById ({ id }) {
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE employeeId = UUID_TO_BIN(?)`, [id]
+    )
+
+    if (administratives.length > 0) {
+      return administratives[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getAdministrativeByDNI ({ dni }) {
+    const [administratives] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      FROM administratives WHERE dni = ?`, [dni]
+    )
+
+    if (administratives.length > 0) {
+      return administratives[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getAdministrativeByEmail ({ email }) {
+    const [administratives] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      FROM administratives WHERE email = ?`, [email]
+    )
+
+    if (administratives.length > 0) {
+      return administratives[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getAdministrativeByTelefono ({ telefono }) {
+    const [administratives] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      FROM administratives WHERE telefono = ?`, [telefono]
     )
 
     if (administratives.length > 0) {
@@ -52,17 +91,37 @@ export class AdministrativesModel {
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult
 
-    try {
-      await connection.query(
+    if (contractId !== 'NULL') {
+      try {
+        const [contrato] = await connection.query(
+          `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+          FROM administratives WHERE contractId = UUID_TO_BIN(?)`, [contractId]
+        )
+
+        if (contrato.length > 0) {
+          return 1
+        }
+
+        await connection.query(
         `INSERT INTO administratives (employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, contractId) VALUES
         (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?, ?, ?, UUID_TO_BIN(?));`, [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, contractId]
-      )
-    } catch (e) {
-      throw new Error('Error creating administrative')
+        )
+      } catch (e) {
+        throw new Error('Error creating administrative 1')
+      }
+    } else {
+      try {
+        await connection.query(
+        `INSERT INTO administratives (employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion) VALUES
+        (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?, ?, ?);`, [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion]
+        )
+      } catch (e) {
+        throw new Error('Error creating administrative 2')
+      }
     }
 
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE employeeId = UUID_TO_BIN(?)`, [uuid]
     )
 
@@ -75,7 +134,7 @@ export class AdministrativesModel {
 
   static async updateAdministrative ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId
       FROM administratives WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -87,6 +146,7 @@ export class AdministrativesModel {
     const sexo = input.sexo ?? datos[0].sexo
     const fechaNacimiento = input.fechaNacimiento ?? datos[0].fechaNacimiento
     const direccion = input.direccion ?? datos[0].direccion
+    const contractId = input.contractId ?? datos[0].contractId
 
     try {
       await connection.query(
@@ -98,16 +158,17 @@ export class AdministrativesModel {
           telefono = ?,
           sexo = ?,
           fechaNacimiento = ?,
-          direccion = ?
+          direccion = ?,
+          contractId = UUID_TO_BIN(?)
         WHERE employeeId = UUID_TO_BIN(?)`,
-        [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, id]
+        [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, contractId, id]
       )
     } catch (e) {
       throw new Error('Error updating administrative')
     }
 
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -128,7 +189,7 @@ export class AdministrativesModel {
     }
 
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 

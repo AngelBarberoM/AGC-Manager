@@ -23,12 +23,64 @@ export class ClientsController {
     res.json(clients)
   }
 
+  getClientByDNI = async (req, res) => {
+    const { dni } = req.params
+
+    const clients = await ClientsModel.getClientByDNI({ dni })
+
+    if (!clients) {
+      return res.status(400).json({ status: 'Error', message: 'No existe cliente para mostrar' })
+    }
+    res.json(clients)
+  }
+
+  getClientByEmail = async (req, res) => {
+    const { email } = req.params
+
+    const clients = await ClientsModel.getClientByEmail({ email })
+
+    if (!clients) {
+      return res.status(400).json({ status: 'Error', message: 'No existe cliente para mostrar' })
+    }
+    res.json(clients)
+  }
+
+  getClientByTelefono = async (req, res) => {
+    const { telefono } = req.params
+
+    const clients = await ClientsModel.getClientByTelefono({ telefono })
+
+    if (!clients) {
+      return res.status(400).json({ status: 'Error', message: 'No existe cliente para mostrar' })
+    }
+    res.json(clients)
+  }
+
   createClient = async (req, res) => {
     const validate = validateClient(req.body)
 
     if (!validate.success) {
       return res.status(400).json({ error: JSON.parse(validate.error.message) })
       // return res.status(400).json({ status: 'Error', message: 'Error Client Schema' })
+    }
+
+    // Comprobamos si existe conductor por DNI, email y telefono
+    const existeClienteDNI = await ClientsModel.getClientByDNI({ dni: validate.data.dni })
+
+    if (existeClienteDNI) {
+      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+    }
+
+    const existeClienteEmail = await ClientsModel.getClientByEmail({ email: validate.data.email })
+
+    if (existeClienteEmail) {
+      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+    }
+
+    const existeClienteTelefono = await ClientsModel.getClientByTelefono({ telefono: validate.data.telefono })
+
+    if (existeClienteTelefono) {
+      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
     }
 
     const newClient = await ClientsModel.createClient({ input: validate.data })
@@ -66,6 +118,12 @@ export class ClientsController {
 
   deleteClient = async (req, res) => {
     const { id } = req.params
+
+    const clients = await ClientsModel.getClientById({ id })
+
+    if (!clients) {
+      return res.status(400).json({ status: 'Error', message: 'No existe cliente para eliminar' })
+    }
 
     const deletedClient = await ClientsModel.deleteClient({ id })
 

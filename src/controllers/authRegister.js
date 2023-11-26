@@ -20,10 +20,16 @@ export async function registerAuth (req, res) {
     return res.status(400).json({ status: 'Error', message: 'Error User Schema' })
   }
 
-  // Comprobamos si existe usuario
-  const existeUsuario = await UsersModel.getUserByEmail({ email })
+  // Comprobamos si existe usuario Email y Username
+  const existeUsuarioUsername = await UsersModel.getUserByUsername({ username })
 
-  if (existeUsuario) {
+  if (existeUsuarioUsername) {
+    return res.status(400).json({ status: 'Error', message: 'Este usuario ya exisite' })
+  }
+
+  const existeUsuarioEmail = await UsersModel.getUserByEmail({ email })
+
+  if (existeUsuarioEmail) {
     return res.status(400).json({ status: 'Error', message: 'Este usuario ya exisite' })
   }
 

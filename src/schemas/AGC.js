@@ -77,8 +77,7 @@ const serviceSchema = z.object({
   }).refine(value => new Date(value) >= new Date('2020-01-01'), {
     message: 'Fecha Creacion must be greater than 2020-01-01.'
   }),
-  clientId: z.string().uuid({
-    invalid_type_error: 'clientId must be a UUID',
+  clientId: z.string({
     required_error: 'clientId is required'
   })
 })
@@ -142,8 +141,7 @@ const administrativeSchema = z.object({
     invalid_type_error: 'Direccion must be a string',
     required_error: 'Direccion is required'
   }),
-  contractId: z.string().uuid({
-    invalid_type_error: 'contractId must be a UUID',
+  contractId: z.string({
     required_error: 'contractId is required'
   })
 })
@@ -204,8 +202,7 @@ const driverSchema = z.object({
       invalid_type_error: 'Certificado Antecedentes must be a enum',
       required_error: 'Certificado Antecedentes is required'
     }),
-  contractId: z.string().uuid({
-    invalid_type_error: 'contractId must be a UUID',
+  contractId: z.string({
     required_error: 'contractId is required'
   })
 })
@@ -229,8 +226,7 @@ const busSchema = z.object({
     invalid_type_error: 'Plazas must be a number',
     required_error: 'Plazas is required'
   }).int().min(9, { message: 'Plazas must be greater or equal than 9' }).max(90, { message: 'Plazas must be fewer or equal than 90' }),
-  employeeId: z.string().uuid({
-    invalid_type_error: 'employeeId must be a UUID',
+  employeeId: z.string({
     required_error: 'employeeId is required'
   })
 })

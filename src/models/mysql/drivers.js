@@ -35,8 +35,47 @@ export class DriversModel {
 
   static async getDriverById ({ id }) {
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE employeeId = UUID_TO_BIN(?)`, [id]
+    )
+
+    if (drivers.length > 0) {
+      return drivers[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getDriverByDNI ({ dni }) {
+    const [drivers] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      FROM drivers WHERE dni = ?`, [dni]
+    )
+
+    if (drivers.length > 0) {
+      return drivers[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getDriverByEmail ({ email }) {
+    const [drivers] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      FROM drivers WHERE email = ?`, [email]
+    )
+
+    if (drivers.length > 0) {
+      return drivers[0]
+    } else {
+      return null
+    }
+  }
+
+  static async getDriverByTelefono ({ telefono }) {
+    const [drivers] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      FROM drivers WHERE telefono = ?`, [telefono]
     )
 
     if (drivers.length > 0) {
@@ -51,17 +90,38 @@ export class DriversModel {
 
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult
-    try {
-      await connection.query(
+
+    if (contractId !== 'NULL') {
+      try {
+        const [contrato] = await connection.query(
+          `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+          FROM drivers WHERE contractId = UUID_TO_BIN(?)`, [contractId]
+        )
+
+        if (contrato.length > 0) {
+          return 1
+        }
+
+        await connection.query(
         `INSERT INTO drivers (employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, contractId) 
         VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, UUID_TO_BIN(?));`, [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, contractId]
-      )
-    } catch (e) {
-      throw new Error('Error creating driver')
+        )
+      } catch (e) {
+        throw new Error('Error creating driver 1')
+      }
+    } else {
+      try {
+        await connection.query(
+        `INSERT INTO drivers (employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes) 
+        VALUES (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes]
+        )
+      } catch (e) {
+        throw new Error('Error creating driver 2')
+      }
     }
 
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE employeeId = UUID_TO_BIN(?)`, [uuid]
     )
 
@@ -74,7 +134,7 @@ export class DriversModel {
 
   static async updateDriver ({ id, input }) {
     const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId
       FROM drivers WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -90,6 +150,8 @@ export class DriversModel {
     const tarjetaCAP = input.tarjetaCAP ?? datos[0].tarjetaCAP
     const tarjetaTacografo = input.tarjetaTacografo ?? datos[0].tarjetaTacografo
     const certificadoAntecedentes = input.certificadoAntecedentes ?? datos[0].certificadoAntecedentes
+    const contractId = input.contractId ?? datos[0].contractId
+
     try {
       await connection.query(
         `UPDATE drivers
@@ -104,16 +166,17 @@ export class DriversModel {
           permisoConducir = ?,
           tarjetaCAP = ?,
           tarjetaTacografo = ?,
-          certificadoAntecedentes = ?
+          certificadoAntecedentes = ?,
+          contractId = UUID_TO_BIN(?)
         WHERE employeeId = UUID_TO_BIN(?)`,
-        [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, id]
+        [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, contractId, id]
       )
     } catch (e) {
       throw new Error('Error updating driver')
     }
 
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -134,7 +197,7 @@ export class DriversModel {
     }
 
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 

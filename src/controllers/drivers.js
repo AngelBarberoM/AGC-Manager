@@ -23,7 +23,44 @@ export class DriversController {
     res.json(drivers)
   }
 
+  getDriverByDNI = async (req, res) => {
+    const { dni } = req.params
+
+    const drivers = await DriversModel.getDriverByDNI({ dni })
+
+    if (!drivers) {
+      return res.status(400).json({ status: 'Error', message: 'No existe conductor para mostrar' })
+    }
+    res.json(drivers)
+  }
+
+  getDriverByEmail = async (req, res) => {
+    const { email } = req.params
+
+    const drivers = await DriversModel.getDriverByEmail({ email })
+
+    if (!drivers) {
+      return res.status(400).json({ status: 'Error', message: 'No existe conductor para mostrar' })
+    }
+    res.json(drivers)
+  }
+
+  getDriverByTelefono = async (req, res) => {
+    const { telefono } = req.params
+
+    const drivers = await DriversModel.getDriverByTelefono({ telefono })
+
+    if (!drivers) {
+      return res.status(400).json({ status: 'Error', message: 'No existe conductor para mostrar' })
+    }
+    res.json(drivers)
+  }
+
   createDriver = async (req, res) => {
+    if (!req.body.contractId) {
+      req.body.contractId = 'NULL'
+    }
+
     const validate = validateDriver(req.body)
 
     if (!validate.success) {
@@ -31,15 +68,39 @@ export class DriversController {
       // return res.status(400).json({ status: 'Error', message: 'Error Driver Schema' })
     }
 
-    const validateContractId = await ContractsModel.getContractById({ id: validate.data.contractId })
+    // Comprobamos si existe conductor por DNI, email y telefono
+    const existeConductorDNI = await DriversModel.getDriverByDNI({ dni: validate.data.dni })
 
-    if (!validateContractId) {
-      return res.status(400).json({ status: 'Error', message: `El conductor ${validate.data.nombre} no ha sido creado correctamente por que el contractId no es correcto ` })
+    if (existeConductorDNI) {
+      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
     }
 
+    const existeConductorEmail = await DriversModel.getDriverByEmail({ email: validate.data.email })
+
+    if (existeConductorEmail) {
+      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+    }
+
+    const existeConductorTelefono = await DriversModel.getDriverByTelefono({ telefono: validate.data.telefono })
+
+    if (existeConductorTelefono) {
+      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+    }
+
+    // Comprobamos que cuando creamos un conductor sin contrato no pete
+
+    if (validate.data.contractId !== 'NULL') {
+      const validateContractId = await ContractsModel.getContractById({ id: validate.data.contractId })
+
+      if (!validateContractId) {
+        return res.status(400).json({ status: 'Error', message: `El conductor ${validate.data.nombre} no ha sido creado correctamente por que el contractId no es correcto ` })
+      }
+    }
     const newDriver = await DriversModel.createDriver({ input: validate.data })
 
-    if (newDriver) {
+    if (newDriver === 1) {
+      return res.status(400).json({ status: 'Error', message: `El conductor ${validate.data.nombre} no ha sido creado correctamente por que el contrato ya está en uso` })
+    } else if (newDriver) {
       return res.status(201).json({ status: 'ok', message: `Driver ${newDriver.nombre} con id ${newDriver.employeeId} creado correctamente`, redirect: '/drivers' })
     } else {
       return res.status(400).json({ status: 'Error', message: `El conductor ${validate.data.nombre} no ha sido creado correctamente ` })
@@ -72,6 +133,12 @@ export class DriversController {
 
   deleteDriver = async (req, res) => {
     const { id } = req.params
+
+    const drivers = await DriversModel.getDriverById({ id })
+
+    if (!drivers) {
+      return res.status(400).json({ status: 'Error', message: 'No existe conductor para eliminar' })
+    }
 
     const deletedDriver = await DriversModel.deleteDriver({ id })
 

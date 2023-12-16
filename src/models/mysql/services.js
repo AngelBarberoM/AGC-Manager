@@ -85,30 +85,56 @@ export class ServicesModel {
   }
 
   static async updateService ({ id, input }) {
-    const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, fechaServicio, fechaCreacion, BIN_TO_UUID(clientId) as clientId 
-      FROM services WHERE serviceId = UUID_TO_BIN(?)`, [id]
-    )
+    const tipoServicio = input.tipoServicio
+    const descripcion = input.descripcion
+    const fechaServicio = input.fechaServicio
+    const fechaCreacion = input.fechaCreacion
+    const clientId = input.clientId
 
-    const tipoServicio = input.tipoServicio ?? datos[0].tipoServicio
-    const descripcion = input.descripcion ?? datos[0].descripcion
-    const fechaServicio = input.fechaServicio ?? datos[0].fechaServicio
-    const fechaCreacion = input.fechaCreacion ?? datos[0].fechaCreacion
-    const clientId = input.clientId ?? datos[0].clientId
-
-    try {
-      await connection.query(
-        `UPDATE services
-        SET tipoServicio = ?,
-          descripcion = ?,
-          fechaServicio = ?,
-          fechaCreacion = ?,
-          clientId = = UUID_TO_BIN(?)
-        WHERE serviceId = UUID_TO_BIN(?)`,
-        [tipoServicio, descripcion, fechaServicio, fechaCreacion, clientId, id]
-      )
-    } catch (e) {
-      throw new Error('Error updating client')
+    if (tipoServicio) {
+      try {
+        await connection.query(
+          'UPDATE services SET tipoServicio = ? WHERE serviceId = UUID_TO_BIN(?)', [tipoServicio, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating type service in service')
+      }
+    }
+    if (descripcion) {
+      try {
+        await connection.query(
+          'UPDATE services SET descripcion = ? WHERE serviceId = UUID_TO_BIN(?)', [descripcion, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating description in service')
+      }
+    }
+    if (fechaServicio) {
+      try {
+        await connection.query(
+          'UPDATE services SET fechaServicio = ? WHERE serviceId = UUID_TO_BIN(?)', [fechaServicio, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating service date in service')
+      }
+    }
+    if (fechaCreacion) {
+      try {
+        await connection.query(
+          'UPDATE services SET fechaCreacion = ? WHERE serviceId = UUID_TO_BIN(?)', [fechaCreacion, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating create date in service')
+      }
+    }
+    if (clientId) {
+      try {
+        await connection.query(
+          'UPDATE services SET clientId = UUID_TO_BIN(?) WHERE serviceId = UUID_TO_BIN(?)', [clientId, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating clientId in service')
+      }
     }
 
     const [services] = await connection.query(

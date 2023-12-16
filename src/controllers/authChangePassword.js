@@ -44,7 +44,6 @@ export async function changePasswordAuth (req, res) {
   const hashPassword = await bcryptjs.hash(password, salt)
 
   // Actualizamos el usuario
-
   const updatedUser = await UsersModel.updateUser({ id: loggedIn.userId, input: { password: hashPassword, tipoUsuario } })
 
   if (updatedUser) {

@@ -113,36 +113,86 @@ export class ClientsModel {
   }
 
   static async updateClient ({ id, input }) {
-    const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
-      FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
-    )
+    const nombreEmpresa = input.nombreEmpresa
+    const dni = input.dni
+    const nombre = input.nombre
+    const apellidos = input.apellidos
+    const email = input.email
+    const telefono = input.telefono
+    const fechaNacimiento = input.email
+    const direccion = input.telefono
 
-    const nombreEmpresa = input.nombreEmpresa ?? datos[0].nombreEmpresa
-    const dni = input.dni ?? datos[0].dni
-    const nombre = input.nombre ?? datos[0].nombre
-    const apellidos = input.apellidos ?? datos[0].apellidos
-    const email = input.email ?? datos[0].email
-    const telefono = input.telefono ?? datos[0].telefono
-    const fechaNacimiento = input.email ?? datos[0].fechaNacimiento
-    const direccion = input.telefono ?? datos[0].direccion
-
-    try {
-      await connection.query(
-        `UPDATE clients
-        SET nombreEmpresa = ?,
-          dni = ?,
-          nombre = ?,
-          apellidos = ?,
-          email = ?,
-          telefono = ?,
-          fechaNacimiento = ?,
-          direccion = ?
-        WHERE clientId = UUID_TO_BIN(?)`,
-        [nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion, id]
-      )
-    } catch (e) {
-      throw new Error('Error updating client')
+    if (nombreEmpresa) {
+      try {
+        await connection.query(
+          'UPDATE clients SET nombreEmpresa = ? WHERE clientId = UUID_TO_BIN(?)', [nombreEmpresa, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating nombre empresa in client')
+      }
+    }
+    if (dni) {
+      try {
+        await connection.query(
+          'UPDATE clients SET dni = ? WHERE clientId = UUID_TO_BIN(?)', [dni, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating dni in client')
+      }
+    }
+    if (nombre) {
+      try {
+        await connection.query(
+          'UPDATE clients SET nombre = ? WHERE clientId = UUID_TO_BIN(?)', [nombre, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating nombre in client')
+      }
+    }
+    if (apellidos) {
+      try {
+        await connection.query(
+          'UPDATE clients SET apellidos = ? WHERE clientId = UUID_TO_BIN(?)', [apellidos, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating apellidos in client')
+      }
+    }
+    if (email) {
+      try {
+        await connection.query(
+          'UPDATE clients SET email = ? WHERE clientId = UUID_TO_BIN(?)', [email, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating email in client')
+      }
+    }
+    if (telefono) {
+      try {
+        await connection.query(
+          'UPDATE clients SET telefono = ? WHERE clientId = UUID_TO_BIN(?)', [telefono, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating telefono in client')
+      }
+    }
+    if (fechaNacimiento) {
+      try {
+        await connection.query(
+          'UPDATE clients SET fechaNacimiento = ? WHERE clientId = UUID_TO_BIN(?)', [fechaNacimiento, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating fechaNacimiento in client')
+      }
+    }
+    if (direccion) {
+      try {
+        await connection.query(
+          'UPDATE clients SET direccion = ? WHERE clientId = UUID_TO_BIN(?)', [direccion, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating direccion in client')
+      }
     }
 
     const [clients] = await connection.query(

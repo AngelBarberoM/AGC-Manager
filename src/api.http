@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un usuario
-PATCH http://localhost:1234/users/aa6830c2-80b0-11ee-9eda-d0c5d3070aa6
+PATCH http://localhost:1234/users/b81f65a5-9c2e-11ee-98e7-e84dca0bd91e
 Content-Type: application/json
 
 {
@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un cliente
-PATCH http://localhost:1234/clients/1de2100e-80b5-11ee-9eda-d0c5d3070aa6
+PATCH http://localhost:1234/clients/ff3804e5-7fac-11ee-920d-d0c5d3070aa6
 Content-Type: application/json
 
 {
@@ -83,7 +83,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un servicio
-PATCH http://localhost:1234/services/d4f6674b-80c0-11ee-9eda-d0c5d3070aa6
+PATCH http://localhost:1234/services/339b66e2-7fe3-11ee-83f6-d0c5d3070aa6
 Content-Type: application/json
 
 {
@@ -114,7 +114,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un contrato
-PATCH http://localhost:1234/contracts/dd859045-80dd-11ee-b214-d0c5d3070aa6
+PATCH http://localhost:1234/contracts/062ffe42-9c0e-11ee-bdce-5e4951bbb96b
 Content-Type: application/json
 
 {
@@ -149,7 +149,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un administrativo
-PATCH http://localhost:1234/administratives/0fdad3fb-80ca-11ee-bd18-d0c5d3070aa6
+PATCH http://localhost:1234/administratives/8b0a6b94-935a-11ee-a3af-d0c5d3070aa6
 Content-Type: application/json
 
 {
@@ -189,12 +189,12 @@ Content-Type: application/json
 }
 
 ### Actualizar un conductor
-PATCH http://localhost:1234/drivers/2d059ab1-80cc-11ee-bd18-d0c5d3070aa6
+PATCH http://localhost:1234/drivers/8b0a6be7-935a-11ee-a3af-d0c5d3070aa6
 Content-Type: application/json
 
 {
-  "tarjetaCAP": "Si",
-  "nombre": "Genaro"
+  "email": "prueba@prueba.com",
+  "telefono": "612312000"
 }
 
 ### Eliminar un conductor
@@ -221,7 +221,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un bus
-PATCH http://localhost:1234/bus/6720fd95-80cd-11ee-bd18-d0c5d3070aa6
+PATCH http://localhost:1234/bus/3a7eef05-9c27-11ee-bdce-5e4951bbb96b
 Content-Type: application/json
 
 {

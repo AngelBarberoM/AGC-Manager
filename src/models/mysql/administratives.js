@@ -133,38 +133,96 @@ export class AdministrativesModel {
   }
 
   static async updateAdministrative ({ id, input }) {
-    const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId
-      FROM administratives WHERE employeeId = UUID_TO_BIN(?)`, [id]
-    )
+    const dni = input.dni
+    const nombre = input.nombre
+    const apellidos = input.apellidos
+    const email = input.email
+    const telefono = input.telefono
+    const sexo = input.sexo
+    const fechaNacimiento = input.fechaNacimiento
+    const direccion = input.direccion
+    const contractId = input.contractId
 
-    const dni = input.dni ?? datos[0].dni
-    const nombre = input.nombre ?? datos[0].nombre
-    const apellidos = input.apellidos ?? datos[0].apellidos
-    const email = input.email ?? datos[0].email
-    const telefono = input.telefono ?? datos[0].telefono
-    const sexo = input.sexo ?? datos[0].sexo
-    const fechaNacimiento = input.fechaNacimiento ?? datos[0].fechaNacimiento
-    const direccion = input.direccion ?? datos[0].direccion
-    const contractId = input.contractId ?? datos[0].contractId
-
-    try {
-      await connection.query(
-        `UPDATE administratives
-        SET dni = ?,
-          nombre = ?,
-          apellidos = ?,
-          email = ?,
-          telefono = ?,
-          sexo = ?,
-          fechaNacimiento = ?,
-          direccion = ?,
-          contractId = UUID_TO_BIN(?)
-        WHERE employeeId = UUID_TO_BIN(?)`,
-        [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, contractId, id]
-      )
-    } catch (e) {
-      throw new Error('Error updating administrative')
+    if (dni) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET dni = ? WHERE employeeId = UUID_TO_BIN(?)', [dni, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating dni in administrative')
+      }
+    }
+    if (nombre) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET nombre = ? WHERE employeeId = UUID_TO_BIN(?)', [nombre, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating nombre in administrative')
+      }
+    }
+    if (apellidos) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET apellidos = ? WHERE employeeId = UUID_TO_BIN(?)', [apellidos, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating apellidos in administrative')
+      }
+    }
+    if (email) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET email = ? WHERE employeeId = UUID_TO_BIN(?)', [email, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating email in administrative')
+      }
+    }
+    if (telefono) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET telefono = ? WHERE employeeId = UUID_TO_BIN(?)', [telefono, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating telefono in administrative')
+      }
+    }
+    if (sexo) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET sexo = ? WHERE employeeId = UUID_TO_BIN(?)', [sexo, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating sexo in administrative')
+      }
+    }
+    if (fechaNacimiento) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET fechaNacimiento = ? WHERE employeeId = UUID_TO_BIN(?)', [fechaNacimiento, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating fechaNacimiento in administrative')
+      }
+    }
+    if (direccion) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET direccion = ? WHERE employeeId = UUID_TO_BIN(?)', [direccion, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating direccion in administrative')
+      }
+    }
+    if (contractId) {
+      try {
+        await connection.query(
+          'UPDATE administratives SET contractId = ? WHERE employeeId = UUID_TO_BIN(?)', [contractId, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating contractId in administrative')
+      }
     }
 
     const [administratives] = await connection.query(

@@ -96,28 +96,46 @@ export class UsersModel {
   }
 
   static async updateUser ({ id, input }) {
-    const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(userId) as userId, username, email, password, tipoUsuario 
-      FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
-    )
+    const username = input.username
+    const email = input.email
+    const password = input.password
+    const tipoUsuario = input.tipoUsuario
 
-    const username = input.username ?? datos[0].username
-    const email = input.email ?? datos[0].email
-    const password = input.password ?? datos[0].password
-    const tipoUsuario = input.tipoUsuario ?? datos[0].tipoUsuario
-
-    try {
-      await connection.query(
-        `UPDATE users
-        SET username = ?,
-          email = ?,
-          password = ?,
-          tipoUsuario = ?
-        WHERE userId = UUID_TO_BIN(?)`,
-        [username, email, password, tipoUsuario, id]
-      )
-    } catch (e) {
-      throw new Error('Error updating user')
+    if (username) {
+      try {
+        await connection.query(
+          'UPDATE users SET username = ? WHERE userId = UUID_TO_BIN(?)', [username, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating username in user')
+      }
+    }
+    if (email) {
+      try {
+        await connection.query(
+          'UPDATE users SET email = ? WHERE userId = UUID_TO_BIN(?)', [email, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating email in user')
+      }
+    }
+    if (password) {
+      try {
+        await connection.query(
+          'UPDATE users SET password = ? WHERE userId = UUID_TO_BIN(?)', [password, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating password in user')
+      }
+    }
+    if (tipoUsuario) {
+      try {
+        await connection.query(
+          'UPDATE users SET tipoUsuario = ? WHERE userId = UUID_TO_BIN(?)', [tipoUsuario, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating tipoUsuario in user')
+      }
     }
 
     const [users] = await connection.query(

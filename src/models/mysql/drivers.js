@@ -133,46 +133,136 @@ export class DriversModel {
   }
 
   static async updateDriver ({ id, input }) {
-    const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId
-      FROM drivers WHERE employeeId = UUID_TO_BIN(?)`, [id]
-    )
+    const dni = input.dni
+    const nombre = input.nombre
+    const apellidos = input.apellidos
+    const email = input.email
+    const telefono = input.telefono
+    const sexo = input.sexo
+    const fechaNacimiento = input.fechaNacimiento
+    const direccion = input.direccion
+    const permisoConducir = input.permisoConducir
+    const tarjetaCAP = input.tarjetaCAP
+    const tarjetaTacografo = input.tarjetaTacografo
+    const certificadoAntecedentes = input.certificadoAntecedentes
+    const contractId = input.contractId
 
-    const dni = input.dni ?? datos[0].dni
-    const nombre = input.nombre ?? datos[0].nombre
-    const apellidos = input.apellidos ?? datos[0].apellidos
-    const email = input.email ?? datos[0].email
-    const telefono = input.telefono ?? datos[0].telefono
-    const sexo = input.sexo ?? datos[0].sexo
-    const fechaNacimiento = input.fechaNacimiento ?? datos[0].fechaNacimiento
-    const direccion = input.direccion ?? datos[0].direccion
-    const permisoConducir = input.permisoConducir ?? datos[0].permisoConducir
-    const tarjetaCAP = input.tarjetaCAP ?? datos[0].tarjetaCAP
-    const tarjetaTacografo = input.tarjetaTacografo ?? datos[0].tarjetaTacografo
-    const certificadoAntecedentes = input.certificadoAntecedentes ?? datos[0].certificadoAntecedentes
-    const contractId = input.contractId ?? datos[0].contractId
-
-    try {
-      await connection.query(
-        `UPDATE drivers
-        SET dni = ?,
-          nombre = ?,
-          apellidos = ?,
-          email = ?,
-          telefono = ?,
-          sexo = ?,
-          fechaNacimiento = ?,
-          direccion = ?,
-          permisoConducir = ?,
-          tarjetaCAP = ?,
-          tarjetaTacografo = ?,
-          certificadoAntecedentes = ?,
-          contractId = UUID_TO_BIN(?)
-        WHERE employeeId = UUID_TO_BIN(?)`,
-        [dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, contractId, id]
-      )
-    } catch (e) {
-      throw new Error('Error updating driver')
+    if (dni) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET dni = ? WHERE employeeId = UUID_TO_BIN(?)', [dni, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating dni in driver')
+      }
+    }
+    if (nombre) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET nombre = ? WHERE employeeId = UUID_TO_BIN(?)', [nombre, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating nombre in driver')
+      }
+    }
+    if (apellidos) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET apellidos = ? WHERE employeeId = UUID_TO_BIN(?)', [apellidos, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating apellidos in driver')
+      }
+    }
+    if (email) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET email = ? WHERE employeeId = UUID_TO_BIN(?)', [email, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating email in driver')
+      }
+    }
+    if (telefono) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET telefono = ? WHERE employeeId = UUID_TO_BIN(?)', [telefono, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating telefono in driver')
+      }
+    }
+    if (sexo) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET sexo = ? WHERE employeeId = UUID_TO_BIN(?)', [sexo, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating sexo in driver')
+      }
+    }
+    if (fechaNacimiento) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET fechaNacimiento = ? WHERE employeeId = UUID_TO_BIN(?)', [fechaNacimiento, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating fechaNacimiento in driver')
+      }
+    }
+    if (direccion) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET direccion = ? WHERE employeeId = UUID_TO_BIN(?)', [direccion, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating direccion in driver')
+      }
+    }
+    if (permisoConducir) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET permisoConducir = ? WHERE employeeId = UUID_TO_BIN(?)', [permisoConducir, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating permisoConducir in driver')
+      }
+    }
+    if (tarjetaCAP) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET tarjetaCAP = ? WHERE employeeId = UUID_TO_BIN(?)', [tarjetaCAP, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating tarjetaCAP in driver')
+      }
+    }
+    if (tarjetaTacografo) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET tarjetaTacografo = ? WHERE employeeId = UUID_TO_BIN(?)', [tarjetaTacografo, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating tarjetaTacografo in driver')
+      }
+    }
+    if (certificadoAntecedentes) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET certificadoAntecedentes = ? WHERE employeeId = UUID_TO_BIN(?)', [certificadoAntecedentes, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating certificadoAntecedentes in driver')
+      }
+    }
+    if (contractId) {
+      try {
+        await connection.query(
+          'UPDATE drivers SET contractId = UUID_TO_BIN(?) WHERE employeeId = UUID_TO_BIN(?)', [contractId, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating contractId in driver')
+      }
     }
 
     const [drivers] = await connection.query(

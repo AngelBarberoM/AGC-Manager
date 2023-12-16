@@ -73,28 +73,46 @@ export class ContractsModel {
   }
 
   static async updateContract ({ id, input }) {
-    const [datos] = await connection.query(
-    `SELECT BIN_TO_UUID(contractId) as contractId, fechaInicio, fechaFin, sueldoHora, horasSemana 
-   FROM contracts WHERE contractId = UUID_TO_BIN(?)`, [id]
-    )
+    const fechaInicio = input.fechaInicio
+    const fechaFin = input.fechaFin
+    const sueldoHora = input.sueldoHora
+    const horasSemana = input.horasSemana
 
-    const fechaInicio = input.fechaInicio ?? datos[0].fechaInicio
-    const fechaFin = input.fechaFin ?? datos[0].fechaFin
-    const sueldoHora = input.sueldoHora ?? datos[0].sueldoHora
-    const horasSemana = input.horasSemana ?? datos[0].horasSemana
-
-    try {
-      await connection.query(
-        `UPDATE contracts
-        SET fechaInicio = ?,
-          fechaFin = ?,
-          sueldoHora = ?,
-          horasSemana = ?
-        WHERE contractId = UUID_TO_BIN(?)`,
-        [fechaInicio, fechaFin, sueldoHora, horasSemana, id]
-      )
-    } catch (e) {
-      throw new Error('Error updating contract')
+    if (fechaInicio) {
+      try {
+        await connection.query(
+          'UPDATE contracts SET fechaInicio = ? WHERE contractId = UUID_TO_BIN(?)', [fechaInicio, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating fechaInicio in contract')
+      }
+    }
+    if (fechaFin) {
+      try {
+        await connection.query(
+          'UPDATE contracts SET fechaFin = ? WHERE contractId = UUID_TO_BIN(?)', [fechaFin, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating fechaFin in contract')
+      }
+    }
+    if (sueldoHora) {
+      try {
+        await connection.query(
+          'UPDATE contracts SET sueldoHora = ? WHERE contractId = UUID_TO_BIN(?)', [sueldoHora, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating sueldoHora in contract')
+      }
+    }
+    if (horasSemana) {
+      try {
+        await connection.query(
+          'UPDATE contracts SET horasSemana = ? WHERE contractId = UUID_TO_BIN(?)', [horasSemana, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating horasSemana in contract')
+      }
     }
 
     const [contracts] = await connection.query(

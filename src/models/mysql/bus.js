@@ -98,30 +98,56 @@ export class BusModel {
   }
 
   static async updateBus ({ id, input }) {
-    const [datos] = await connection.query(
-      `SELECT BIN_TO_UUID(busId) as busId, matricula, marca, modelo, plazas, BIN_TO_UUID(employeeId) as employeeId  
-      FROM bus WHERE busId = UUID_TO_BIN(?)`, [id]
-    )
+    const matricula = input.matricula
+    const marca = input.marca
+    const modelo = input.modelo
+    const plazas = input.plazas
+    const employeeId = input.employeeId
 
-    const matricula = input.matricula ?? datos[0].matricula
-    const marca = input.marca ?? datos[0].marca
-    const modelo = input.modelo ?? datos[0].modelo
-    const plazas = input.plazas ?? datos[0].plazas
-    const employeeId = input.employeeId ?? datos[0].employeeId
-
-    try {
-      await connection.query(
-        `UPDATE bus
-        SET matricula = ?,
-          marca = ?,
-          modelo = ?,
-          plazas = ?,
-          employeeId = UUID_TO_BIN(?)
-        WHERE busId = UUID_TO_BIN(?)`,
-        [matricula, marca, modelo, plazas, employeeId, id]
-      )
-    } catch (e) {
-      throw new Error('Error updating bus')
+    if (matricula) {
+      try {
+        await connection.query(
+          'UPDATE bus SET matricula = ? WHERE busId = UUID_TO_BIN(?)', [matricula, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating matricula in bus')
+      }
+    }
+    if (marca) {
+      try {
+        await connection.query(
+          'UPDATE bus SET marca = ? WHERE busId = UUID_TO_BIN(?)', [marca, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating marca in bus')
+      }
+    }
+    if (modelo) {
+      try {
+        await connection.query(
+          'UPDATE bus SET modelo = ? WHERE busId = UUID_TO_BIN(?)', [modelo, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating modelo in bus')
+      }
+    }
+    if (plazas) {
+      try {
+        await connection.query(
+          'UPDATE bus SET plazas = ? WHERE busId = UUID_TO_BIN(?)', [plazas, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating plazas in bus')
+      }
+    }
+    if (employeeId) {
+      try {
+        await connection.query(
+          'UPDATE bus SET employeeId = UUID_TO_BIN(?) WHERE busId = UUID_TO_BIN(?)', [employeeId, id]
+        )
+      } catch (e) {
+        throw new Error('Error updating employeeId in bus')
+      }
     }
 
     const [bus] = await connection.query(

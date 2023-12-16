@@ -22,12 +22,3 @@ employeesRouter.get('/', onlyLoggedIn, (req, res) => {
 
 employeesRouter.get('/allAdministratives', onlyLoggedIn, administrativesController.getAllAdministratives)
 employeesRouter.get('/allDrivers', onlyLoggedIn, driversController.getAllDrivers)
-// employeesRouter.get('/:id', onlyLoggedIn, driversController.getDriverById)
-// employeesRouter.delete('/:id', onlyLoggedIn, driversController.deleteDriver)
-// employeesRouter.post('/', onlyLoggedIn, driversController.createDriver)
-// employeesRouter.patch('/:id', onlyLoggedIn, driversController.updateDriver)
-
-// employeesRouter.get('/:id', onlyLoggedIn, administrativesController.getAdministrativeById)
-// employeesRouter.delete('/:id', onlyLoggedIn, administrativesController.deleteAdministrative)
-// employeesRouter.post('/', onlyLoggedIn, administrativesController.createAdministrative)
-// employeesRouter.patch('/:id', onlyLoggedIn, administrativesController.updateAdministrative)

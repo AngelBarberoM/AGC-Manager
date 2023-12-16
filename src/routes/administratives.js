@@ -17,7 +17,13 @@ administrativesRouter.get('/', onlyLoggedIn, (req, res) => {
 })
 
 administrativesRouter.get('/allAdministratives', onlyLoggedIn, administrativesController.getAllAdministratives)
-administrativesRouter.get('/:id', onlyLoggedIn, administrativesController.getAdministrativeById)
+
+administrativesRouter.get('/:id', onlyLoggedIn, (req, res) => {
+  const administrativesHtmlPath = path.join(__dirname, '..', 'views', 'administrative.html')
+  res.sendFile(administrativesHtmlPath)
+})
+administrativesRouter.get('/details/:id', onlyLoggedIn, administrativesController.getAdministrativeById)
+
 administrativesRouter.delete('/:id', onlyLoggedIn, administrativesController.deleteAdministrative)
 administrativesRouter.post('/', onlyLoggedIn, administrativesController.createAdministrative)
 administrativesRouter.patch('/:id', onlyLoggedIn, administrativesController.updateAdministrative)

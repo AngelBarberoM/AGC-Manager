@@ -1,4 +1,4 @@
-fetch('/employees/allAdministratives')
+fetch('/administratives/allAdministratives')
   .then(response => response.json())
   .then(data => {
     const administrativeTable = document.getElementById('administrative-table')
@@ -42,9 +42,20 @@ fetch('/employees/allAdministratives')
         direccionCell.textContent = client.direccion
         row.appendChild(direccionCell)
 
-        const contratoIdCell = document.createElement('td')
-        contratoIdCell.textContent = client.contractId
-        row.appendChild(contratoIdCell)
+        // Crear una celda para el botón
+        const viewDetailsCell = document.createElement('td')
+
+        // Crear el botón y configurar su comportamiento
+        const viewDetailsButton = document.createElement('button')
+        viewDetailsButton.textContent = 'Ver Detalles'
+
+        viewDetailsButton.addEventListener('click', () => {
+          window.location.href = `/administratives/${client.employeeId}`
+        })
+
+        viewDetailsCell.appendChild(viewDetailsButton)
+
+        row.appendChild(viewDetailsCell)
 
         tbody.appendChild(row)
       })
@@ -54,7 +65,7 @@ fetch('/employees/allAdministratives')
     console.error('Error¡', error)
   })
 
-fetch('/employees/allDrivers')
+fetch('/drivers/allDrivers')
   .then(response => response.json())
   .then(data => {
     const driverTable = document.getElementById('driver-table')
@@ -114,9 +125,20 @@ fetch('/employees/allDrivers')
         certificadoAntecedentesCell.textContent = client.certificadoAntecedentes
         row.appendChild(certificadoAntecedentesCell)
 
-        const contratoIdCell = document.createElement('td')
-        contratoIdCell.textContent = client.contractId
-        row.appendChild(contratoIdCell)
+        // Crear una celda para el botón
+        const viewDetailsCell = document.createElement('td')
+
+        // Crear el botón y configurar su comportamiento
+        const viewDetailsButton = document.createElement('button')
+        viewDetailsButton.textContent = 'Ver Detalles'
+
+        viewDetailsButton.addEventListener('click', () => {
+          window.location.href = `/drivers/${client.employeeId}`
+        })
+
+        viewDetailsCell.appendChild(viewDetailsButton)
+
+        row.appendChild(viewDetailsCell)
 
         tbody.appendChild(row)
       })

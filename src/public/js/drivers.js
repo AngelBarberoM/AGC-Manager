@@ -58,9 +58,20 @@ fetch('/drivers/allDrivers')
         certificadoAntecedentesCell.textContent = client.certificadoAntecedentes
         row.appendChild(certificadoAntecedentesCell)
 
-        const contratoIdCell = document.createElement('td')
-        contratoIdCell.textContent = client.contractId
-        row.appendChild(contratoIdCell)
+        // Crear una celda para el botón
+        const viewDetailsCell = document.createElement('td')
+
+        // Crear el botón y configurar su comportamiento
+        const viewDetailsButton = document.createElement('button')
+        viewDetailsButton.textContent = 'Ver Detalles'
+
+        viewDetailsButton.addEventListener('click', () => {
+          window.location.href = `/drivers/${client.employeeId}`
+        })
+
+        viewDetailsCell.appendChild(viewDetailsButton)
+
+        row.appendChild(viewDetailsCell)
 
         tbody.appendChild(row)
       })

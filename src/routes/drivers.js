@@ -17,7 +17,13 @@ driversRouter.get('/', onlyLoggedIn, (req, res) => {
 })
 
 driversRouter.get('/allDrivers', onlyLoggedIn, driversController.getAllDrivers)
-driversRouter.get('/:id', onlyLoggedIn, driversController.getDriverById)
+
+driversRouter.get('/:id', onlyLoggedIn, (req, res) => {
+  const driversHtmlPath = path.join(__dirname, '..', 'views', 'driver.html')
+  res.sendFile(driversHtmlPath)
+})
+driversRouter.get('/details/:id', onlyLoggedIn, driversController.getDriverById)
+
 driversRouter.delete('/:id', onlyLoggedIn, driversController.deleteDriver)
 driversRouter.post('/', onlyLoggedIn, driversController.createDriver)
 driversRouter.patch('/:id', onlyLoggedIn, driversController.updateDriver)

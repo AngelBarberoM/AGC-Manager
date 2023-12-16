@@ -130,7 +130,7 @@ DELETE  http://localhost:1234/contracts/001c13cc-80c1-11ee-9eda-d0c5d3070aa6
 GET http://localhost:1234/administratives/alladministratives
 
 ### Recuperar un administrativo por id
-GET http://localhost:1234/administratives/b1e8f663-7fad-11ee-920d-d0c5d3070aa6
+GET http://localhost:1234/administratives/8b0a6ad2-935a-11ee-a3af-d0c5d3070aa6
 
 ### Crear un administrativo
 POST http://localhost:1234/administratives

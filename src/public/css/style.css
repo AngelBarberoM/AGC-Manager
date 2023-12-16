@@ -192,3 +192,29 @@ button:hover {
 .escondido{
   display: none;
 }
+
+/* Estilos para las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Espacio superior entre la tabla y otros elementos */
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
+  border-right: 1px solid rgba(206, 200, 200, 0.1);;
+}
+
+th {
+  background-color: #333; /* Color de fondo para las celdas de encabezado */
+  color: white;
+}
+
+/* Estilo para las filas alternas (opcional) */
+tr:nth-child(even) {
+  background-color: #202020;
+}
+
+/* Añade más estilos según tus preferencias */

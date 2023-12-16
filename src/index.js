@@ -24,16 +24,16 @@ app.use('/', pagesRouter)
 
 // Errores
 // Page not found 404
-// app.use((req, res, next) => {
-//   const err = new Error('Page not found')
-//   err.status = 404
-//   next(err)
-// })
-
-// app.use((err, req, res, next) => {
-//   res.status(err.status || 500)
-//   res.send(err.message)
-// })
+app.use((req, res, next) => {
+  const err = new Error('Page not found')
+  err.status = 404
+  next(err)
+})
+app.use((err, req, res, next) => {
+  res.status(err.status || 500)
+  const errorHtmlPath = path.join(__dirname, 'views', 'error', '404.html')
+  res.sendFile(errorHtmlPath)
+})
 
 // Servidor
 const PORT = process.env.PORT ?? 1234

@@ -8,6 +8,7 @@ import { changePasswordRouter } from './changePassword.js'
 import { usersRouter } from './users.js'
 import { clientsRouter } from './clients.js'
 import { servicesRouter } from './services.js'
+import { employeesRouter } from './employees.js'
 import { administrativesRouter } from './administratives.js'
 import { driversRouter } from './drivers.js'
 import { busRouter } from './bus.js'
@@ -54,6 +55,9 @@ pagesRouter.use('/clients', clientsRouter)
 
 // Services Page
 pagesRouter.use('/services', servicesRouter)
+
+// Drivers Page
+pagesRouter.use('/employees', employeesRouter)
 
 // Administratives Page
 pagesRouter.use('/administratives', administrativesRouter)

@@ -58,7 +58,7 @@ export async function registerAuth (req, res) {
       return res.status(404).json({ status: 'Error', message: 'User not found' })
     }
   } else if (newUser) {
-    return res.status(201).json({ status: 'ok', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/login' })
+    return res.status(201).json({ status: 'ok', message: `Usuario ${newUser.username} creado correctamente`, redirect: '/home' })
   } else {
     return res.status(400).json({ status: 'Error', message: `El usuario ${newUser.username} no ha sido creado correctamente ` })
   }

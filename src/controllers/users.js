@@ -65,7 +65,7 @@ export class UsersController {
 
     // Comprobamos si el usuario ha sido creado correctamente
     if (newUser) {
-      return res.status(201).json({ status: 'ok', message: `Usuario ${newUser.username} con id ${newUser.userId} creado correctamente`, redirect: '/login' })
+      return res.status(201).json({ status: 'ok', message: `Usuario ${newUser.username} con id ${newUser.userId} creado correctamente`, redirect: '/home' })
     } else {
       return res.status(400).json({ status: 'Error', message: `El usuario ${validate.data.username} no ha sido creado correctamente ` })
     }

@@ -94,7 +94,7 @@ fetch(`/administratives/details/${employeeId}`)
               if (deleteData.status === 'ok') {
                 window.alert('Administrativo eliminado correctamente.')
 
-                window.location.reload()
+                window.location.href = '/employees'
               } else {
                 console.error('Error al eliminar:', deleteData.message)
               }

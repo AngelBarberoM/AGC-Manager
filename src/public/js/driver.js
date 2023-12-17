@@ -110,7 +110,7 @@ fetch(`/drivers/details/${employeeId}`)
               if (deleteData.status === 'ok') {
                 window.alert('Conductor eliminado correctamente.')
 
-                window.location.reload()
+                window.location.href = '/employees'
               } else {
                 console.error('Error al eliminar:', deleteData.message)
               }

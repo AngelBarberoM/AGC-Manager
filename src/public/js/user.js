@@ -53,18 +53,15 @@ fetch(`/users/details/${userId}`)
 
       // Funcionalidad Botón Eliminar
       deleteButton.addEventListener('click', () => {
-        // Mostrar mensaje de confirmación
-
         const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el usuario: ${data.username}?`)
 
         if (confirmDelete) {
-          // Realizar la solicitud de eliminación
           fetch(`/users/${userId}`, { method: 'DELETE' })
             .then(response => response.json())
             .then(deleteData => {
               if (deleteData.status === 'ok') {
                 window.alert('Usuario eliminado exitosamente.')
-                // Puedes redirigir a otra página o actualizar la actual según tus necesidades.
+
                 window.location.href = '/home'
               } else {
                 console.error('Error al eliminar:', deleteData.message)

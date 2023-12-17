@@ -30,20 +30,58 @@ fetch('/administratives/allAdministratives')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
 
-        // Crear una celda para el botón
-        const viewDetailsCell = document.createElement('td')
+        // Botones de Actualizar y Eliminar
+        const buttonsCell = document.createElement('td')
+        const searchButton = document.createElement('img')
+        const updateButton = document.createElement('img')
+        const deleteButton = document.createElement('img')
 
-        // Crear el botón y configurar su comportamiento
-        const viewDetailsButton = document.createElement('button')
-        viewDetailsButton.textContent = 'Ver Detalles'
+        searchButton.src = '/img/lupa.png'
+        searchButton.alt = 'Actualizar Administrativo'
+        searchButton.className = 'chiquito'
+        updateButton.src = '/img/editar.png'
+        updateButton.alt = 'Actualizar Administrativo'
+        updateButton.className = 'chiquito'
+        deleteButton.src = '/img/eliminar.png'
+        deleteButton.alt = 'Eliminar Administrativo'
+        deleteButton.className = 'chiquito'
 
-        viewDetailsButton.addEventListener('click', () => {
+        // Funcionalidad Botón Buscar
+        searchButton.addEventListener('click', () => {
           window.location.href = `/administratives/${client.employeeId}`
         })
 
-        viewDetailsCell.appendChild(viewDetailsButton)
+        // Funcionalidad Botón Actualizar
+        updateButton.addEventListener('click', () => {
+          window.location.href = `/administratives/update/${client.employeeId}`
+        })
 
-        row.appendChild(viewDetailsCell)
+        // Funcionalidad Botón Eliminar
+        deleteButton.addEventListener('click', () => {
+          const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el administrativo: ${client.nombre} ${client.apellidos}?`)
+
+          if (confirmDelete) {
+            fetch(`/administratives/${client.employeeId}`, { method: 'DELETE' })
+              .then(response => response.json())
+              .then(deleteData => {
+                if (deleteData.status === 'ok') {
+                  window.alert('Administrativo eliminado exitosamente.')
+
+                  window.location.reload()
+                } else {
+                  console.error('Error al eliminar:', deleteData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al eliminar:', error)
+              })
+          }
+        })
+
+        buttonsCell.appendChild(searchButton)
+        buttonsCell.appendChild(updateButton)
+        buttonsCell.appendChild(deleteButton)
+        row.appendChild(buttonsCell)
 
         tbody.appendChild(row)
       })
@@ -85,20 +123,58 @@ fetch('/drivers/allDrivers')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
 
-        // Crear una celda para el botón
-        const viewDetailsCell = document.createElement('td')
+        // Botones de Actualizar y Eliminar
+        const buttonsCell = document.createElement('td')
+        const searchButton = document.createElement('img')
+        const updateButton = document.createElement('img')
+        const deleteButton = document.createElement('img')
 
-        // Crear el botón y configurar su comportamiento
-        const viewDetailsButton = document.createElement('button')
-        viewDetailsButton.textContent = 'Ver Detalles'
+        searchButton.src = '/img/lupa.png'
+        searchButton.alt = 'Actualizar Conductor'
+        searchButton.className = 'chiquito'
+        updateButton.src = '/img/editar.png'
+        updateButton.alt = 'Actualizar Conductor'
+        updateButton.className = 'chiquito'
+        deleteButton.src = '/img/eliminar.png'
+        deleteButton.alt = 'Eliminar Conductor'
+        deleteButton.className = 'chiquito'
 
-        viewDetailsButton.addEventListener('click', () => {
+        // Funcionalidad Botón Buscar
+        searchButton.addEventListener('click', () => {
           window.location.href = `/drivers/${client.employeeId}`
         })
 
-        viewDetailsCell.appendChild(viewDetailsButton)
+        // Funcionalidad Botón Actualizar
+        updateButton.addEventListener('click', () => {
+          window.location.href = `/drivers/update/${client.employeeId}`
+        })
 
-        row.appendChild(viewDetailsCell)
+        // Funcionalidad Botón Eliminar
+        deleteButton.addEventListener('click', () => {
+          const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el conductor: ${client.nombre} ${client.apellidos}?`)
+
+          if (confirmDelete) {
+            fetch(`/drivers/${client.employeeId}`, { method: 'DELETE' })
+              .then(response => response.json())
+              .then(deleteData => {
+                if (deleteData.status === 'ok') {
+                  window.alert('Conductor eliminado exitosamente.')
+
+                  window.location.reload()
+                } else {
+                  console.error('Error al eliminar:', deleteData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al eliminar:', error)
+              })
+          }
+        })
+
+        buttonsCell.appendChild(searchButton)
+        buttonsCell.appendChild(updateButton)
+        buttonsCell.appendChild(deleteButton)
+        row.appendChild(buttonsCell)
 
         tbody.appendChild(row)
       })

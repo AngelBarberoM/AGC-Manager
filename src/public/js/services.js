@@ -37,13 +37,13 @@ fetch('/services/allServices')
         const deleteButton = document.createElement('img')
 
         searchButton.src = '/img/lupa.png'
-        searchButton.alt = 'Actualizar Usuario'
+        searchButton.alt = 'Actualizar Servicios'
         searchButton.className = 'chiquito'
         updateButton.src = '/img/editar.png'
-        updateButton.alt = 'Actualizar Usuario'
+        updateButton.alt = 'Actualizar Servicios'
         updateButton.className = 'chiquito'
         deleteButton.src = '/img/eliminar.png'
-        deleteButton.alt = 'Eliminar Usuario'
+        deleteButton.alt = 'Eliminar Servicios'
         deleteButton.className = 'chiquito'
 
         // Funcionalidad Botón Buscar

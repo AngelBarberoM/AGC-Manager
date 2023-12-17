@@ -30,7 +30,7 @@ fetch('/services/allServices')
         clientIdCell.textContent = client.clientId
         row.appendChild(clientIdCell)
 
-        // Botones de Actualizar y Eliminar
+        // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
         const updateButton = document.createElement('img')

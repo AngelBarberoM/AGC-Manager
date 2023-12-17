@@ -26,7 +26,7 @@ fetch('/contracts/allContracts')
         horasSemanaCell.textContent = client.horasSemana
         row.appendChild(horasSemanaCell)
 
-        // Botones de Actualizar y Eliminar
+        // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
         const updateButton = document.createElement('img')

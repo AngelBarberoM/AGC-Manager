@@ -49,6 +49,50 @@ fetch(`/bus/details/${busId}`)
 
       row.appendChild(viewDetailsDriverCell)
 
+      // Botones de Buscar, Actualizar y Eliminar
+      const buttonsCell = document.createElement('td')
+
+      const updateButton = document.createElement('img')
+      const deleteButton = document.createElement('img')
+
+      updateButton.src = '/img/editar.png'
+      updateButton.alt = 'Actualizar Autobuses'
+      updateButton.className = 'chiquito'
+      deleteButton.src = '/img/eliminar.png'
+      deleteButton.alt = 'Eliminar Autobuses'
+      deleteButton.className = 'chiquito'
+
+      // Funcionalidad Botón Actualizar
+      updateButton.addEventListener('click', () => {
+        window.location.href = `/bus/update/${data.busId}`
+      })
+
+      // Funcionalidad Botón Eliminar
+      deleteButton.addEventListener('click', () => {
+        const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el autobús: ${data.matricula}?`)
+
+        if (confirmDelete) {
+          fetch(`/bus/${data.busId}`, { method: 'DELETE' })
+            .then(response => response.json())
+            .then(deleteData => {
+              if (deleteData.status === 'ok') {
+                window.alert('Autobús eliminado correctamente.')
+
+                window.location.reload()
+              } else {
+                console.error('Error al eliminar:', deleteData.message)
+              }
+            })
+            .catch(error => {
+              console.error('Error al eliminar:', error)
+            })
+        }
+      })
+
+      buttonsCell.appendChild(updateButton)
+      buttonsCell.appendChild(deleteButton)
+      row.appendChild(buttonsCell)
+
       tbody.appendChild(row)
     }
   })

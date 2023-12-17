@@ -10,10 +10,6 @@ fetch('/administratives/allAdministratives')
       data.forEach(client => {
         const row = document.createElement('tr')
 
-        const dniCell = document.createElement('td')
-        dniCell.textContent = client.dni
-        row.appendChild(dniCell)
-
         const nombreCell = document.createElement('td')
         nombreCell.textContent = client.nombre
         row.appendChild(nombreCell)
@@ -22,6 +18,10 @@ fetch('/administratives/allAdministratives')
         apellidosCell.textContent = client.apellidos
         row.appendChild(apellidosCell)
 
+        const dniCell = document.createElement('td')
+        dniCell.textContent = client.dni
+        row.appendChild(dniCell)
+
         const emailCell = document.createElement('td')
         emailCell.textContent = client.email
         row.appendChild(emailCell)
@@ -29,18 +29,6 @@ fetch('/administratives/allAdministratives')
         const telefonoCell = document.createElement('td')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
-
-        const sexoCell = document.createElement('td')
-        sexoCell.textContent = client.sexo
-        row.appendChild(sexoCell)
-
-        const fechaNacimientoCell = document.createElement('td')
-        fechaNacimientoCell.textContent = client.fechaNacimiento
-        row.appendChild(fechaNacimientoCell)
-
-        const direccionCell = document.createElement('td')
-        direccionCell.textContent = client.direccion
-        row.appendChild(direccionCell)
 
         // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')

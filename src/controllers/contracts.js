@@ -78,6 +78,6 @@ export class ContractsController {
       return res.status(404).json({ status: 'Error', message: 'Contract not found' })
     }
 
-    return res.json({ message: 'Contract deleted' })
+    return res.json({ status: 'ok', message: 'Contract deleted' })
   }
 }

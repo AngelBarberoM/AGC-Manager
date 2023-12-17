@@ -65,9 +65,9 @@ fetch('/services/allServices')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Usuario eliminado exitosamente.')
+                  window.alert('Servicio eliminado exitosamente.')
 
-                  window.location.href = '/home'
+                  window.location.reload()
                 } else {
                   console.error('Error al eliminar:', deleteData.message)
                 }

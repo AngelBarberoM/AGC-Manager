@@ -90,6 +90,6 @@ export class ServicesController {
       return res.status(404).json({ status: 'Error', message: 'Service not found' })
     }
 
-    return res.json({ message: 'Service deleted' })
+    return res.json({ status: 'ok', message: 'Service deleted' })
   }
 }

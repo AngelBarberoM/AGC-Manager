@@ -78,7 +78,7 @@ fetch('/users/allUsers')
                 if (deleteData.status === 'ok') {
                   window.alert('Usuario eliminado exitosamente.')
 
-                  window.location.href = '/home'
+                  window.location.reload()
                 } else {
                   console.error('Error al eliminar:', deleteData.message)
                 }

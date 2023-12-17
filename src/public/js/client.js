@@ -42,6 +42,50 @@ fetch(`/clients/details/${clientId}`)
       telefonoCell.textContent = data.telefono
       row.appendChild(telefonoCell)
 
+      // Botones de Buscar, Actualizar y Eliminar
+      const buttonsCell = document.createElement('td')
+
+      const updateButton = document.createElement('img')
+      const deleteButton = document.createElement('img')
+
+      updateButton.src = '/img/editar.png'
+      updateButton.alt = 'Actualizar Clientes'
+      updateButton.className = 'chiquito'
+      deleteButton.src = '/img/eliminar.png'
+      deleteButton.alt = 'Eliminar Clientes'
+      deleteButton.className = 'chiquito'
+
+      // Funcionalidad Botón Actualizar
+      updateButton.addEventListener('click', () => {
+        window.location.href = `/clients/update/${data.clientId}`
+      })
+
+      // Funcionalidad Botón Eliminar
+      deleteButton.addEventListener('click', () => {
+        const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el cliente: ${data.nombre} ${data.apellidos}??`)
+
+        if (confirmDelete) {
+          fetch(`/clients/${data.clientId}`, { method: 'DELETE' })
+            .then(response => response.json())
+            .then(deleteData => {
+              if (deleteData.status === 'ok') {
+                window.alert('Cliente eliminado correctamente.')
+
+                window.location.reload()
+              } else {
+                console.error('Error al eliminar:', deleteData.message)
+              }
+            })
+            .catch(error => {
+              console.error('Error al eliminar:', error)
+            })
+        }
+      })
+
+      buttonsCell.appendChild(updateButton)
+      buttonsCell.appendChild(deleteButton)
+      row.appendChild(buttonsCell)
+
       tbody.appendChild(row)
     }
   })

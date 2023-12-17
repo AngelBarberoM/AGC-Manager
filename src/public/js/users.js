@@ -26,22 +26,7 @@ fetch('/users/allUsers')
         tipoUsuarioCell.textContent = client.tipoUsuario
         row.appendChild(tipoUsuarioCell)
 
-        // // Crear una celda para el botón
-        // const viewDetailsContractCell = document.createElement('td')
-
-        // // Crear el botón y configurar su comportamiento
-        // const viewDetailsButton = document.createElement('button')
-        // viewDetailsButton.textContent = 'Ver Detalles'
-
-        // viewDetailsButton.addEventListener('click', () => {
-        //   window.location.href = `/users/${client.userId}`
-        // })
-
-        // viewDetailsContractCell.appendChild(viewDetailsButton)
-
-        // row.appendChild(viewDetailsContractCell)
-
-        // Botones de Actualizar y Eliminar
+        // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
         const updateButton = document.createElement('img')
@@ -76,7 +61,7 @@ fetch('/users/allUsers')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Usuario eliminado exitosamente.')
+                  window.alert('Usuario eliminado correctamente.')
 
                   window.location.reload()
                 } else {

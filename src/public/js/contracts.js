@@ -61,7 +61,7 @@ fetch('/contracts/allContracts')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Contrato eliminado exitosamente.')
+                  window.alert('Contrato eliminado correctamente.')
 
                   window.location.reload()
                 } else {

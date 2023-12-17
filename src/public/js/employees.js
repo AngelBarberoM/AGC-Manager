@@ -65,7 +65,7 @@ fetch('/administratives/allAdministratives')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Administrativo eliminado exitosamente.')
+                  window.alert('Administrativo eliminado correctamente.')
 
                   window.location.reload()
                 } else {
@@ -158,7 +158,7 @@ fetch('/drivers/allDrivers')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Conductor eliminado exitosamente.')
+                  window.alert('Conductor eliminado correctamente.')
 
                   window.location.reload()
                 } else {

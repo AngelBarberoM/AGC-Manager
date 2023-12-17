@@ -61,7 +61,7 @@ fetch('/bus/allBus')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Autobús eliminado exitosamente.')
+                  window.alert('Autobús eliminado correctamente.')
 
                   window.location.reload()
                 } else {

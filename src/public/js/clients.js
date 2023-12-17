@@ -69,7 +69,7 @@ fetch('/clients/allClients')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Cliente eliminado exitosamente.')
+                  window.alert('Cliente eliminado correctamente.')
 
                   window.location.reload()
                 } else {

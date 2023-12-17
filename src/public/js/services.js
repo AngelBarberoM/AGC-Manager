@@ -65,7 +65,7 @@ fetch('/services/allServices')
               .then(response => response.json())
               .then(deleteData => {
                 if (deleteData.status === 'ok') {
-                  window.alert('Servicio eliminado exitosamente.')
+                  window.alert('Servicio eliminado correctamente.')
 
                   window.location.reload()
                 } else {

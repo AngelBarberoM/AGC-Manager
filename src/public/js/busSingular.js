@@ -34,9 +34,20 @@ fetch(`/bus/details/${busId}`)
       plazasCell.textContent = data.plazas
       row.appendChild(plazasCell)
 
-      const conductorIdCell = document.createElement('td')
-      conductorIdCell.textContent = data.employeeId
-      row.appendChild(conductorIdCell)
+      // Crear una celda para el botón
+      const viewDetailsDriverCell = document.createElement('td')
+
+      // Crear el botón y configurar su comportamiento
+      const viewDetailsButton = document.createElement('button')
+      viewDetailsButton.textContent = 'Ver Conductor'
+
+      viewDetailsButton.addEventListener('click', () => {
+        window.location.href = `/drivers/${data.employeeId}`
+      })
+
+      viewDetailsDriverCell.appendChild(viewDetailsButton)
+
+      row.appendChild(viewDetailsDriverCell)
 
       tbody.appendChild(row)
     }

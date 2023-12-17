@@ -34,6 +34,50 @@ fetch(`/contracts/details/${contractId}`)
       horasSemanaCell.textContent = data.horasSemana
       row.appendChild(horasSemanaCell)
 
+      // Botones de Buscar, Actualizar y Eliminar
+      const buttonsCell = document.createElement('td')
+
+      const updateButton = document.createElement('img')
+      const deleteButton = document.createElement('img')
+
+      updateButton.src = '/img/editar.png'
+      updateButton.alt = 'Actualizar Contrato'
+      updateButton.className = 'chiquito'
+      deleteButton.src = '/img/eliminar.png'
+      deleteButton.alt = 'Eliminar Contrato'
+      deleteButton.className = 'chiquito'
+
+      // Funcionalidad Botón Actualizar
+      updateButton.addEventListener('click', () => {
+        window.location.href = `/contracts/update/${data.contractId}`
+      })
+
+      // Funcionalidad Botón Eliminar
+      deleteButton.addEventListener('click', () => {
+        const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar el contrato?')
+
+        if (confirmDelete) {
+          fetch(`/contracts/${data.contractId}`, { method: 'DELETE' })
+            .then(response => response.json())
+            .then(deleteData => {
+              if (deleteData.status === 'ok') {
+                window.alert('Contrato eliminado correctamente.')
+
+                window.location.reload()
+              } else {
+                console.error('Error al eliminar:', deleteData.message)
+              }
+            })
+            .catch(error => {
+              console.error('Error al eliminar:', error)
+            })
+        }
+      })
+
+      buttonsCell.appendChild(updateButton)
+      buttonsCell.appendChild(deleteButton)
+      row.appendChild(buttonsCell)
+
       tbody.appendChild(row)
     }
   })

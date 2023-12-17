@@ -110,6 +110,6 @@ export class UsersController {
       return res.status(404).json({ status: 'Error', message: 'User not found' })
     }
 
-    return res.json({ status: 'Success', message: 'User deleted' })
+    return res.json({ status: 'ok', message: 'User deleted' })
   }
 }

@@ -42,11 +42,9 @@ fetch(`/users/details/${userId}`)
       updateButton.src = '/img/editar.png'
       updateButton.alt = 'Actualizar Usuario'
       updateButton.className = 'chiquito'
-      updateButton.id = 'update-user'
       deleteButton.src = '/img/eliminar.png'
       deleteButton.alt = 'Eliminar Usuario'
       deleteButton.className = 'chiquito'
-      deleteButton.id = 'delete-user'
 
       // Funcionalidad Botón Actualizar
       updateButton.addEventListener('click', () => {
@@ -64,7 +62,7 @@ fetch(`/users/details/${userId}`)
           fetch(`/users/${userId}`, { method: 'DELETE' })
             .then(response => response.json())
             .then(deleteData => {
-              if (deleteData.status === 'Success') {
+              if (deleteData.status === 'ok') {
                 window.alert('Usuario eliminado exitosamente.')
                 // Puedes redirigir a otra página o actualizar la actual según tus necesidades.
                 window.location.href = '/home'

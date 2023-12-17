@@ -30,6 +30,21 @@ fetch('/services/allServices')
         clientIdCell.textContent = client.clientId
         row.appendChild(clientIdCell)
 
+        // Crear una celda para el botón
+        const viewDetailsContractCell = document.createElement('td')
+
+        // Crear el botón y configurar su comportamiento
+        const viewDetailsButton = document.createElement('button')
+        viewDetailsButton.textContent = 'Ver Detalles'
+
+        viewDetailsButton.addEventListener('click', () => {
+          window.location.href = `/services/${client.serviceId}`
+        })
+
+        viewDetailsContractCell.appendChild(viewDetailsButton)
+
+        row.appendChild(viewDetailsContractCell)
+
         tbody.appendChild(row)
       })
     }

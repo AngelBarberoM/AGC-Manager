@@ -204,7 +204,8 @@ th, td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
-  border-right: 1px solid rgba(206, 200, 200, 0.1);;
+  border-right: 1px solid rgba(206, 200, 200, 0.05);
+  border-left: 1px solid rgba(206, 200, 200, 0.05);
 }
 
 th {

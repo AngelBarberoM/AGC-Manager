@@ -17,7 +17,14 @@ servicesRouter.get('/', onlyLoggedIn, (req, res) => {
 })
 
 servicesRouter.get('/allServices', onlyLoggedIn, servicesController.getAllServices)
-servicesRouter.get('/:id', onlyLoggedIn, servicesController.getServiceById)
+
+servicesRouter.get('/:id', onlyLoggedIn, (req, res) => {
+  const servicesHtmlPath = path.join(__dirname, '..', 'views', 'service.html')
+  res.sendFile(servicesHtmlPath)
+})
+
+servicesRouter.get('/details/:id', onlyLoggedIn, servicesController.getServiceById)
+
 servicesRouter.delete('/:id', onlyLoggedIn, servicesController.deleteService)
 servicesRouter.post('/', onlyLoggedIn, servicesController.createService)
 servicesRouter.patch('/:id', onlyLoggedIn, servicesController.updateService)

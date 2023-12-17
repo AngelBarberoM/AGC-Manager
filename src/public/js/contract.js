@@ -63,7 +63,7 @@ fetch(`/contracts/details/${contractId}`)
               if (deleteData.status === 'ok') {
                 window.alert('Contrato eliminado correctamente.')
 
-                window.location.reload()
+                window.location.href = '/contracts'
               } else {
                 console.error('Error al eliminar:', deleteData.message)
               }

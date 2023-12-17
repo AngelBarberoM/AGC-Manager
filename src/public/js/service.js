@@ -78,7 +78,7 @@ fetch(`/services/details/${serviceId}`)
               if (deleteData.status === 'ok') {
                 window.alert('Servicio eliminado correctamente.')
 
-                window.location.reload()
+                window.location.href = '/services'
               } else {
                 console.error('Error al eliminar:', deleteData.message)
               }

@@ -71,7 +71,7 @@ fetch(`/clients/details/${clientId}`)
               if (deleteData.status === 'ok') {
                 window.alert('Cliente eliminado correctamente.')
 
-                window.location.reload()
+                window.location.href = '/clients'
               } else {
                 console.error('Error al eliminar:', deleteData.message)
               }

@@ -78,7 +78,7 @@ fetch(`/bus/details/${busId}`)
               if (deleteData.status === 'ok') {
                 window.alert('Autobús eliminado correctamente.')
 
-                window.location.reload()
+                window.location.href = '/bus'
               } else {
                 console.error('Error al eliminar:', deleteData.message)
               }

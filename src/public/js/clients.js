@@ -34,6 +34,21 @@ fetch('/clients/allClients')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
 
+        // Crear una celda para el botón
+        const viewDetailsCell = document.createElement('td')
+
+        // Crear el botón y configurar su comportamiento
+        const viewDetailsButton = document.createElement('button')
+        viewDetailsButton.textContent = 'Ver Detalles'
+
+        viewDetailsButton.addEventListener('click', () => {
+          window.location.href = `/clients/${client.clientId}`
+        })
+
+        viewDetailsCell.appendChild(viewDetailsButton)
+
+        row.appendChild(viewDetailsCell)
+
         tbody.appendChild(row)
       })
     }

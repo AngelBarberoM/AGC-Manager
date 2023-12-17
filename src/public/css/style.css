@@ -202,7 +202,7 @@ table {
 
 th, td {
   padding: 12px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
   border-right: 1px solid rgba(206, 200, 200, 0.05);
   border-left: 1px solid rgba(206, 200, 200, 0.05);
@@ -213,9 +213,19 @@ th {
   color: white;
 }
 
-/* Estilo para las filas alternas (opcional) */
 tr:nth-child(even) {
   background-color: #202020;
 }
 
-/* Añade más estilos según tus preferencias */
+.chiquito {
+  width: 20px;
+  height: 20px;
+  padding-right: 10px;
+  transition: transform 0.3s ease-in-out; /* Agregamos una transición para suavizar el efecto de escala */
+  display: inline-block; /* Para que el padding-right funcione correctamente */
+}
+
+.chiquito:hover {
+  transform: scale(1.2);
+  filter: brightness(1.1); /* Aumentamos el brillo al hacer hover */
+}

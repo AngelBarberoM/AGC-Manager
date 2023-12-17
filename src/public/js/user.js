@@ -34,6 +34,54 @@ fetch(`/users/details/${userId}`)
       tipoUsuarioCell.textContent = data.tipoUsuario
       row.appendChild(tipoUsuarioCell)
 
+      // Botones de Actualizar y Eliminar
+      const buttonsCell = document.createElement('td')
+      const updateButton = document.createElement('img')
+      const deleteButton = document.createElement('img')
+
+      updateButton.src = '/img/editar.png'
+      updateButton.alt = 'Actualizar Usuario'
+      updateButton.className = 'chiquito'
+      updateButton.id = 'update-user'
+      deleteButton.src = '/img/eliminar.png'
+      deleteButton.alt = 'Eliminar Usuario'
+      deleteButton.className = 'chiquito'
+      deleteButton.id = 'delete-user'
+
+      // Funcionalidad Botón Actualizar
+      updateButton.addEventListener('click', () => {
+        window.location.href = `/users/update/${userId}`
+      })
+
+      // Funcionalidad Botón Eliminar
+      deleteButton.addEventListener('click', () => {
+        // Mostrar mensaje de confirmación
+
+        const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el usuario: ${data.username}?`)
+
+        if (confirmDelete) {
+          // Realizar la solicitud de eliminación
+          fetch(`/users/${userId}`, { method: 'DELETE' })
+            .then(response => response.json())
+            .then(deleteData => {
+              if (deleteData.status === 'Success') {
+                window.alert('Usuario eliminado exitosamente.')
+                // Puedes redirigir a otra página o actualizar la actual según tus necesidades.
+                window.location.href = '/home'
+              } else {
+                console.error('Error al eliminar:', deleteData.message)
+              }
+            })
+            .catch(error => {
+              console.error('Error al eliminar:', error)
+            })
+        }
+      })
+
+      buttonsCell.appendChild(updateButton)
+      buttonsCell.appendChild(deleteButton)
+      row.appendChild(buttonsCell)
+
       tbody.appendChild(row)
     }
   })

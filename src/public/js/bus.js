@@ -26,20 +26,58 @@ fetch('/bus/allBus')
         plazasCell.textContent = client.plazas
         row.appendChild(plazasCell)
 
-        // Crear una celda para el botón
-        const viewDetailsCell = document.createElement('td')
+        // Botones de Buscar, Actualizar y Eliminar
+        const buttonsCell = document.createElement('td')
+        const searchButton = document.createElement('img')
+        const updateButton = document.createElement('img')
+        const deleteButton = document.createElement('img')
 
-        // Crear el botón y configurar su comportamiento
-        const viewDetailsButton = document.createElement('button')
-        viewDetailsButton.textContent = 'Ver Detalles'
+        searchButton.src = '/img/lupa.png'
+        searchButton.alt = 'Actualizar Autobuses'
+        searchButton.className = 'chiquito'
+        updateButton.src = '/img/editar.png'
+        updateButton.alt = 'Actualizar Autobuses'
+        updateButton.className = 'chiquito'
+        deleteButton.src = '/img/eliminar.png'
+        deleteButton.alt = 'Eliminar Autobuses'
+        deleteButton.className = 'chiquito'
 
-        viewDetailsButton.addEventListener('click', () => {
+        // Funcionalidad Botón Buscar
+        searchButton.addEventListener('click', () => {
           window.location.href = `/bus/${client.busId}`
         })
 
-        viewDetailsCell.appendChild(viewDetailsButton)
+        // Funcionalidad Botón Actualizar
+        updateButton.addEventListener('click', () => {
+          window.location.href = `/bus/update/${client.busId}`
+        })
 
-        row.appendChild(viewDetailsCell)
+        // Funcionalidad Botón Eliminar
+        deleteButton.addEventListener('click', () => {
+          const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el autobús: ${client.matricula}?`)
+
+          if (confirmDelete) {
+            fetch(`/bus/${client.busId}`, { method: 'DELETE' })
+              .then(response => response.json())
+              .then(deleteData => {
+                if (deleteData.status === 'ok') {
+                  window.alert('Autobús eliminado exitosamente.')
+
+                  window.location.reload()
+                } else {
+                  console.error('Error al eliminar:', deleteData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al eliminar:', error)
+              })
+          }
+        })
+
+        buttonsCell.appendChild(searchButton)
+        buttonsCell.appendChild(updateButton)
+        buttonsCell.appendChild(deleteButton)
+        row.appendChild(buttonsCell)
 
         tbody.appendChild(row)
       })

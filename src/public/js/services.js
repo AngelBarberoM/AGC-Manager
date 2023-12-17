@@ -30,20 +30,58 @@ fetch('/services/allServices')
         clientIdCell.textContent = client.clientId
         row.appendChild(clientIdCell)
 
-        // Crear una celda para el botón
-        const viewDetailsContractCell = document.createElement('td')
+        // Botones de Actualizar y Eliminar
+        const buttonsCell = document.createElement('td')
+        const searchButton = document.createElement('img')
+        const updateButton = document.createElement('img')
+        const deleteButton = document.createElement('img')
 
-        // Crear el botón y configurar su comportamiento
-        const viewDetailsButton = document.createElement('button')
-        viewDetailsButton.textContent = 'Ver Detalles'
+        searchButton.src = '/img/lupa.png'
+        searchButton.alt = 'Actualizar Usuario'
+        searchButton.className = 'chiquito'
+        updateButton.src = '/img/editar.png'
+        updateButton.alt = 'Actualizar Usuario'
+        updateButton.className = 'chiquito'
+        deleteButton.src = '/img/eliminar.png'
+        deleteButton.alt = 'Eliminar Usuario'
+        deleteButton.className = 'chiquito'
 
-        viewDetailsButton.addEventListener('click', () => {
+        // Funcionalidad Botón Buscar
+        searchButton.addEventListener('click', () => {
           window.location.href = `/services/${client.serviceId}`
         })
 
-        viewDetailsContractCell.appendChild(viewDetailsButton)
+        // Funcionalidad Botón Actualizar
+        updateButton.addEventListener('click', () => {
+          window.location.href = `/services/update/${client.serviceId}`
+        })
 
-        row.appendChild(viewDetailsContractCell)
+        // Funcionalidad Botón Eliminar
+        deleteButton.addEventListener('click', () => {
+          const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el servicio: ${client.tipoServicio}?`)
+
+          if (confirmDelete) {
+            fetch(`/services/${client.serviceId}`, { method: 'DELETE' })
+              .then(response => response.json())
+              .then(deleteData => {
+                if (deleteData.status === 'ok') {
+                  window.alert('Usuario eliminado exitosamente.')
+
+                  window.location.href = '/home'
+                } else {
+                  console.error('Error al eliminar:', deleteData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al eliminar:', error)
+              })
+          }
+        })
+
+        buttonsCell.appendChild(searchButton)
+        buttonsCell.appendChild(updateButton)
+        buttonsCell.appendChild(deleteButton)
+        row.appendChild(buttonsCell)
 
         tbody.appendChild(row)
       })

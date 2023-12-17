@@ -24,7 +24,10 @@ export class AdministrativesModel {
   }
 
   static async getAllAdministratives () {
-    const [administratives] = await connection.query('SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId FROM administratives')
+    const [administratives] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      FROM administratives`
+    )
 
     if (administratives.length > 0) {
       return administratives
@@ -35,7 +38,7 @@ export class AdministrativesModel {
 
   static async getAdministrativeById ({ id }) {
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -48,7 +51,7 @@ export class AdministrativesModel {
 
   static async getAdministrativeByDNI ({ dni }) {
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE dni = ?`, [dni]
     )
 
@@ -61,7 +64,7 @@ export class AdministrativesModel {
 
   static async getAdministrativeByEmail ({ email }) {
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE email = ?`, [email]
     )
 
@@ -74,7 +77,7 @@ export class AdministrativesModel {
 
   static async getAdministrativeByTelefono ({ telefono }) {
     const [administratives] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, BIN_TO_UUID(contractId) as contractId 
       FROM administratives WHERE telefono = ?`, [telefono]
     )
 

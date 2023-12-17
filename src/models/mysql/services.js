@@ -24,7 +24,10 @@ export class ServicesModel {
   }
 
   static async getAllServices () {
-    const [services] = await connection.query('SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, fechaServicio, fechaCreacion, BIN_TO_UUID(clientId) as clientId FROM services')
+    const [services] = await connection.query(
+      `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, DATE_FORMAT(fechaServicio, '%Y-%m-%d') AS fechaServicio, DATE_FORMAT(fechaCreacion, '%Y-%m-%d') AS fechaCreacion, BIN_TO_UUID(clientId) as clientId 
+      FROM services`
+    )
 
     if (services.length > 0) {
       return services
@@ -35,7 +38,7 @@ export class ServicesModel {
 
   static async getServiceById ({ id }) {
     const [services] = await connection.query(
-      `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, fechaServicio, fechaCreacion, BIN_TO_UUID(clientId) as clientId 
+      `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, DATE_FORMAT(fechaServicio, '%Y-%m-%d') AS fechaServicio, DATE_FORMAT(fechaCreacion, '%Y-%m-%d') AS fechaCreacion, BIN_TO_UUID(clientId) as clientId 
       FROM services WHERE serviceId = UUID_TO_BIN(?)`, [id]
     )
 

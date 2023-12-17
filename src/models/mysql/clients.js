@@ -24,7 +24,10 @@ export class ClientsModel {
   }
 
   static async getAllClients () {
-    const [clients] = await connection.query('SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion FROM clients')
+    const [clients] = await connection.query(
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion 
+      FROM clients`
+    )
 
     if (clients.length > 0) {
       return clients
@@ -35,7 +38,7 @@ export class ClientsModel {
 
   static async getClientById ({ id }) {
     const [clients] = await connection.query(
-      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion 
       FROM clients WHERE clientId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -48,7 +51,7 @@ export class ClientsModel {
 
   static async getClientByDNI ({ dni }) {
     const [clients] = await connection.query(
-      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion 
       FROM clients WHERE dni = ?`, [dni]
     )
 
@@ -61,7 +64,7 @@ export class ClientsModel {
 
   static async getClientByEmail ({ email }) {
     const [clients] = await connection.query(
-      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion 
       FROM clients WHERE email = ?`, [email]
     )
 
@@ -74,7 +77,7 @@ export class ClientsModel {
 
   static async getClientByTelefono ({ telefono }) {
     const [clients] = await connection.query(
-      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion 
+      `SELECT BIN_TO_UUID(clientId) as clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion 
       FROM clients WHERE telefono = ?`, [telefono]
     )
 

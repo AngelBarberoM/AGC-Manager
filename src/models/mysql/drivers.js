@@ -24,7 +24,11 @@ export class DriversModel {
   }
 
   static async getAllDrivers () {
-    const [drivers] = await connection.query('SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId FROM drivers')
+    const [drivers] = await connection.query(
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo,  DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, 
+      direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      FROM drivers`
+    )
 
     if (drivers.length > 0) {
       return drivers
@@ -35,7 +39,7 @@ export class DriversModel {
 
   static async getDriverById ({ id }) {
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo,  DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE employeeId = UUID_TO_BIN(?)`, [id]
     )
 
@@ -48,7 +52,7 @@ export class DriversModel {
 
   static async getDriverByDNI ({ dni }) {
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo,  DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE dni = ?`, [dni]
     )
 
@@ -61,7 +65,7 @@ export class DriversModel {
 
   static async getDriverByEmail ({ email }) {
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo,  DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE email = ?`, [email]
     )
 
@@ -74,7 +78,7 @@ export class DriversModel {
 
   static async getDriverByTelefono ({ telefono }) {
     const [drivers] = await connection.query(
-      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
+      `SELECT BIN_TO_UUID(employeeId) as employeeId, dni, nombre, apellidos, email, telefono, sexo,  DATE_FORMAT(fechaNacimiento, '%Y-%m-%d') AS fechaNacimiento, direccion, permisoConducir, tarjetaCAP, tarjetaTacografo, certificadoAntecedentes, BIN_TO_UUID(contractId) as contractId 
       FROM drivers WHERE telefono = ?`, [telefono]
     )
 

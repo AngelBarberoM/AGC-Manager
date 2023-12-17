@@ -24,7 +24,10 @@ export class ContractsModel {
   }
 
   static async getAllContracts () {
-    const [contracts] = await connection.query('SELECT BIN_TO_UUID(contractId) as contractId, fechaInicio, fechaFin, sueldoHora, horasSemana FROM contracts')
+    const [contracts] = await connection.query(
+      `SELECT BIN_TO_UUID(contractId) as contractId, DATE_FORMAT(fechaInicio, '%Y-%m-%d') AS fechaInicio, DATE_FORMAT(fechaFin, '%Y-%m-%d') AS fechaFin, sueldoHora, horasSemana 
+      FROM contracts`
+    )
 
     if (contracts.length > 0) {
       return contracts
@@ -35,7 +38,7 @@ export class ContractsModel {
 
   static async getContractById ({ id }) {
     const [contracts] = await connection.query(
-      `SELECT BIN_TO_UUID(contractId) as contractId, fechaInicio, fechaFin, sueldoHora, horasSemana 
+      `SELECT BIN_TO_UUID(contractId) as contractId, DATE_FORMAT(fechaInicio, '%Y-%m-%d') AS fechaInicio, DATE_FORMAT(fechaFin, '%Y-%m-%d') AS fechaFin, sueldoHora, horasSemana 
       FROM contracts WHERE contractId = UUID_TO_BIN(?)`, [id]
     )
 

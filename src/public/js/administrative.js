@@ -65,6 +65,52 @@ fetch(`/administratives/details/${employeeId}`)
 
       row.appendChild(viewDetailsContractCell)
 
+      // Botones de Buscar, Actualizar y Eliminar
+      const buttonsCell = document.createElement('td')
+
+      const updateButton = document.createElement('img')
+      const deleteButton = document.createElement('img')
+
+      updateButton.src = '/img/editar.png'
+      updateButton.alt = 'Actualizar Administrativo'
+      updateButton.className = 'chiquito'
+      deleteButton.src = '/img/eliminar.png'
+      deleteButton.alt = 'Eliminar Administrativo'
+      deleteButton.className = 'chiquito'
+
+      // Funcionalidad Botón Actualizar
+      updateButton.addEventListener('click', () => {
+        window.location.href = `/administratives/update/${data.employeeId}`
+      })
+
+      // Funcionalidad Botón Eliminar
+      deleteButton.addEventListener('click', () => {
+        const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el administrativo: ${data.nombre} ${data.apellidos}?`)
+
+        if (confirmDelete) {
+          fetch(`/administratives/${data.employeeId}`, { method: 'DELETE' })
+            .then(response => response.json())
+            .then(deleteData => {
+              if (deleteData.status === 'ok') {
+                window.alert('Administrativo eliminado correctamente.')
+
+                window.location.reload()
+              } else {
+                console.error('Error al eliminar:', deleteData.message)
+              }
+            })
+            .catch(error => {
+              console.error('Error al eliminar:', error)
+            })
+        }
+      })
+
+      buttonsCell.appendChild(updateButton)
+      buttonsCell.appendChild(deleteButton)
+      row.appendChild(buttonsCell)
+
+      tbody.appendChild(row)
+
       tbody.appendChild(row)
     }
   })

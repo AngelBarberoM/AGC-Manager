@@ -34,10 +34,6 @@ fetch(`/services/details/${serviceId}`)
       fechaCreacionCell.textContent = data.fechaCreacion
       row.appendChild(fechaCreacionCell)
 
-      const clientIdCell = document.createElement('td')
-      clientIdCell.textContent = data.clientId
-      row.appendChild(clientIdCell)
-
       // Crear una celda para el botón
       const viewDetailsClientCell = document.createElement('td')
 
@@ -52,6 +48,50 @@ fetch(`/services/details/${serviceId}`)
       viewDetailsClientCell.appendChild(viewDetailsButton)
 
       row.appendChild(viewDetailsClientCell)
+
+      // Botones de Buscar, Actualizar y Eliminar
+      const buttonsCell = document.createElement('td')
+
+      const updateButton = document.createElement('img')
+      const deleteButton = document.createElement('img')
+
+      updateButton.src = '/img/editar.png'
+      updateButton.alt = 'Actualizar Servicios'
+      updateButton.className = 'chiquito'
+      deleteButton.src = '/img/eliminar.png'
+      deleteButton.alt = 'Eliminar Servicios'
+      deleteButton.className = 'chiquito'
+
+      // Funcionalidad Botón Actualizar
+      updateButton.addEventListener('click', () => {
+        window.location.href = `/services/update/${data.serviceId}`
+      })
+
+      // Funcionalidad Botón Eliminar
+      deleteButton.addEventListener('click', () => {
+        const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el servicio: ${data.tipoServicio}?`)
+
+        if (confirmDelete) {
+          fetch(`/services/${data.serviceId}`, { method: 'DELETE' })
+            .then(response => response.json())
+            .then(deleteData => {
+              if (deleteData.status === 'ok') {
+                window.alert('Servicio eliminado correctamente.')
+
+                window.location.reload()
+              } else {
+                console.error('Error al eliminar:', deleteData.message)
+              }
+            })
+            .catch(error => {
+              console.error('Error al eliminar:', error)
+            })
+        }
+      })
+
+      buttonsCell.appendChild(updateButton)
+      buttonsCell.appendChild(deleteButton)
+      row.appendChild(buttonsCell)
 
       tbody.appendChild(row)
     }

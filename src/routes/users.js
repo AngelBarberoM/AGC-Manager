@@ -17,7 +17,13 @@ usersRouter.get('/', onlyLoggedIn, (req, res) => {
 })
 
 usersRouter.get('/allUsers', onlyLoggedIn, usersController.getAllUsers)
-usersRouter.get('/:id', onlyLoggedIn, usersController.getUserById)
+
+usersRouter.get('/:id', onlyLoggedIn, (req, res) => {
+  const usersHtmlPath = path.join(__dirname, '..', 'views', 'user.html')
+  res.sendFile(usersHtmlPath)
+})
+usersRouter.get('/details/:id', onlyLoggedIn, usersController.getUserById)
+
 usersRouter.delete('/:id', onlyLoggedIn, usersController.deleteUser)
 usersRouter.post('/', onlyLoggedIn, usersController.createUser)
 usersRouter.patch('/:id', onlyLoggedIn, usersController.updateUser)

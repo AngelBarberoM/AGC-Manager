@@ -10,10 +10,6 @@ fetch('/drivers/allDrivers')
       data.forEach(client => {
         const row = document.createElement('tr')
 
-        const dniCell = document.createElement('td')
-        dniCell.textContent = client.dni
-        row.appendChild(dniCell)
-
         const nombreCell = document.createElement('td')
         nombreCell.textContent = client.nombre
         row.appendChild(nombreCell)
@@ -21,6 +17,10 @@ fetch('/drivers/allDrivers')
         const apellidosCell = document.createElement('td')
         apellidosCell.textContent = client.apellidos
         row.appendChild(apellidosCell)
+
+        const dniCell = document.createElement('td')
+        dniCell.textContent = client.dni
+        row.appendChild(dniCell)
 
         const emailCell = document.createElement('td')
         emailCell.textContent = client.email
@@ -30,48 +30,58 @@ fetch('/drivers/allDrivers')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
 
-        const sexoCell = document.createElement('td')
-        sexoCell.textContent = client.sexo
-        row.appendChild(sexoCell)
+        // Botones de Buscar, Actualizar y Eliminar
+        const buttonsCell = document.createElement('td')
+        const searchButton = document.createElement('img')
+        const updateButton = document.createElement('img')
+        const deleteButton = document.createElement('img')
 
-        const fechaNacimientoCell = document.createElement('td')
-        fechaNacimientoCell.textContent = client.fechaNacimiento
-        row.appendChild(fechaNacimientoCell)
+        searchButton.src = '/img/lupa.png'
+        searchButton.alt = 'Actualizar Conductor'
+        searchButton.className = 'chiquito'
+        updateButton.src = '/img/editar.png'
+        updateButton.alt = 'Actualizar Conductor'
+        updateButton.className = 'chiquito'
+        deleteButton.src = '/img/eliminar.png'
+        deleteButton.alt = 'Eliminar Conductor'
+        deleteButton.className = 'chiquito'
 
-        const direccionCell = document.createElement('td')
-        direccionCell.textContent = client.direccion
-        row.appendChild(direccionCell)
-
-        const permisoConducirCell = document.createElement('td')
-        permisoConducirCell.textContent = client.permisoConducir
-        row.appendChild(permisoConducirCell)
-
-        const tarjetaCAPCell = document.createElement('td')
-        tarjetaCAPCell.textContent = client.tarjetaCAP
-        row.appendChild(tarjetaCAPCell)
-
-        const tarjetaTacografoCell = document.createElement('td')
-        tarjetaTacografoCell.textContent = client.tarjetaTacografo
-        row.appendChild(tarjetaTacografoCell)
-
-        const certificadoAntecedentesCell = document.createElement('td')
-        certificadoAntecedentesCell.textContent = client.certificadoAntecedentes
-        row.appendChild(certificadoAntecedentesCell)
-
-        // Crear una celda para el botón
-        const viewDetailsCell = document.createElement('td')
-
-        // Crear el botón y configurar su comportamiento
-        const viewDetailsButton = document.createElement('button')
-        viewDetailsButton.textContent = 'Ver Detalles'
-
-        viewDetailsButton.addEventListener('click', () => {
+        // Funcionalidad Botón Buscar
+        searchButton.addEventListener('click', () => {
           window.location.href = `/drivers/${client.employeeId}`
         })
 
-        viewDetailsCell.appendChild(viewDetailsButton)
+        // Funcionalidad Botón Actualizar
+        updateButton.addEventListener('click', () => {
+          window.location.href = `/drivers/update/${client.employeeId}`
+        })
 
-        row.appendChild(viewDetailsCell)
+        // Funcionalidad Botón Eliminar
+        deleteButton.addEventListener('click', () => {
+          const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar el conductor: ${client.nombre} ${client.apellidos}?`)
+
+          if (confirmDelete) {
+            fetch(`/drivers/${client.employeeId}`, { method: 'DELETE' })
+              .then(response => response.json())
+              .then(deleteData => {
+                if (deleteData.status === 'ok') {
+                  window.alert('Conductor eliminado correctamente.')
+
+                  window.location.reload()
+                } else {
+                  console.error('Error al eliminar:', deleteData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al eliminar:', error)
+              })
+          }
+        })
+
+        buttonsCell.appendChild(searchButton)
+        buttonsCell.appendChild(updateButton)
+        buttonsCell.appendChild(deleteButton)
+        row.appendChild(buttonsCell)
 
         tbody.appendChild(row)
       })

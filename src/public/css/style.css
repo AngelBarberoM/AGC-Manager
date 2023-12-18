@@ -265,6 +265,10 @@ tr:nth-child(even) {
   color: white;
 }
 
+.updateFormContainer label {
+  color: white;
+}
+
 .updateFormContainer input {
   width: 200px;
   padding: 10px;

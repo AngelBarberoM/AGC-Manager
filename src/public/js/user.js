@@ -34,14 +34,13 @@ fetch(`/users/details/${userId}`)
             <table>
             <thead>
               <tr>
-                <th>Nombre de Usuario</th>
+                <th><label for="username">Nuevo Nombre de Usuario:</label></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <label for="username">Nuevo Nombre de Usuario:</label>
                   <input type="text" id="username" name="username" value="${data.username}" required>
                 </td>
                 <td>
@@ -123,14 +122,13 @@ fetch(`/users/details/${userId}`)
             <table>
             <thead>
               <tr>
-                <th>Email</th>
+                <th><label for="email">Nuevo Email:</label></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <label for="email">Nuevo Email:</label>
                   <input type="text" id="email" name="email" value="${data.email}" required>
                 </td>
                 <td>
@@ -212,19 +210,17 @@ fetch(`/users/details/${userId}`)
             <table>
             <thead>
               <tr>
-                <th>Contraseña</th>
-                <th>Confirmar Contraseña</th>
+                <th><label for="password">Nueva Contraseña:</label></th>
+                <th><label for="confirmedPassword">Repetir Contraseña:</label></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                <label for="password">Nueva Contraseña:</label>
-                <input type="password" id="password" name="password" value="*****************" required>
+                  <input type="password" id="password" name="password" value="*****************" required>
                 </td>
                 <td>
-                  <label for="confirmedPassword">Repetir Contraseña:</label>
                   <input type="password" id="confirmedPassword" name="confirmedPassword" value="*****************" required>
                 </td>
                 <td>

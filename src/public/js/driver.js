@@ -1,11 +1,6 @@
-// Obtén el path de la URL y divídelo en partes usando '/'
 const pathParts = window.location.pathname.split('/')
-// Encuentra la posición del segmento 'administratives'
 const adminIndex = pathParts.indexOf('drivers')
-// Si 'administratives' está en la URL y hay un identificador después, obtén el identificador
 const employeeId = adminIndex !== -1 && pathParts.length > adminIndex + 1 ? pathParts[adminIndex + 1] : null
-
-// // Realizar el fetch con el ID específico
 
 fetch(`/drivers/details/${employeeId}`)
   .then(response => response.json())

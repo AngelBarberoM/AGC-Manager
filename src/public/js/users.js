@@ -19,7 +19,7 @@ fetch('/users/allUsers')
         row.appendChild(emailCell)
 
         const passwordCell = document.createElement('td')
-        passwordCell.textContent = client.password
+        passwordCell.textContent = '*****************'
         row.appendChild(passwordCell)
 
         const tipoUsuarioCell = document.createElement('td')
@@ -29,15 +29,13 @@ fetch('/users/allUsers')
         // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
-        const updateButton = document.createElement('img')
+
         const deleteButton = document.createElement('img')
 
         searchButton.src = '/img/lupa.png'
         searchButton.alt = 'Actualizar Usuario'
         searchButton.className = 'chiquito'
-        updateButton.src = '/img/editar.png'
-        updateButton.alt = 'Actualizar Usuario'
-        updateButton.className = 'chiquito'
+
         deleteButton.src = '/img/eliminar.png'
         deleteButton.alt = 'Eliminar Usuario'
         deleteButton.className = 'chiquito'
@@ -45,11 +43,6 @@ fetch('/users/allUsers')
         // Funcionalidad Botón Buscar
         searchButton.addEventListener('click', () => {
           window.location.href = `/users/${client.userId}`
-        })
-
-        // Funcionalidad Botón Actualizar
-        updateButton.addEventListener('click', () => {
-          window.location.href = `/users/update/${client.userId}`
         })
 
         // Funcionalidad Botón Eliminar
@@ -75,7 +68,6 @@ fetch('/users/allUsers')
         })
 
         buttonsCell.appendChild(searchButton)
-        buttonsCell.appendChild(updateButton)
         buttonsCell.appendChild(deleteButton)
         row.appendChild(buttonsCell)
 

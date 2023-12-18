@@ -72,7 +72,7 @@ nav {
 
 main {
   
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/DosAutobuses.webp'); /* Reemplaza 'tu-imagen.jpg' con la URL de tu imagen */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/DosAutobuses.webp');
   background-size: cover;
   background-position: center; 
   height: 80vh;
@@ -184,6 +184,12 @@ button {
 button:hover {
   background-color: #0056b3; 
 }
+.rojo {
+  background-color: #e6241d;
+}
+.rojo:hover {
+  background-color: #8a1915;
+}
 
 .error{
   color: rgb(255, 81, 81);
@@ -197,19 +203,19 @@ button:hover {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px; /* Espacio superior entre la tabla y otros elementos */
+  margin-top: 20px; 
 }
 
 th, td {
   padding: 12px;
   text-align: center;
-  border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
+  border-bottom: 1px solid #ddd;
   border-right: 1px solid rgba(206, 200, 200, 0.05);
   border-left: 1px solid rgba(206, 200, 200, 0.05);
 }
 
 th {
-  background-color: #333; /* Color de fondo para las celdas de encabezado */
+  background-color: #333;
   color: white;
 }
 
@@ -217,17 +223,73 @@ tr:nth-child(even) {
   background-color: #202020;
 }
 
+/* FORMULARIO ACTUALIZAR DATOS */
+
+.updateFormContainer {
+  background-color: #1a1919;
+  border-radius: 8px;
+  padding: 0px;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0);
+  width: 100%;
+  text-align: center;
+}
+
+.updateFormContainer form{
+  background-color: #1a1919;
+  border-radius: 8px;
+  padding: 0px;
+  box-shadow: none;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.updateFormContainer table {
+  width: 60%;
+  border-collapse: collapse;
+  margin-top: 20px; 
+}
+
+.updateFormContainer th, .updateFormContainer td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
+  border-right: 1px solid rgba(206, 200, 200, 0.05);
+  border-left: 1px solid rgba(206, 200, 200, 0.05);
+}
+
+.updateFormContainer th {
+  background-color: #333;
+  color: white;
+}
+
+.updateFormContainer input {
+  width: 200px;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+/* Imagenes botones */
 .chiquito {
   width: 20px;
   height: 20px;
   padding-right: 10px;
-  transition: transform 0.2s ease-in-out; /* Agregamos una transición para suavizar el efecto de escala */
-  display: inline-block; /* Para que el padding-right funcione correctamente */
+  transition: transform 0.2s ease-in-out;
+  display: inline-block;
+}
+.separado {
+  padding-right: 0;
+  padding-left: 10px;
 }
 .chiquito:last-child {
-  padding-right: 0; /* Aplicamos un padding-right diferente para la última imagen */
+  padding-right: 0;
 }
 .chiquito:hover {
   transform: scale(1.2);
-  filter: brightness(1.1); /* Aumentamos el brillo al hacer hover */
+  filter: brightness(1.1); 
 }

@@ -111,7 +111,7 @@ export class DriversController {
     const validate = validatePartialDriver(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar' })
     }
 
     const { id } = req.params
@@ -128,7 +128,7 @@ export class DriversController {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
-    return res.json(updatedDriver)
+    return res.json({ status: 'ok', message: 'Conductor actualizado', usuario: updatedDriver })
   }
 
   deleteDriver = async (req, res) => {
@@ -146,6 +146,6 @@ export class DriversController {
       return res.status(404).json({ status: 'Error', message: 'Driver not found' })
     }
 
-    return res.json({ message: 'Driver deleted' })
+    return res.json({ status: 'ok', message: 'Driver deleted' })
   }
 }

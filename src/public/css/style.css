@@ -1,19 +1,19 @@
-body {
+.initial-body-container {
   background-color: #1a1919;
   color: white;
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 5px;
-  height: 98vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-header {
-  height: 10vh;
+.initial-header-container {
+  height: 60px;
+  margin-bottom: 5px;
 }
 
-.MenuDiv {
+.initial-header-container .MenuDiv {
   background-color: rgb(40, 43, 43);
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -30,7 +30,7 @@ header {
 
 #logo img {
   border-radius: 8px;
-  padding: 5px;
+  padding: 3px;
 }
 
 #logo:hover {
@@ -70,8 +70,7 @@ nav {
   cursor: pointer;
 }
 
-main {
-  
+.initial-main-container {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/DosAutobuses.webp');
   background-size: cover;
   background-position: center; 
@@ -155,7 +154,7 @@ input[type="password"] {
   border-radius: 4px;
 }
 
-footer {
+.initial-footer-container {
   height: 10vh;
   text-align: center; 
   display: flex;
@@ -305,3 +304,114 @@ select {
   transform: scale(1.2);
   filter: brightness(1.1); 
 }
+
+/* ----------------------------------------------- */
+/* AQUI SE REALIZA TODO LO RELACIONADO CON EL GRID */
+.container {
+  background-color: #1a1919;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  grid-template-rows: 60px 1fr 40px;
+  min-height: 100vh;
+  grid-template-areas: 
+  "header header header"
+  "sidebar content content"
+  "footer footer footer"
+}
+.container header{
+  grid-area: header;
+  background-color: rgb(54, 58, 58);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  margin-bottom: 2px;
+}
+.container aside{
+  grid-area: sidebar;
+  background-color: rgb(54, 58, 58);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  margin-right: 2px;
+}
+.container main{
+  grid-area: content;
+  background-color: rgb(33, 41, 63);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  
+}
+.container footer{
+  grid-area: footer;
+  text-align: center; 
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.Menu-Aside {
+  padding-left: 10px;
+  padding-top: auto;
+  list-style: none; 
+  display: flex;
+  flex-direction: column;
+  gap: 5px; 
+}
+
+.Menu-Aside li {
+  margin-right: auto; 
+}
+
+.Menu-Aside li a {
+  color: white;
+  text-decoration: none;
+  font-size: medium;
+  padding: 8px; /* Ajusta el padding según sea necesario */
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.Menu-Aside li a:hover {
+  background-color: #9a9c9e;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.Menu-Aside li a img {
+  padding-right: 5px;
+  vertical-align: middle; /* Alinea la imagen verticalmente */
+}
+
+/* .Menu-Aside {
+  padding-top: 20px;
+  list-style: none; 
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+}
+
+.Menu-Aside li {
+  margin-right: auto; 
+}
+
+.Menu-Aside li a {
+  color: white;
+  text-decoration: none;
+  font-size: medium;
+  padding: 5px; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.Menu-Aside li a:hover {
+  background-color: #9a9c9e;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+} */
+/* ----------------------------------------------- */

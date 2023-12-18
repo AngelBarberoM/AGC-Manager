@@ -29,15 +29,11 @@ fetch('/contracts/allContracts')
         // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
-        const updateButton = document.createElement('img')
         const deleteButton = document.createElement('img')
 
         searchButton.src = '/img/lupa.png'
         searchButton.alt = 'Actualizar Contrato'
         searchButton.className = 'chiquito'
-        updateButton.src = '/img/editar.png'
-        updateButton.alt = 'Actualizar Contrato'
-        updateButton.className = 'chiquito'
         deleteButton.src = '/img/eliminar.png'
         deleteButton.alt = 'Eliminar Contrato'
         deleteButton.className = 'chiquito'
@@ -45,11 +41,6 @@ fetch('/contracts/allContracts')
         // Funcionalidad Botón Buscar
         searchButton.addEventListener('click', () => {
           window.location.href = `/contracts/${client.contractId}`
-        })
-
-        // Funcionalidad Botón Actualizar
-        updateButton.addEventListener('click', () => {
-          window.location.href = `/contracts/update/${client.contractId}`
         })
 
         // Funcionalidad Botón Eliminar
@@ -75,7 +66,6 @@ fetch('/contracts/allContracts')
         })
 
         buttonsCell.appendChild(searchButton)
-        buttonsCell.appendChild(updateButton)
         buttonsCell.appendChild(deleteButton)
         row.appendChild(buttonsCell)
 

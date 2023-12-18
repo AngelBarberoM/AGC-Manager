@@ -37,15 +37,11 @@ fetch('/clients/allClients')
         // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
-        const updateButton = document.createElement('img')
         const deleteButton = document.createElement('img')
 
         searchButton.src = '/img/lupa.png'
         searchButton.alt = 'Actualizar Clientes'
         searchButton.className = 'chiquito'
-        updateButton.src = '/img/editar.png'
-        updateButton.alt = 'Actualizar Clientes'
-        updateButton.className = 'chiquito'
         deleteButton.src = '/img/eliminar.png'
         deleteButton.alt = 'Eliminar Clientes'
         deleteButton.className = 'chiquito'
@@ -53,11 +49,6 @@ fetch('/clients/allClients')
         // Funcionalidad Botón Buscar
         searchButton.addEventListener('click', () => {
           window.location.href = `/clients/${client.clientId}`
-        })
-
-        // Funcionalidad Botón Actualizar
-        updateButton.addEventListener('click', () => {
-          window.location.href = `/clients/update/${client.clientId}`
         })
 
         // Funcionalidad Botón Eliminar
@@ -83,7 +74,6 @@ fetch('/clients/allClients')
         })
 
         buttonsCell.appendChild(searchButton)
-        buttonsCell.appendChild(updateButton)
         buttonsCell.appendChild(deleteButton)
         row.appendChild(buttonsCell)
 

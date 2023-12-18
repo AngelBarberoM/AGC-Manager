@@ -26,18 +26,15 @@ fetch('/bus/allBus')
         plazasCell.textContent = client.plazas
         row.appendChild(plazasCell)
 
-        // Botones de Buscar, Actualizar y Eliminar
+        // Botones de Buscar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
-        const updateButton = document.createElement('img')
+
         const deleteButton = document.createElement('img')
 
         searchButton.src = '/img/lupa.png'
         searchButton.alt = 'Actualizar Autobuses'
         searchButton.className = 'chiquito'
-        updateButton.src = '/img/editar.png'
-        updateButton.alt = 'Actualizar Autobuses'
-        updateButton.className = 'chiquito'
         deleteButton.src = '/img/eliminar.png'
         deleteButton.alt = 'Eliminar Autobuses'
         deleteButton.className = 'chiquito'
@@ -45,11 +42,6 @@ fetch('/bus/allBus')
         // Funcionalidad Botón Buscar
         searchButton.addEventListener('click', () => {
           window.location.href = `/bus/${client.busId}`
-        })
-
-        // Funcionalidad Botón Actualizar
-        updateButton.addEventListener('click', () => {
-          window.location.href = `/bus/update/${client.busId}`
         })
 
         // Funcionalidad Botón Eliminar
@@ -75,7 +67,6 @@ fetch('/bus/allBus')
         })
 
         buttonsCell.appendChild(searchButton)
-        buttonsCell.appendChild(updateButton)
         buttonsCell.appendChild(deleteButton)
         row.appendChild(buttonsCell)
 

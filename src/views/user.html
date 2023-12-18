@@ -8,34 +8,62 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <script src="/js/user.js"></script>
 </head>
-<body>
-  <h1>Portal de Gestion de Datos del Usuario</h1>
-  <div>
-    <table id="user-table">
-      <thead>
-        <tr>
-          <th>Nombre de Usuario</th>
-          <th>Email</th>
-          <th>Contraseña</th>
-          <th>Tipo de Usuario</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>  
+<body class="container">
+  <header>
+    <div class="imagen-texto">
+      <a id="logo" href="/">
+        <picture>
+          <img alt="Logo Autocares Gómez Carmona" width="190" height="50" src="/img/logoAGC.webp">
+        </picture>
+      </a>
+      <h1>Portal de Gestion de Datos del Usuario</h1>
+    </div>
+  </header>
 
-  <div class="updateFormContainer"></div>
+  <aside>
+    <div>
+      <nav>
+        <ul class="Menu-Aside">
+          <li><a aria-current="page" href="/home">Home</a></li>
+          <li><a aria-current="page" href="/users">Usuarios</a></li>
+          <li><a aria-current="page" href="/contracts">Contratos</a></li>
+          <li><a aria-current="page" href="/employees">Empleados</a></li>
+          <li><a aria-current="page" href="/administratives">Administrativos</a></li>
+          <li><a aria-current="page" href="/drivers">Conductores</a></li>
+          <li><a aria-current="page" href="/bus">Autobuses</a></li>
+          <li><a aria-current="page" href="/services">Servicios</a></li>
+          <li><a aria-current="page" href="/clients">Clientes</a></li>
+          <li><a aria-current="page" href="/admin">Admin</a></li>
+          <li><a aria-current="page" href="/admin"><img src='/img/user.svg' width="20" height="20">Perfil</a></li>
+          <li><a aria-current="page" href="/logout"><img src='/img/logout.svg' width="20" height="20">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
 
-  <div>
-    <ul>
-      <li>
-        <a href="/home">Home</a>
-      </li>
-      <li>
-        <a href="/users">Usuarios</a>
-      </li>
-    </ul>
-  </div>
+  <main>
+    <div>
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>Nombre de Usuario</th>
+            <th>Email</th>
+            <th>Contraseña</th>
+            <th>Tipo de Usuario</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>  
+
+    <div class="updateFormContainer"></div>
+  </main>
+
+  <footer>
+    <picture>
+      <img alt="Emoji Autobus Chiquito" width="60" height="60" src="/img/buschiquito.png">
+    </picture>
+  </footer>
 </body>
 </html>

@@ -8,31 +8,62 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script src="js/clients.js"></script>
 </head>
-<body>
-  <h1>Esto es el Portal de Gestion de Clientes</h1>
-  <div>
-    <table id="client-table">
-      <thead>
-        <tr>
-          <th>Nombre Empresa</th>
-          <th>DNI</th>
-          <th>Nombre</th>
-          <th>Apellidos</th>
-          <th>Email</th>
-          <th>Teléfono</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>  
+<body class="container">
+  <header>
+    <div class="imagen-texto">
+      <a id="logo" href="/">
+        <picture>
+          <img alt="Logo Autocares Gómez Carmona" width="190" height="50" src="img/logoAGC.webp">
+        </picture>
+      </a>
+      <h1>Esto es el Portal de Gestion de Clientes</h1>
+    </div>
+  </header>
 
-  <div>
-    <ul>
-      <li>
-        <a href="/home">Home</a>
-      </li>
-    </ul>
-  </div>
+  <aside>
+    <div>
+      <nav>
+        <ul class="Menu-Aside">
+          <li><a aria-current="page" href="/home">Home</a></li>
+          <li><a aria-current="page" href="/users">Usuarios</a></li>
+          <li><a aria-current="page" href="/contracts">Contratos</a></li>
+          <li><a aria-current="page" href="/employees">Empleados</a></li>
+          <li><a aria-current="page" href="/administratives">Administrativos</a></li>
+          <li><a aria-current="page" href="/drivers">Conductores</a></li>
+          <li><a aria-current="page" href="/bus">Autobuses</a></li>
+          <li><a aria-current="page" href="/services">Servicios</a></li>
+          <li><a aria-current="page" href="/clients">Clientes</a></li>
+          <li><a aria-current="page" href="/admin">Admin</a></li>
+          <li><a aria-current="page" href="/admin"><img src='/img/user.svg' width="20" height="20">Perfil</a></li>
+          <li><a aria-current="page" href="/logout"><img src='/img/logout.svg' width="20" height="20">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main>
+    <div>
+      <table id="client-table">
+        <thead>
+          <tr>
+            <th>Nombre Empresa</th>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>  
+  </main>
+  
+  <footer>
+    <picture>
+      <img alt="Emoji Autobus Chiquito" width="60" height="60" src="img/buschiquito.png">
+    </picture>
+  </footer>
 </body>
 </html>

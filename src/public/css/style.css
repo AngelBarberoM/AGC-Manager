@@ -203,14 +203,17 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px; 
+  margin: 0 auto;
+  border: 1px solid rgba(206, 200, 200, 0.5);
+  border-radius: 10px;
 }
 
 th, td {
   padding: 12px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid rgba(206, 200, 200, 0.05);
-  border-left: 1px solid rgba(206, 200, 200, 0.05);
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid rgba(206, 200, 200, 0.5);
+    border-left: 1px solid rgba(206, 200, 200, 0.5);
 }
 
 th {
@@ -321,13 +324,36 @@ select {
   "sidebar content content"
   "footer footer footer"
 }
-.container header{
+.container header {
   grid-area: header;
   background-color: rgb(54, 58, 58);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   margin-bottom: 2px;
 }
+
+.imagen-texto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen-texto #logo{
+  margin-left: 1px;
+  margin-right: auto; 
+}
+.imagen-texto #logo:hover {
+  transform: scale(1.03);
+}
+
+.container header h1 {
+  color: white;
+  font-size: 24px;
+  margin-top: auto; 
+  margin-right: auto; 
+}
+
 .container aside{
   grid-area: sidebar;
   background-color: rgb(54, 58, 58);
@@ -337,11 +363,21 @@ select {
 }
 .container main{
   grid-area: content;
-  background-color: rgb(33, 41, 63);
+  background-color: rgb(54, 58, 58);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
-  
+  padding: 20px;
 }
+.container main h1 {
+  color: white;
+  font-size: 20px;
+  margin-top: 10; 
+  margin-right: auto; 
+}
+.segundo {
+  padding-top: 20px;
+}
+
 .container footer{
   grid-area: footer;
   text-align: center; 
@@ -386,32 +422,4 @@ select {
   vertical-align: middle; /* Alinea la imagen verticalmente */
 }
 
-/* .Menu-Aside {
-  padding-top: 20px;
-  list-style: none; 
-  display: flex;
-  flex-direction: column;
-  gap: 20px; 
-}
-
-.Menu-Aside li {
-  margin-right: auto; 
-}
-
-.Menu-Aside li a {
-  color: white;
-  text-decoration: none;
-  font-size: medium;
-  padding: 5px; 
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.Menu-Aside li a:hover {
-  background-color: #9a9c9e;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 30px;
-  cursor: pointer;
-} */
 /* ----------------------------------------------- */

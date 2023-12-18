@@ -86,6 +86,10 @@ export class UsersController {
       return res.status(400).json({ status: 'Error', message: 'No existe usuario para actualizar' })
     }
 
+    if (validate.data.password !== validate.data.confirmedPassword) {
+      return res.status(400).json({ status: 'Error', message: 'Las contraseñas introducidas son incorrectas' })
+    }
+
     const updatedUser = await UsersModel.updateUser({ id, input: validate.data })
 
     if (!updatedUser) {

@@ -80,6 +80,8 @@ fetch(`/users/details/${userId}`)
 
                   window.location.reload()
                 } else {
+                  window.alert(`${patchData.message}`)
+
                   console.error('Error al actualizar:', patchData.message)
                 }
               })
@@ -167,6 +169,8 @@ fetch(`/users/details/${userId}`)
 
                   window.location.reload()
                 } else {
+                  window.alert(`${patchData.message}`)
+
                   console.error('Error al actualizar:', patchData.message)
                 }
               })
@@ -260,6 +264,8 @@ fetch(`/users/details/${userId}`)
 
                   window.location.reload()
                 } else {
+                  window.alert(`${patchData.message}`)
+
                   console.error('Error al actualizar:', patchData.message)
                 }
               })

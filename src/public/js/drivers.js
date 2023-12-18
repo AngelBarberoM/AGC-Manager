@@ -30,18 +30,14 @@ fetch('/drivers/allDrivers')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
 
-        // Botones de Buscar, Actualizar y Eliminar
+        // Botones de Buscar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
-        const updateButton = document.createElement('img')
         const deleteButton = document.createElement('img')
 
         searchButton.src = '/img/lupa.png'
         searchButton.alt = 'Actualizar Conductor'
         searchButton.className = 'chiquito'
-        updateButton.src = '/img/editar.png'
-        updateButton.alt = 'Actualizar Conductor'
-        updateButton.className = 'chiquito'
         deleteButton.src = '/img/eliminar.png'
         deleteButton.alt = 'Eliminar Conductor'
         deleteButton.className = 'chiquito'
@@ -49,11 +45,6 @@ fetch('/drivers/allDrivers')
         // Funcionalidad Botón Buscar
         searchButton.addEventListener('click', () => {
           window.location.href = `/drivers/${client.employeeId}`
-        })
-
-        // Funcionalidad Botón Actualizar
-        updateButton.addEventListener('click', () => {
-          window.location.href = `/drivers/update/${client.employeeId}`
         })
 
         // Funcionalidad Botón Eliminar
@@ -79,7 +70,6 @@ fetch('/drivers/allDrivers')
         })
 
         buttonsCell.appendChild(searchButton)
-        buttonsCell.appendChild(updateButton)
         buttonsCell.appendChild(deleteButton)
         row.appendChild(buttonsCell)
 

@@ -30,18 +30,15 @@ fetch('/administratives/allAdministratives')
         telefonoCell.textContent = client.telefono
         row.appendChild(telefonoCell)
 
-        // Botones de Buscar, Actualizar y Eliminar
+        // Botones de Buscar y Eliminar
         const buttonsCell = document.createElement('td')
         const searchButton = document.createElement('img')
-        const updateButton = document.createElement('img')
+
         const deleteButton = document.createElement('img')
 
         searchButton.src = '/img/lupa.png'
         searchButton.alt = 'Actualizar Administrativo'
         searchButton.className = 'chiquito'
-        updateButton.src = '/img/editar.png'
-        updateButton.alt = 'Actualizar Administrativo'
-        updateButton.className = 'chiquito'
         deleteButton.src = '/img/eliminar.png'
         deleteButton.alt = 'Eliminar Administrativo'
         deleteButton.className = 'chiquito'
@@ -49,11 +46,6 @@ fetch('/administratives/allAdministratives')
         // Funcionalidad Botón Buscar
         searchButton.addEventListener('click', () => {
           window.location.href = `/administratives/${client.employeeId}`
-        })
-
-        // Funcionalidad Botón Actualizar
-        updateButton.addEventListener('click', () => {
-          window.location.href = `/administratives/update/${client.employeeId}`
         })
 
         // Funcionalidad Botón Eliminar
@@ -79,7 +71,6 @@ fetch('/administratives/allAdministratives')
         })
 
         buttonsCell.appendChild(searchButton)
-        buttonsCell.appendChild(updateButton)
         buttonsCell.appendChild(deleteButton)
         row.appendChild(buttonsCell)
 

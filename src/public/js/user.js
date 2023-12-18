@@ -34,7 +34,7 @@ fetch(`/users/details/${userId}`)
             <table>
             <thead>
               <tr>
-                <th><label for="username">Nuevo Nombre de Usuario:</label></th>
+                <th><label for="username">Nuevo Nombre de Usuario</label></th>
                 <th></th>
               </tr>
             </thead>
@@ -122,7 +122,7 @@ fetch(`/users/details/${userId}`)
             <table>
             <thead>
               <tr>
-                <th><label for="email">Nuevo Email:</label></th>
+                <th><label for="email">Nuevo Email</label></th>
                 <th></th>
               </tr>
             </thead>
@@ -210,7 +210,7 @@ fetch(`/users/details/${userId}`)
             <table>
             <thead>
               <tr>
-                <th><label for="password">Nueva Contraseña:</label></th>
+                <th><label for="password">Nueva Contraseña</label></th>
                 <th><label for="confirmedPassword">Repetir Contraseña:</label></th>
                 <th></th>
               </tr>

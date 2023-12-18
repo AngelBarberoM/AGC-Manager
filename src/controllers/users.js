@@ -96,7 +96,7 @@ export class UsersController {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
-    return res.json({ status: 'ok', message: 'User deleted', usuario: updatedUser })
+    return res.json({ status: 'ok', message: 'User updated', usuario: updatedUser })
   }
 
   deleteUser = async (req, res) => {

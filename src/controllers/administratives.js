@@ -112,7 +112,7 @@ export class AdministrativesController {
     const validate = validatePartialAdministrative(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar' })
     }
 
     const { id } = req.params
@@ -129,7 +129,7 @@ export class AdministrativesController {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
-    return res.json(updatedAdministrative)
+    return res.json({ status: 'ok', message: 'Administrativo actualizado', usuario: updatedAdministrative })
   }
 
   deleteAdministrative = async (req, res) => {
@@ -147,6 +147,6 @@ export class AdministrativesController {
       return res.status(404).json({ status: 'Error', message: 'Administrative not found' })
     }
 
-    return res.json({ message: 'Administrative deleted' })
+    return res.json({ status: 'ok', message: 'Administrativo eliminado' })
   }
 }

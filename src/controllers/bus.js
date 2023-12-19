@@ -72,7 +72,7 @@ export class BusController {
     const validate = validatePartialBus(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar' })
     }
 
     const { id } = req.params
@@ -89,7 +89,7 @@ export class BusController {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
-    return res.json(updatedBus)
+    return res.json({ status: 'ok', message: 'Autobús actualizado', usuario: updatedBus })
   }
 
   deleteBus = async (req, res) => {

@@ -31,8 +31,7 @@ export class ServicesController {
     const validate = validateService(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
-      // return res.status(400).json({ status: 'Error', message: 'Error Service Schema' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar' })
     }
 
     if (validate.data.clientId !== 'NULL') {
@@ -52,10 +51,31 @@ export class ServicesController {
   }
 
   updateService = async (req, res) => {
+    // controlamos las fechas de los servicios
+    if (req.body.fechaServicio) {
+      const { id } = req.params
+      const provisionalService = await ServicesModel.getServiceById({ id })
+
+      // FECHA ACTUAL
+      const now = new Date()
+      const year = now.getFullYear()
+      const month = String(now.getMonth() + 1).padStart(2, '0')
+      const day = String(now.getDate()).padStart(2, '0')
+      const formattedDate = `${year}-${month}-${day}`
+
+      if (req.body.fechaServicio <= formattedDate) {
+        return res.status(400).json({ status: 'Error', message: 'No se puede poner una fecha de servicio anterior a la fecha actual' })
+      }
+
+      if (provisionalService.fechaServicio <= formattedDate) {
+        return res.status(400).json({ status: 'Error', message: 'La fecha de un servicio que ya ha pasado no se puede cambiar' })
+      }
+    }
+
     const validate = validatePartialService(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar' })
     }
 
     const { id } = req.params
@@ -72,7 +92,7 @@ export class ServicesController {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
-    return res.json(updatedService)
+    return res.json({ status: 'ok', message: 'Conductor actualizado', usuario: updatedService })
   }
 
   deleteService = async (req, res) => {

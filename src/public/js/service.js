@@ -19,10 +19,174 @@ fetch(`/services/details/${serviceId}`)
 
       const descripcionCell = document.createElement('td')
       descripcionCell.textContent = data.descripcion
+
+      // Botón de Actualizar Descripcion
+      const updateDescripcionButton = document.createElement('img')
+
+      updateDescripcionButton.src = '/img/editar.png'
+      updateDescripcionButton.alt = 'Actualizar Descripcion'
+      updateDescripcionButton.className = 'chiquito separado'
+
+      // Funcionalidad Botón Actualizar
+      updateDescripcionButton.addEventListener('click', () => {
+        const updateForm = document.createElement('form')
+        const updateFormContainer = document.querySelector('.updateFormContainer')
+
+        updateForm.innerHTML = `
+            <table>
+            <thead>
+              <tr>
+                <th><label for="descripcion">Nuevo Descripcion</label></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="text" id="descripcion" name="descripcion" value="${data.descripcion}" required>
+                </td>
+                <td>
+                  <button type="button" id="submitUpdate">Actualizar</button>
+                  <button type="button" class="rojo" id="cancelarUpdate">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        `
+
+        const submitUpdateButton = updateForm.querySelector('#submitUpdate')
+        const cancelarUpdateButton = updateForm.querySelector('#cancelarUpdate')
+
+        submitUpdateButton.addEventListener('click', () => {
+          const updatedData = {
+            descripcion: updateForm.querySelector('#descripcion').value
+          }
+
+          const confirmUpdate = window.confirm(`¿Estás seguro de que deseas actualizar el descripcion: ${data.descripcion}?`)
+
+          if (confirmUpdate) {
+            fetch(`/services/${serviceId}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedData)
+            })
+              .then(response => response.json())
+              .then(patchData => {
+                if (patchData.status === 'ok') {
+                  window.alert('Descripcion actualizado correctamente.')
+
+                  updateFormContainer.removeChild(updateForm)
+
+                  window.location.reload()
+                } else {
+                  window.alert(`${patchData.message}`)
+
+                  console.error('Error al actualizar:', patchData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al actualizar:', error)
+              })
+          }
+        })
+
+        cancelarUpdateButton.addEventListener('click', () => {
+          updateFormContainer.removeChild(updateForm)
+        })
+
+        updateFormContainer.innerHTML = ''
+        updateFormContainer.appendChild(updateForm)
+      })
+
+      descripcionCell.appendChild(updateDescripcionButton)
       row.appendChild(descripcionCell)
 
       const fechaServicioCell = document.createElement('td')
       fechaServicioCell.textContent = data.fechaServicio
+
+      // Botón de Actualizar FechaServicio
+      const updateFechaServicioButton = document.createElement('img')
+
+      updateFechaServicioButton.src = '/img/editar.png'
+      updateFechaServicioButton.alt = 'Actualizar Fecha Servicio'
+      updateFechaServicioButton.className = 'chiquito separado'
+
+      // Funcionalidad Botón Actualizar
+      updateFechaServicioButton.addEventListener('click', () => {
+        const updateForm = document.createElement('form')
+        const updateFormContainer = document.querySelector('.updateFormContainer')
+
+        updateForm.innerHTML = `
+            <table>
+            <thead>
+              <tr>
+                <th><label for="fechaServicio">Nueva Fecha Servicio</label></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="date" id="fechaServicio" name="fechaServicio" value="${data.fechaServicio}" required>
+                </td>
+                <td>
+                  <button type="button" id="submitUpdate">Actualizar</button>
+                  <button type="button" class="rojo" id="cancelarUpdate">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        `
+
+        const submitUpdateButton = updateForm.querySelector('#submitUpdate')
+        const cancelarUpdateButton = updateForm.querySelector('#cancelarUpdate')
+
+        submitUpdateButton.addEventListener('click', () => {
+          const updatedData = {
+            fechaServicio: updateForm.querySelector('#fechaServicio').value
+          }
+
+          const confirmUpdate = window.confirm(`¿Estás seguro de que deseas actualizar el fechaServicio: ${data.fechaServicio}?`)
+
+          if (confirmUpdate) {
+            fetch(`/services/${serviceId}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedData)
+            })
+              .then(response => response.json())
+              .then(patchData => {
+                if (patchData.status === 'ok') {
+                  window.alert('Fecha Servicio actualizada correctamente.')
+
+                  updateFormContainer.removeChild(updateForm)
+
+                  window.location.reload()
+                } else {
+                  window.alert(`${patchData.message}`)
+
+                  console.error('Error al actualizar:', patchData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al actualizar:', error)
+              })
+          }
+        })
+
+        cancelarUpdateButton.addEventListener('click', () => {
+          updateFormContainer.removeChild(updateForm)
+        })
+
+        updateFormContainer.innerHTML = ''
+        updateFormContainer.appendChild(updateForm)
+      })
+
+      fechaServicioCell.appendChild(updateFechaServicioButton)
       row.appendChild(fechaServicioCell)
 
       const fechaCreacionCell = document.createElement('td')
@@ -44,23 +208,13 @@ fetch(`/services/details/${serviceId}`)
 
       row.appendChild(viewDetailsClientCell)
 
-      // Botones de Buscar, Actualizar y Eliminar
+      // BotónEliminar
       const buttonsCell = document.createElement('td')
-
-      const updateButton = document.createElement('img')
       const deleteButton = document.createElement('img')
 
-      updateButton.src = '/img/editar.png'
-      updateButton.alt = 'Actualizar Servicios'
-      updateButton.className = 'chiquito'
       deleteButton.src = '/img/eliminar.png'
       deleteButton.alt = 'Eliminar Servicios'
       deleteButton.className = 'chiquito'
-
-      // Funcionalidad Botón Actualizar
-      updateButton.addEventListener('click', () => {
-        window.location.href = `/services/update/${data.serviceId}`
-      })
 
       // Funcionalidad Botón Eliminar
       deleteButton.addEventListener('click', () => {
@@ -84,7 +238,6 @@ fetch(`/services/details/${serviceId}`)
         }
       })
 
-      buttonsCell.appendChild(updateButton)
       buttonsCell.appendChild(deleteButton)
       row.appendChild(buttonsCell)
 

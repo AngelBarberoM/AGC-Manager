@@ -43,7 +43,7 @@ export class ContractsController {
     const validate = validatePartialContract(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar' })
     }
 
     const { id } = req.params
@@ -60,7 +60,7 @@ export class ContractsController {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
-    return res.json(updatedContract)
+    return res.json({ status: 'ok', message: 'Contrato actualizado', usuario: updatedContract })
   }
 
   deleteContract = async (req, res) => {

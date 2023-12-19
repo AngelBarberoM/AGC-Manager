@@ -19,33 +19,187 @@ fetch(`/contracts/details/${contractId}`)
 
       const fechaFinCell = document.createElement('td')
       fechaFinCell.textContent = data.fechaFin
+
+      // Botón de Actualizar FechaFin
+      const updateFechaFinButton = document.createElement('img')
+
+      updateFechaFinButton.src = '/img/editar.png'
+      updateFechaFinButton.alt = 'Actualizar FechaFin'
+      updateFechaFinButton.className = 'chiquito separado'
+
+      // Funcionalidad Botón Actualizar
+      updateFechaFinButton.addEventListener('click', () => {
+        const updateForm = document.createElement('form')
+        const updateFormContainer = document.querySelector('.updateFormContainer')
+
+        updateForm.innerHTML = `
+            <table>
+            <thead>
+              <tr>
+                <th><label for="fechaFin">Nuevo Fecha Fin</label></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="date" id="fechaFin" name="fechaFin" value="${data.fechaFin}" required>
+                </td>
+                <td>
+                  <button type="button" id="submitUpdate">Actualizar</button>
+                  <button type="button" class="rojo" id="cancelarUpdate">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        `
+
+        const submitUpdateButton = updateForm.querySelector('#submitUpdate')
+        const cancelarUpdateButton = updateForm.querySelector('#cancelarUpdate')
+
+        submitUpdateButton.addEventListener('click', () => {
+          const updatedData = {
+            fechaFin: updateForm.querySelector('#fechaFin').value
+          }
+
+          const confirmUpdate = window.confirm(`¿Estás seguro de que deseas actualizar la fecha fin: ${data.fechaFin}?`)
+
+          if (confirmUpdate) {
+            fetch(`/contracts/${contractId}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedData)
+            })
+              .then(response => response.json())
+              .then(patchData => {
+                if (patchData.status === 'ok') {
+                  window.alert('Fecha Fin actualizado correctamente.')
+
+                  updateFormContainer.removeChild(updateForm)
+
+                  window.location.reload()
+                } else {
+                  window.alert(`${patchData.message}`)
+
+                  console.error('Error al actualizar:', patchData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al actualizar:', error)
+              })
+          }
+        })
+
+        cancelarUpdateButton.addEventListener('click', () => {
+          updateFormContainer.removeChild(updateForm)
+        })
+
+        updateFormContainer.innerHTML = ''
+        updateFormContainer.appendChild(updateForm)
+      })
+
+      fechaFinCell.appendChild(updateFechaFinButton)
       row.appendChild(fechaFinCell)
 
       const sueldoHoraCell = document.createElement('td')
       sueldoHoraCell.textContent = data.sueldoHora
+
+      // Botón de Actualizar SueldoHora
+      const updateSueldoHoraButton = document.createElement('img')
+
+      updateSueldoHoraButton.src = '/img/editar.png'
+      updateSueldoHoraButton.alt = 'Actualizar Sueldo Hora'
+      updateSueldoHoraButton.className = 'chiquito separado'
+
+      // Funcionalidad Botón Actualizar
+      updateSueldoHoraButton.addEventListener('click', () => {
+        const updateForm = document.createElement('form')
+        const updateFormContainer = document.querySelector('.updateFormContainer')
+
+        updateForm.innerHTML = `
+            <table>
+            <thead>
+              <tr>
+                <th><label for="sueldoHora">Nuevo Sueldo Hora</label></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="number" id="sueldoHora" name="sueldoHora" value="${data.sueldoHora}" required>
+                </td>
+                <td>
+                  <button type="button" id="submitUpdate">Actualizar</button>
+                  <button type="button" class="rojo" id="cancelarUpdate">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        `
+
+        const submitUpdateButton = updateForm.querySelector('#submitUpdate')
+        const cancelarUpdateButton = updateForm.querySelector('#cancelarUpdate')
+
+        submitUpdateButton.addEventListener('click', () => {
+          const updatedData = {
+            sueldoHora: Number(updateForm.querySelector('#sueldoHora').value)
+          }
+
+          const confirmUpdate = window.confirm(`¿Estás seguro de que deseas actualizar el sueldo Hora: ${data.sueldoHora}?`)
+
+          if (confirmUpdate) {
+            fetch(`/contracts/${contractId}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedData)
+            })
+              .then(response => response.json())
+              .then(patchData => {
+                if (patchData.status === 'ok') {
+                  window.alert('Sueldo Hora actualizado correctamente.')
+
+                  updateFormContainer.removeChild(updateForm)
+
+                  window.location.reload()
+                } else {
+                  window.alert(`${patchData.message}`)
+
+                  console.error('Error al actualizar:', patchData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al actualizar:', error)
+              })
+          }
+        })
+
+        cancelarUpdateButton.addEventListener('click', () => {
+          updateFormContainer.removeChild(updateForm)
+        })
+
+        updateFormContainer.innerHTML = ''
+        updateFormContainer.appendChild(updateForm)
+      })
+
+      sueldoHoraCell.appendChild(updateSueldoHoraButton)
       row.appendChild(sueldoHoraCell)
 
       const horasSemanaCell = document.createElement('td')
       horasSemanaCell.textContent = data.horasSemana
       row.appendChild(horasSemanaCell)
 
-      // Botones de Buscar, Actualizar y Eliminar
+      // Botón y Eliminar
       const buttonsCell = document.createElement('td')
-
-      const updateButton = document.createElement('img')
       const deleteButton = document.createElement('img')
 
-      updateButton.src = '/img/editar.png'
-      updateButton.alt = 'Actualizar Contrato'
-      updateButton.className = 'chiquito'
       deleteButton.src = '/img/eliminar.png'
       deleteButton.alt = 'Eliminar Contrato'
       deleteButton.className = 'chiquito'
-
-      // Funcionalidad Botón Actualizar
-      updateButton.addEventListener('click', () => {
-        window.location.href = `/contracts/update/${data.contractId}`
-      })
 
       // Funcionalidad Botón Eliminar
       deleteButton.addEventListener('click', () => {
@@ -69,7 +223,6 @@ fetch(`/contracts/details/${contractId}`)
         }
       })
 
-      buttonsCell.appendChild(updateButton)
       buttonsCell.appendChild(deleteButton)
       row.appendChild(buttonsCell)
 

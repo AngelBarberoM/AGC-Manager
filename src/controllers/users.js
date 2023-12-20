@@ -1,5 +1,5 @@
 import bcryptjs from 'bcryptjs'
-// import { AGCdbModel } from '../models/mysql/AGCdb.js'
+import jsonwebtoken from 'jsonwebtoken'
 import { UsersModel } from '../models/mysql/users.js'
 import { validateUser, validatePartialUser } from '../schemas/AGC.js'
 
@@ -17,6 +17,20 @@ export class UsersController {
     const { id } = req.params
 
     const users = await UsersModel.getUserById({ id })
+
+    if (!users) {
+      return res.status(400).json({ status: 'Error', message: 'No existe usuario para mostrar' })
+    }
+    // res.json(users)
+    return res.json({ status: 'ok', tipoUsuario: users.tipoUsuario })
+  }
+
+  getTypeUserById = async (req, res) => {
+    const cookieJWT = req.headers.cookie.split('; ').find(cookie => cookie.startsWith('jwt=')).slice(4)
+    const decodedCookie = jsonwebtoken.verify(cookieJWT, process.env.JWT_SECRET)
+    const id = decodedCookie.id
+
+    const users = await UsersModel.getTypeUserById({ id })
 
     if (!users) {
       return res.status(400).json({ status: 'Error', message: 'No existe usuario para mostrar' })

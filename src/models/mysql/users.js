@@ -72,6 +72,19 @@ export class UsersModel {
     }
   }
 
+  static async getTypeUserById ({ id }) {
+    const [users] = await connection.query(
+      `SELECT tipoUsuario 
+      FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
+    )
+
+    if (users.length > 0) {
+      return users[0]
+    } else {
+      return null
+    }
+  }
+
   static async createUser ({ input }) {
     const { username, email, password, tipoUsuario } = input
 

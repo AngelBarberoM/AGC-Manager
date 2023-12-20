@@ -1,12 +1,13 @@
 const asidePersonalizadoAdmin = document.createElement('a')
 const asidePersonalizadoAdminContainer = document.querySelector('.aside-personalizado-admin')
+
 asidePersonalizadoAdmin.ariaCurrent = 'page'
 asidePersonalizadoAdmin.href = '/admin'
 
 const asidePersonalizadoPerfil = document.createElement('a')
 const asidePersonalizadoPerfilContainer = document.querySelector('.aside-personalizado-perfil')
 
-asidePersonalizadoAdmin.ariaCurrent = 'page'
+asidePersonalizadoPerfil.ariaCurrent = 'page'
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('/users/typeUser/:userId')

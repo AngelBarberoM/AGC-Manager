@@ -289,10 +289,10 @@ select {
 }
 
 
-/* Imagenes botones */
+/* Imagenes */
 .chiquito {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   padding-right: 10px;
   transition: transform 0.2s ease-in-out;
   display: inline-block;
@@ -309,6 +309,11 @@ select {
   filter: brightness(1.1); 
 }
 
+.img-menu {
+  width: 18px;
+  height: 18px;
+}
+
 /* ----------------------------------------------- */
 /* AQUI SE REALIZA TODO LO RELACIONADO CON EL GRID */
 .container {
@@ -318,7 +323,7 @@ select {
   margin: 0;
   display: grid;
   grid-template-columns: 200px 1fr 1fr;
-  grid-template-rows: 60px 1fr 60px;
+  grid-template-rows: 60px 1fr 40px;
   min-height: 100vh;
   grid-template-areas: 
   "header header header"
@@ -367,7 +372,7 @@ select {
 
 .container main{
   grid-area: content;
-  padding: 20px;
+  padding: 10px;
 }
 .container main h1 {
   color: white;
@@ -395,7 +400,7 @@ select {
   list-style: none; 
   display: flex;
   flex-direction: column;
-  gap: 5px; 
+  /* gap: 5px;  */
 }
 
 .Menu-Aside li {
@@ -411,6 +416,7 @@ select {
   border-radius: 30px;
   display: flex;
   align-items: center;
+  margin-top: 5px;
 }
 
 .Menu-Aside li a:hover {

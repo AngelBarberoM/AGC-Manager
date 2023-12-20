@@ -9,6 +9,12 @@ const asidePersonalizadoPerfilContainer = document.querySelector('.aside-persona
 
 asidePersonalizadoPerfil.ariaCurrent = 'page'
 
+const asidePersonalizadoUsuarios = document.createElement('a')
+const asidePersonalizadoUsuariosContainer = document.querySelector('.aside-personalizado-usuarios')
+
+asidePersonalizadoUsuarios.ariaCurrent = 'page'
+asidePersonalizadoUsuarios.href = '/users'
+
 document.addEventListener('DOMContentLoaded', () => {
   fetch('/users/typeUser/:userId')
     .then(response => response.json())
@@ -16,10 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.tipoUsuario === 'admin') {
         asidePersonalizadoAdmin.innerHTML = 'Administrador'
         asidePersonalizadoAdminContainer.appendChild(asidePersonalizadoAdmin)
+
+        asidePersonalizadoUsuarios.innerHTML = 'Usuarios'
+        asidePersonalizadoUsuariosContainer.appendChild(asidePersonalizadoUsuarios)
       }
 
       asidePersonalizadoPerfil.href = `/users/${data.userId}`
-      asidePersonalizadoPerfil.innerHTML = '<img src=\'/img/user.svg\' width="20" height="20">Perfil'
+      asidePersonalizadoPerfil.innerHTML = '<img src=\'/img/user.svg\' class="img-menu">Perfil'
       asidePersonalizadoPerfilContainer.appendChild(asidePersonalizadoPerfil)
     })
     .catch(error => {

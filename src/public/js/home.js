@@ -1,25 +1,25 @@
-const token = document.cookie.split('; ').find(cookie => cookie.startsWith('jwt=')).slice(4)
-
-const asidePersonalizadoAdmin = document.createElement('li')
+const asidePersonalizadoAdmin = document.createElement('a')
 const asidePersonalizadoAdminContainer = document.querySelector('.aside-personalizado-admin')
+asidePersonalizadoAdmin.ariaCurrent = 'page'
+asidePersonalizadoAdmin.href = '/admin'
+
+const asidePersonalizadoPerfil = document.createElement('a')
+const asidePersonalizadoPerfilContainer = document.querySelector('.aside-personalizado-perfil')
+
+asidePersonalizadoAdmin.ariaCurrent = 'page'
+
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('/users/typeUser/:userId', {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  fetch('/users/typeUser/:userId')
     .then(response => response.json())
     .then(data => {
-    // Realizar la lógica según el tipo de usuario
       if (data.tipoUsuario === 'admin') {
-        asidePersonalizadoAdmin.innerHTML = `
-        <a aria-current="page" href="/admin">Admin</a>
-      `
-
-        // Agrega el formulario al contenedor
+        asidePersonalizadoAdmin.innerHTML = 'Administrador'
         asidePersonalizadoAdminContainer.appendChild(asidePersonalizadoAdmin)
       }
+
+      asidePersonalizadoPerfil.href = `/users/${data.userId}`
+      asidePersonalizadoPerfil.innerHTML = '<img src=\'/img/user.svg\' width="20" height="20">Perfil'
+      asidePersonalizadoPerfilContainer.appendChild(asidePersonalizadoPerfil)
     })
     .catch(error => {
       console.error('Error en la solicitud:', error)

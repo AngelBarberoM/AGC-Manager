@@ -74,7 +74,7 @@ export class UsersModel {
 
   static async getTypeUserById ({ id }) {
     const [users] = await connection.query(
-      `SELECT tipoUsuario 
+      `SELECT BIN_TO_UUID(userId) as userId, tipoUsuario 
       FROM users WHERE userId = UUID_TO_BIN(?)`, [id]
     )
 

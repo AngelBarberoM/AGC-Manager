@@ -21,8 +21,7 @@ export class UsersController {
     if (!users) {
       return res.status(400).json({ status: 'Error', message: 'No existe usuario para mostrar' })
     }
-    // res.json(users)
-    return res.json({ status: 'ok', tipoUsuario: users.tipoUsuario })
+    res.json(users)
   }
 
   getTypeUserById = async (req, res) => {

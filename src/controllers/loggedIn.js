@@ -57,6 +57,28 @@ export async function onlyLoggedIn (req, res, next) {
   } else res.redirect('/login')
 }
 
+export async function onlyUserAdmin (req, res, next) {
+  const urlParts = req.url.split('/')
+  let userIdURL
+  if (urlParts.includes('details')) {
+    const detailsIndex = urlParts.indexOf('details')
+    userIdURL = urlParts[detailsIndex + 1]
+  } else {
+    userIdURL = urlParts[urlParts.indexOf('') + 1]
+  }
+
+  const loggedIn = await isLoggedIn(req)
+
+  const { tipoUsuario, userId } = loggedIn
+
+  if (tipoUsuario === 'admin') return next()
+  else if (tipoUsuario === 'normal') {
+    if (userId === userIdURL) {
+      return next()
+    } else res.redirect('/home')
+  } else res.redirect('/home')
+}
+
 // Función que comprueba si un usuario con la sesión iniciada intenta cerrar su sesión
 export async function loggedOut (req, res, next) {
   const loggedIn = await isLoggedIn(req)

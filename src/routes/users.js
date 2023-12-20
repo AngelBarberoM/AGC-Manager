@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { UsersModel } from '../models/mysql/users.js'
-import { onlyLoggedIn, onlyAdmin } from '../controllers/loggedIn.js'
+import { onlyLoggedIn, onlyAdmin, onlyUserAdmin } from '../controllers/loggedIn.js'
 import { UsersController } from '../controllers/users.js'
 
 import path from 'path'
@@ -18,11 +18,11 @@ usersRouter.get('/', onlyAdmin, (req, res) => {
 
 usersRouter.get('/allUsers', onlyAdmin, usersController.getAllUsers)
 
-usersRouter.get('/:id', onlyLoggedIn, (req, res) => {
+usersRouter.get('/:id', onlyUserAdmin, (req, res) => {
   const usersHtmlPath = path.join(__dirname, '..', 'views', 'user.html')
   res.sendFile(usersHtmlPath)
 })
-usersRouter.get('/details/:id', onlyLoggedIn, usersController.getUserById)
+usersRouter.get('/details/:id', onlyUserAdmin, usersController.getUserById)
 
 usersRouter.get('/typeUser/:id', onlyLoggedIn, usersController.getTypeUserById)
 

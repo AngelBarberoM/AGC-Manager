@@ -322,7 +322,7 @@ select {
   font-family: Arial, sans-serif;
   margin: 0;
   display: grid;
-  grid-template-columns: 200px 1fr 1fr;
+  grid-template-columns: 0.3fr 1fr 1fr;
   grid-template-rows: 60px 1fr 40px;
   min-height: 100vh;
   grid-template-areas: 
@@ -335,7 +335,7 @@ select {
   background-color: rgb(54, 58, 58);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
-  margin-top: 2px;
+  margin: 2px 5px 0px 5px;
 }
 
 .imagen-texto {
@@ -365,14 +365,17 @@ select {
   background-color: rgb(54, 55, 58);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
-  margin-right: 2px;
-  margin-top: 5px;
-  margin: 10px 0px;
+  margin: 10px 0px 0px 5px;
+  width: 0.3fr;
+  height: 510px;
+}
+.container .especial {
+  height: 470px;
 }
 
 .container main{
   grid-area: content;
-  padding: 10px;
+  padding: 10px 5px 5px 10px;
 }
 .container main h1 {
   color: white;
@@ -393,17 +396,17 @@ select {
 }
 
 .Menu-Aside {
-  padding-left: 10px;
+  padding-left: 0px;
   margin-top: 10px; 
-  margin-bottom: 19px; 
+  margin-bottom: 10px; 
   padding-top: auto;
   list-style: none; 
   display: flex;
   flex-direction: column;
-  /* gap: 5px;  */
 }
 
 .Menu-Aside li {
+  padding-left: 10px;
   margin-right: auto; 
 }
 
@@ -433,3 +436,83 @@ select {
 }
 
 /* ----------------------------------------------- */
+
+/* MEDIA QUERY */
+@media (max-width: 950px) {
+  .container header {
+    height: 58px;
+  }
+  .container header h1 {
+    width: 220px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .container .headerespecial h1 {
+    width: 370px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container header {
+    height: 58px;
+  }
+  .container header h1 {
+    width: 220px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .container .headerespecial {
+    height: 115px;
+  }
+  .container .headerespecial h1 {
+    width: 200px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .container .especial {
+    margin-top: 70px;
+  }
+  .container .asideespecial {
+    margin-top: 70px;
+  }
+  .container .mainesoecial {
+    margin-top: 70px;
+  }
+  
+}
+
+@media (max-width: 490px) {
+  .container header {
+    height: 90px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .container header h1 {
+    width: 190px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .container aside {
+    margin-top: 40px;
+  }
+  .container main {
+    margin-top: 40px;
+  }
+  .container .headeradmin {
+    height: 58px;
+  }
+  .container .asideadmin {
+    margin-top: 10px;
+  }
+  .container .mainadmin {
+    margin-top: 0px;
+  }
+}
+
+@media (max-height: 604px) {
+  .container aside {
+    height: 510px;
+  }
+}

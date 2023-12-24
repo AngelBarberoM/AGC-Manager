@@ -22,13 +22,9 @@ fetch('/services/allServices')
         fechaServicioCell.textContent = client.fechaServicio
         row.appendChild(fechaServicioCell)
 
-        const fechaCreacionCell = document.createElement('td')
-        fechaCreacionCell.textContent = client.fechaCreacion
-        row.appendChild(fechaCreacionCell)
-
-        const clientIdCell = document.createElement('td')
-        clientIdCell.textContent = client.clientId
-        row.appendChild(clientIdCell)
+        const clientCell = document.createElement('td')
+        clientCell.textContent = client.nombreApellidosCliente
+        row.appendChild(clientCell)
 
         // Botones de Buscar, Actualizar y Eliminar
         const buttonsCell = document.createElement('td')

@@ -25,8 +25,10 @@ export class ServicesModel {
 
   static async getAllServices () {
     const [services] = await connection.query(
-      `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, DATE_FORMAT(fechaServicio, '%Y-%m-%d') AS fechaServicio, DATE_FORMAT(fechaCreacion, '%Y-%m-%d') AS fechaCreacion, BIN_TO_UUID(clientId) as clientId 
-      FROM services`
+      // `SELECT BIN_TO_UUID(serviceId) as serviceId, tipoServicio, descripcion, DATE_FORMAT(fechaServicio, '%Y-%m-%d') AS fechaServicio, DATE_FORMAT(fechaCreacion, '%Y-%m-%d') AS fechaCreacion, BIN_TO_UUID(clientId) as clientId
+      // FROM services`
+      `SELECT BIN_TO_UUID(s.serviceId) AS serviceId, s.tipoServicio, s.descripcion, DATE_FORMAT(s.fechaServicio, '%Y-%m-%d') AS fechaServicio, DATE_FORMAT(s.fechaCreacion, '%Y-%m-%d') AS fechaCreacion, CONCAT(c.nombre, ' ', c.apellidos) AS nombreApellidosCliente 
+      FROM services s NATURAL JOIN clients c`
     )
 
     if (services.length > 0) {

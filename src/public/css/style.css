@@ -102,8 +102,8 @@ nav {
   margin: auto; 
 }
 .register {
-  width: 400px;
-  height: 550px;
+  width: 500px;
+  height: 400px;
 }
 
 .main-container {
@@ -117,6 +117,12 @@ h1 {
   margin-bottom: 20px;
   color: #333;
 }
+
+.form-container h1 {
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
 p {
   color: #333;
   font-size: 16px;
@@ -142,6 +148,26 @@ form {
   width: 300px;
   text-align: center;
 }
+.form-especial {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.div-register-user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 450px;
+  text-align: center;
+}
 
 label {
   display: block;
@@ -156,7 +182,7 @@ input[type="email"],
 input[type="password"] {
   width: 90%;
   padding: 10px;
-  margin: 8px 0;
+  margin: 8px 0px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -185,6 +211,10 @@ button {
   font-weight: bold;
   margin-top: 10px;
   transition: background-color 0.3s;
+}
+
+.form-especial button {
+  width: 100%;
 }
 
 button:hover {
@@ -293,7 +323,9 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
+.form-especial select {
+  width: 100%;
+}
 
 /* Imagenes */
 .chiquito {

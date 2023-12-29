@@ -64,6 +64,7 @@ nav {
   text-decoration: none;
   font-size: medium;
   border-radius: 30px;
+  margin-right: 10px;
   padding: 10px; 
   transition: background-color 0.3s, color 0.3s;
 }
@@ -325,6 +326,60 @@ select {
 }
 .form-especial select {
   width: 100%;
+}
+
+/* FORMULARIO CREAR */
+.createContainer {
+  background-color: #1a1919;
+  border-radius: 8px;
+  padding: 0px;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0);
+  width: 100%;
+  text-align: center;
+}
+
+.createContainer form{
+  background-color: #1a1919;
+  border-radius: 8px;
+  padding: 0px;
+  box-shadow: none;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+.createContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; 
+}
+
+.createContainer th, .createContainer td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
+  border-right: 1px solid rgba(206, 200, 200, 0.05);
+  border-left: 1px solid rgba(206, 200, 200, 0.05);
+}
+
+.createContainer th {
+  background-color: #333;
+  color: white;
+}
+
+.createContainer label {
+  color: white;
+}
+
+.createContainer input {
+  width: 75%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
 }
 
 /* Imagenes */

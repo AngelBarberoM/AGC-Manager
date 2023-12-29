@@ -18,12 +18,20 @@ contractsRouter.get('/', onlyLoggedIn, (req, res) => {
 
 contractsRouter.get('/allContracts', onlyLoggedIn, contractsController.getAllContracts)
 
+contractsRouter.get('/create', onlyLoggedIn, (req, res) => {
+  const contractsHtmlPath = path.join(__dirname, '..', 'views', 'createContract.html')
+  res.sendFile(contractsHtmlPath)
+})
+
 contractsRouter.get('/:id', onlyLoggedIn, (req, res) => {
   const contractsHtmlPath = path.join(__dirname, '..', 'views', 'contract.html')
   res.sendFile(contractsHtmlPath)
 })
+
 contractsRouter.get('/details/:id', onlyLoggedIn, contractsController.getContractById)
 
 contractsRouter.delete('/:id', onlyLoggedIn, contractsController.deleteContract)
+
 contractsRouter.post('/', onlyLoggedIn, contractsController.createContract)
+
 contractsRouter.patch('/:id', onlyLoggedIn, contractsController.updateContract)

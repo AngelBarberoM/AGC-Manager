@@ -26,8 +26,7 @@ export class ContractsController {
     const validate = validateContract(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
-      // return res.status(400).json({ status: 'Error', message: 'Error Contract Schema' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el contrato' })
     }
 
     const newContract = await ContractsModel.createContract({ input: validate.data })

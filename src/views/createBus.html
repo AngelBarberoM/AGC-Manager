@@ -45,29 +45,33 @@
         <table>
           <thead>
             <tr>
-              <th><label for="fechaInicio">Fecha Inicio</label></th>
-              <th><label for="fechaFin">Fecha Fin</label></th>
-              <th><label for="sueldoHora">Sueldo Hora</label></th>
-              <th><label for="horasSemana">Horas a la Semana</label></th>
+              <th><label for="matricula">Matrícula</label></th>
+              <th><label for="marca">Marca</label></th>
+              <th><label for="modelo">Modelo</label></th>
+              <th><label for="plazas">Plazas</label></th>
+              <th><label for="conductor">Conductor</label></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                <input type="text" id="matricula" name="matricula" placeholder="1234KCH" required>
               </td>
               <td>
-                <input type="date" id="fechaFin" name="fechaFin" required>
+                <input type="text" id="marca" name="marca" placeholder="Iveco" required>
               </td>
               <td>
-                <input type="number" id="sueldoHora" name="sueldoHora" value="6.75" required>
+                <input type="text" id="modelo" name="modelo" placeholder="Crossway" required>
               </td>
               <td>
-                <input type="number" id="horasSemana" name="horasSemana" value="40" required>
+                <input type="number" id="plazas" name="plazas" placeholder="50" required>
               </td>
               <td>
-                <button type="submit">Añadir</button>
+                <input type="text" id="conductor" name="conductor" required>
+              </td>
+              <td>
+                <button type="submit">Añadir</button> <br>
                 <button type="button" class="rojo" id="cancelarCreate">Cancelar</button>
               </td>
             </tr>

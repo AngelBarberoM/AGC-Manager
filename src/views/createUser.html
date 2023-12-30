@@ -45,29 +45,36 @@
         <table>
           <thead>
             <tr>
-              <th><label for="fechaInicio">Fecha Inicio</label></th>
-              <th><label for="fechaFin">Fecha Fin</label></th>
-              <th><label for="sueldoHora">Sueldo Hora</label></th>
-              <th><label for="horasSemana">Horas a la Semana</label></th>
+              <th><label for="username">Nombre Usuario</label></th>
+              <th><label for="email">Email</label></th>
+              <th><label for="password">Contraseña</label></th>
+              <th><label for="confirmedPassword">Confirmar Contraseña</label></th>
+              <th><label for="tipoUsuario">Tipo de Usuario</label></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                <input type="text" id="username" name="username" placeholder="manuelgg" required>
               </td>
               <td>
-                <input type="date" id="fechaFin" name="fechaFin" required>
+                <input type="email" id="email" name="email" placeholder="manuel@gmail.com" required>
               </td>
               <td>
-                <input type="number" id="sueldoHora" name="sueldoHora" value="6.75" required>
+                <input type="password" id="password" name="password" placeholder="********" required>
               </td>
               <td>
-                <input type="number" id="horasSemana" name="horasSemana" value="40" required>
+                <input type="password" id="confirmedPassword" name="confirmedPassword" placeholder="********" required>
               </td>
               <td>
-                <button type="submit">Añadir</button>
+                <select id="tipoUsuario" name="tipoUsuario" required>
+                  <option value="normal">Normal</option>
+                  <option value="autorizado">Autorizado</option>
+                </select>
+              </td>
+              <td>
+                <button type="submit">Añadir</button> <br>
                 <button type="button" class="rojo" id="cancelarCreate">Cancelar</button>
               </td>
             </tr>

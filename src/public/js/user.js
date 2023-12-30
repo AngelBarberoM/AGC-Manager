@@ -113,7 +113,7 @@ fetch(`/users/details/${userId}`)
       updateEmailButton.alt = 'Actualizar Email'
       updateEmailButton.className = 'chiquito separado'
 
-      // Funcionalidad Botón Actualizar Username
+      // Funcionalidad Botón Actualizar
       updateEmailButton.addEventListener('click', () => {
         const updateForm = document.createElement('form')
         const updateFormContainer = document.querySelector('.updateFormContainer')

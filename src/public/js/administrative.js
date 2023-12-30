@@ -43,7 +43,7 @@ fetch(`/administratives/details/${employeeId}`)
       updateEmailButton.alt = 'Actualizar Email'
       updateEmailButton.className = 'chiquito separado'
 
-      // Funcionalidad Botón Actualizar Username
+      // Funcionalidad Botón Actualizar
       updateEmailButton.addEventListener('click', () => {
         const updateForm = document.createElement('form')
         const updateFormContainer = document.querySelector('.updateFormContainer')
@@ -131,7 +131,7 @@ fetch(`/administratives/details/${employeeId}`)
       updateTelefonoButton.alt = 'Actualizar Telefono'
       updateTelefonoButton.className = 'chiquito separado'
 
-      // Funcionalidad Botón Actualizar Username
+      // Funcionalidad Botón Actualizar
       updateTelefonoButton.addEventListener('click', () => {
         const updateForm = document.createElement('form')
         const updateFormContainer = document.querySelector('.updateFormContainer')
@@ -219,7 +219,7 @@ fetch(`/administratives/details/${employeeId}`)
       updateSexoButton.alt = 'Actualizar Sexo'
       updateSexoButton.className = 'chiquito separado'
 
-      // Funcionalidad Botón Actualizar Username
+      // Funcionalidad Botón Actualizar
       updateSexoButton.addEventListener('click', () => {
         const updateForm = document.createElement('form')
         const updateFormContainer = document.querySelector('.updateFormContainer')
@@ -307,7 +307,7 @@ fetch(`/administratives/details/${employeeId}`)
       updateFechaNacimientoButton.alt = 'Actualizar Fecha Nacimiento'
       updateFechaNacimientoButton.className = 'chiquito separado'
 
-      // Funcionalidad Botón Actualizar Username
+      // Funcionalidad Botón Actualizar
       updateFechaNacimientoButton.addEventListener('click', () => {
         const updateForm = document.createElement('form')
         const updateFormContainer = document.querySelector('.updateFormContainer')
@@ -395,7 +395,7 @@ fetch(`/administratives/details/${employeeId}`)
       updateDireccionButton.alt = 'Actualizar Direccion'
       updateDireccionButton.className = 'chiquito separado'
 
-      // Funcionalidad Botón Actualizar Username
+      // Funcionalidad Botón Actualizar
       updateDireccionButton.addEventListener('click', () => {
         const updateForm = document.createElement('form')
         const updateFormContainer = document.querySelector('.updateFormContainer')
@@ -481,7 +481,11 @@ fetch(`/administratives/details/${employeeId}`)
       viewDetailsButton.textContent = 'Ver Contrato'
 
       viewDetailsButton.addEventListener('click', () => {
-        window.location.href = `/contracts/${data.contractId}`
+        if (data.contractId === null) {
+          window.alert('El contrato no existe.')
+        } else {
+          window.location.href = `/contracts/${data.contractId}`
+        }
       })
 
       viewDetailsContractCell.appendChild(viewDetailsButton)

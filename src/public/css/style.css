@@ -471,10 +471,7 @@ select {
   border-radius: 8px;
   margin: 10px 0px 0px 5px;
   width: 193px;
-  height: 510px;
-}
-.container .especial {
-  height: 470px;
+  height: 480px;
 }
 
 .container main{
@@ -579,9 +576,6 @@ select {
     margin-bottom: 2px;
   }
   .container .especial {
-    margin-top: 70px;
-  }
-  .container .asideespecial {
     margin-top: 70px;
   }
   .container .mainesoecial {

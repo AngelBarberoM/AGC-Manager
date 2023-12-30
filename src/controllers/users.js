@@ -41,8 +41,7 @@ export class UsersController {
     const validate = validateUser(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
-      // return res.status(400).json({ status: 'Error', message: 'Error User Schema' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el usuario' })
     }
     const username = validate.data.username
     const email = validate.data.email
@@ -88,7 +87,7 @@ export class UsersController {
     const validate = validatePartialUser(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar el usuario' })
     }
 
     const { id } = req.params

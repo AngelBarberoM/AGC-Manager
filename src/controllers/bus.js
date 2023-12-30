@@ -42,14 +42,13 @@ export class BusController {
     const validate = validateBus(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
-      // return res.status(400).json({ status: 'Error', message: 'Error Bus Schema' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el autobus' })
     }
 
     const existeBusMatricula = await BusModel.getBusByMatricula({ matricula: validate.data.matricula })
 
     if (existeBusMatricula) {
-      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este autobus ya exisite' })
     }
 
     if (validate.data.employeeId !== 'NULL') {

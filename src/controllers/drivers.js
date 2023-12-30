@@ -64,8 +64,7 @@ export class DriversController {
     const validate = validateDriver(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
-      // return res.status(400).json({ status: 'Error', message: 'Error Driver Schema' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el conductor' })
     }
 
     // Comprobamos si existe conductor por DNI, email y telefono

@@ -472,12 +472,9 @@ fetch(`/administratives/details/${employeeId}`)
       row.appendChild(direccionCell)
 
       // CONTRATO
-
-      // Crear una celda para el botón
       const viewDetailsContractCell = document.createElement('td')
-
-      // Crear el botón y configurar su comportamiento
       const viewDetailsButton = document.createElement('button')
+
       viewDetailsButton.textContent = 'Ver Contrato'
 
       viewDetailsButton.addEventListener('click', () => {

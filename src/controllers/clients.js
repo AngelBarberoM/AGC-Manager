@@ -60,8 +60,7 @@ export class ClientsController {
     const validate = validateClient(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
-      // return res.status(400).json({ status: 'Error', message: 'Error Client Schema' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el cliente' })
     }
 
     // Comprobamos si existe conductor por DNI, email y telefono
@@ -96,7 +95,7 @@ export class ClientsController {
     const validate = validatePartialClient(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ error: JSON.parse(validate.error.message) })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar el cliente' })
     }
 
     const { id } = req.params
@@ -113,7 +112,7 @@ export class ClientsController {
       return res.status(400).json({ status: 'Error', message: 'No se ha podido actualizar' })
     }
 
-    return res.json(updatedClient)
+    return res.json({ status: 'ok', message: 'Cliente actualizado', usuario: updatedClient })
   }
 
   deleteClient = async (req, res) => {
@@ -131,6 +130,6 @@ export class ClientsController {
       return res.status(404).json({ status: 'Error', message: 'Client not found' })
     }
 
-    return res.json({ message: 'Client deleted' })
+    return res.json({ status: 'ok', message: 'Cliente eliminado' })
   }
 }

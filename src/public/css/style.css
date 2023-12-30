@@ -249,9 +249,10 @@ table {
 th, td {
   padding: 12px;
   text-align: center;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid rgba(206, 200, 200, 0.5);
-    border-left: 1px solid rgba(206, 200, 200, 0.5);
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid rgba(206, 200, 200, 0.5);
+  border-left: 1px solid rgba(206, 200, 200, 0.5);
+  font-size:0.9em;
 }
 
 th {
@@ -393,6 +394,22 @@ select {
   margin-top: 8px;
 }
 
+.creates.employees {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+
+.creates.employees h1 {
+  margin-bottom: 0; 
+}
+
+.creates.employees nav {
+  margin-top: 10px;
+  align-self: flex-end;
+}
+
 /* Imagenes */
 .chiquito {
   width: 18px;
@@ -459,7 +476,7 @@ select {
 
 .container header h1 {
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   margin: auto; 
   margin-left: 0px; 
 }
@@ -483,9 +500,6 @@ select {
   font-size: 20px;
   margin-top: 10; 
   margin-right: auto; 
-}
-.segundo {
-  padding-top: 20px;
 }
 
 .container footer{
@@ -515,7 +529,7 @@ select {
   color: white;
   text-decoration: none;
   font-size: medium;
-  padding: 8px; /* Ajusta el padding según sea necesario */
+  padding: 8px;
   transition: background-color 0.4s;
   border-radius: 30px;
   display: flex;

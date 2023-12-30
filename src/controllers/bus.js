@@ -106,6 +106,6 @@ export class BusController {
       return res.status(404).json({ status: 'Error', message: 'Bus not found' })
     }
 
-    return res.json({ message: 'Bus deleted' })
+    return res.json({ status: 'ok', message: 'Bus deleted' })
   }
 }

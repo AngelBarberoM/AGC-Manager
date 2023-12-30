@@ -45,29 +45,108 @@
         <table>
           <thead>
             <tr>
-              <th><label for="fechaInicio">Fecha Inicio</label></th>
-              <th><label for="fechaFin">Fecha Fin</label></th>
-              <th><label for="sueldoHora">Sueldo Hora</label></th>
-              <th><label for="horasSemana">Horas a la Semana</label></th>
+              <th><label for="dni">DNI</label></th>
+              <th><label for="nombre">Nombre</label></th>
+              <th><label for="apellidos">Apellidos</label></th>
+              <th><label for="email">Email</label></th>
+              <th><label for="telefono">Teléfono</label></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <input type="text" id="dni" name="dni" placeholder="12345678A" required>
+              </td>
+              <td>
+                <input type="text" id="nombre" name="nombre" placeholder="Carla" required>
+              </td>
+              <td>
+                <input type="text" id="apellidos" name="apellidos" placeholder="Fernandez" required>
+              </td>
+              <td>
+                <input type="email" id="email" name="email" placeholder="carla@gmail.com" required>
+              </td>
+              <td>
+                <input type="text" id="telefono" name="telefono" placeholder="611111111" required>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th><label for="sexo">Sexo</label></th>
+              <th><label for="fechaNacimiento">Fecha de Nacimiento</label></th>
+              <th><label for="direccion">Dirección</label></th>
+              <th><label for="contrato">Contrato</label></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <select id="sexo" name="sexo" required>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="otros">Otro</option>
+                </select>
+              </td>
+              <td>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" placeholder="Lucas" required>
+              </td>
+              <td>
+                <input type="text" id="direccion" name="direccion" placeholder="C/Amatista 9, 3" required>
+              </td>
+              <td>
+                <input type="text" id="contrato" name="contrato" required>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th><label for="permisoConducir">Permiso de Conducir</label></th>
+              <th><label for="tarjetaCAP">Tarjeta CAP</label></th>
+              <th><label for="tarjetaTacografo">Tarjeta Tacógrafo</label></th>
+              <th><label for="certificadoAntecedentes">Certificado Antecedentes</label></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                <select id="permisoConducir" name="permisoConducir" required>
+                  <option value="B">Tipo B</option>
+                  <option value="C1">Tipo C1</option>
+                  <option value="C">Tipo C</option>
+                  <option value="D1">Tipo D1</option>
+                  <option value="D">Tipo D</option>
+                  <option value="BE">Tipo BE</option>
+                  <option value="C1E">Tipo C1E</option>
+                  <option value="D1E">Tipo D1E</option>
+                  <option value="DE">Tipo DE</option>
+                </select>
               </td>
               <td>
-                <input type="date" id="fechaFin" name="fechaFin" required>
+                <select id="tarjetaCAP" name="tarjetaCAP" required>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
+                </select>
               </td>
               <td>
-                <input type="number" id="sueldoHora" name="sueldoHora" value="6.75" required>
+                <select id="tarjetaTacografo" name="tarjetaTacografo" required>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
+                </select>
               </td>
               <td>
-                <input type="number" id="horasSemana" name="horasSemana" value="40" required>
+                <select id="certificadoAntecedentes" name="certificadoAntecedentes" required>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
+                </select>
               </td>
               <td>
-                <button type="submit">Añadir</button>
+                <button type="submit">Añadir</button> <br>
                 <button type="button" class="rojo" id="cancelarCreate">Cancelar</button>
               </td>
             </tr>

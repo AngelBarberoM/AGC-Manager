@@ -346,6 +346,7 @@ select {
   width: 100%;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 0px;
 }

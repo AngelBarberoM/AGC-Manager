@@ -45,26 +45,34 @@
         <table>
           <thead>
             <tr>
-              <th><label for="fechaInicio">Fecha Inicio</label></th>
-              <th><label for="fechaFin">Fecha Fin</label></th>
-              <th><label for="sueldoHora">Sueldo Hora</label></th>
-              <th><label for="horasSemana">Horas a la Semana</label></th>
+              <th><label for="nombreEmpresa">Nombre Empresa</label></th>
+              <th><label for="dni">DNI</label></th>
+              <th><label for="nombre">Nombre</label></th>
+              <th><label for="apellidos">Apellidos</label></th>
+              <th><label for="email">Email</label></th>
+              <th><label for="telefono">Teléfono</label></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                <input type="text" id="nombreEmpresa" name="nombreEmpresa" required>
               </td>
               <td>
-                <input type="date" id="fechaFin" name="fechaFin" required>
+                <input type="text" id="dni" name="dni" placeholder="12345678A" required>
               </td>
               <td>
-                <input type="number" id="sueldoHora" name="sueldoHora" value="6.75" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Lucas" required>
               </td>
               <td>
-                <input type="number" id="horasSemana" name="horasSemana" value="40" required>
+                <input type="text" id="apellidos" name="apellidos" placeholder="Gutiérrez" required>
+              </td>
+              <td>
+                <input type="email" id="email" name="email" placeholder="lucas@gmail.com" required>
+              </td>
+              <td>
+                <input type="text" id="telefono" name="telefono" placeholder="611111111" required>
               </td>
               <td>
                 <button type="submit">Añadir</button>

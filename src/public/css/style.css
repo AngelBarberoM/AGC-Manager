@@ -382,6 +382,16 @@ select {
   text-align: center;
 }
 
+.creates nav{
+  display: block;
+  align-content: end;
+  margin: 0px;
+}
+
+.creates nav ul{
+  margin-top: 8px;
+}
+
 /* Imagenes */
 .chiquito {
   width: 18px;

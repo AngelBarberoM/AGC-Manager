@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (patchData.status === 'ok') {
             window.alert('Contrato creado correctamente.')
 
-            window.location.href('/contracts')
+            window.location.href = '/contracts'
           } else {
             window.alert(`${patchData.message}`)
 

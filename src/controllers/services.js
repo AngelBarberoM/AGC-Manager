@@ -31,7 +31,7 @@ export class ServicesController {
     const validate = validateService(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido actualizar' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el servicio' })
     }
 
     if (validate.data.clientId !== 'NULL') {

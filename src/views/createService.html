@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crear Contrato</title>
+  <title>Crear Servicio</title>
   <link rel="icon" type="image/jog" href="/img/AGC.png">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <script src="/js/createContract.js"></script>
+  <script src="/js/createService.js"></script>
 </head>
 <body class="container">
   <header>
@@ -16,7 +16,7 @@
           <img alt="Logo Autocares Gómez Carmona" width="190" height="50" src="/img/logoAGC.webp">
         </picture>
       </a>
-      <h1>Crear Contrato</h1>
+      <h1>Crear Servicio</h1>
     </div>
   </header>
 
@@ -41,30 +41,46 @@
 
   <main>
     <div class="createContainer">
-      <form id="createContract-form">
+      <form id="createService-form">
         <table>
           <thead>
             <tr>
-              <th><label for="fechaInicio">Fecha Inicio</label></th>
-              <th><label for="fechaFin">Fecha Fin</label></th>
-              <th><label for="sueldoHora">Sueldo Hora</label></th>
-              <th><label for="horasSemana">Horas a la Semana</label></th>
+              <th><label for="tipoServicio">Tipo de Servicio</label></th>
+              <th><label for="descripcion">Descripción</label></th>
+              <th><label for="fechaServicio">Fecha de Servicio</label></th>
+              <th><label for="fechaCreacion">Fecha de Creación</label></th>
+              <th><label for="cliente">Cliente</label></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                <select id="tipoServicio" name="tipoServicio" required>
+                  <option value="ruta">Ruta</option>
+                  <option value="transfer">Transfer</option>
+                  <option value="escolar">Escolar</option>
+                  <option value="excursion">Excursión</option>
+                  <option value="turismo">Turismo</option>
+                  <option value="largaDistancia">Larga Distancia</option>
+                  <option value="eventos">Eventos</option>
+                  <option value="eventosEspeciales">Eventos Especiales</option>
+                  <option value="eventosDeportivos">Eventos Deportivos</option>
+                  <option value="alquilerAutobus">Alquiler Autobús</option>
+                  <option value="transporteCrucero">Transporte Crucero</option>
+                </select>
               </td>
               <td>
-                <input type="date" id="fechaFin" name="fechaFin" required>
+                <input type="text" id="descripcion" name="descripcion" required>
               </td>
               <td>
-                <input type="number" id="sueldoHora" name="sueldoHora" value="6.75" required>
+                <input type="date" id="fechaServicio" name="fechaServicio" value="6.75" required>
               </td>
               <td>
-                <input type="number" id="horasSemana" name="horasSemana" value="40" required>
+                <input type="date" id="fechaCreacion" name="fechaCreacion" value="40" required>
+              </td>
+              <td>
+                <input type="text" id="cliente" name="cliente" required>
               </td>
               <td>
                 <button type="submit">Añadir</button> <br>

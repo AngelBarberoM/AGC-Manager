@@ -18,6 +18,11 @@ usersRouter.get('/', onlyAdmin, (req, res) => {
 
 usersRouter.get('/allUsers', onlyAdmin, usersController.getAllUsers)
 
+usersRouter.get('/create', onlyLoggedIn, (req, res) => {
+  const usersHtmlPath = path.join(__dirname, '..', 'views', 'createUser.html')
+  res.sendFile(usersHtmlPath)
+})
+
 usersRouter.get('/:id', onlyUserAdmin, (req, res) => {
   const usersHtmlPath = path.join(__dirname, '..', 'views', 'user.html')
   res.sendFile(usersHtmlPath)

@@ -18,6 +18,11 @@ clientsRouter.get('/', onlyLoggedIn, (req, res) => {
 
 clientsRouter.get('/allClients', onlyLoggedIn, clientsController.getAllClients)
 
+clientsRouter.get('/create', onlyLoggedIn, (req, res) => {
+  const clientsHtmlPath = path.join(__dirname, '..', 'views', 'createClient.html')
+  res.sendFile(clientsHtmlPath)
+})
+
 clientsRouter.get('/:id', onlyLoggedIn, (req, res) => {
   const clientsHtmlPath = path.join(__dirname, '..', 'views', 'client.html')
   res.sendFile(clientsHtmlPath)

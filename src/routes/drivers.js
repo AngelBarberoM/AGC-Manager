@@ -18,6 +18,11 @@ driversRouter.get('/', onlyLoggedIn, (req, res) => {
 
 driversRouter.get('/allDrivers', onlyLoggedIn, driversController.getAllDrivers)
 
+driversRouter.get('/create', onlyLoggedIn, (req, res) => {
+  const driversHtmlPath = path.join(__dirname, '..', 'views', 'createDriver.html')
+  res.sendFile(driversHtmlPath)
+})
+
 driversRouter.get('/:id', onlyLoggedIn, (req, res) => {
   const driversHtmlPath = path.join(__dirname, '..', 'views', 'driver.html')
   res.sendFile(driversHtmlPath)

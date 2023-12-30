@@ -18,6 +18,11 @@ servicesRouter.get('/', onlyLoggedIn, (req, res) => {
 
 servicesRouter.get('/allServices', onlyLoggedIn, servicesController.getAllServices)
 
+servicesRouter.get('/create', onlyLoggedIn, (req, res) => {
+  const servicesHtmlPath = path.join(__dirname, '..', 'views', 'createService.html')
+  res.sendFile(servicesHtmlPath)
+})
+
 servicesRouter.get('/:id', onlyLoggedIn, (req, res) => {
   const servicesHtmlPath = path.join(__dirname, '..', 'views', 'service.html')
   res.sendFile(servicesHtmlPath)

@@ -283,7 +283,11 @@ fetch(`/bus/details/${busId}`)
       viewDetailsButton.textContent = 'Ver Conductor'
 
       viewDetailsButton.addEventListener('click', () => {
-        window.location.href = `/drivers/${data.employeeId}`
+        if (data.employeeId === null) {
+          window.alert('El conductor no existe.')
+        } else {
+          window.location.href = `/drivers/${data.employeeId}`
+        }
       })
 
       viewDetailsDriverCell.appendChild(viewDetailsButton)

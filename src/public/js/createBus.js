@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const marca = e.target.elements.marca.value
     const modelo = e.target.elements.modelo.value
     const plazas = Number(e.target.elements.plazas.value)
-    const conductor = e.target.elements.conductor.value
+    const employeeId = e.target.elements.employeeId.value
 
     const confirmCreate = window.confirm('¿Estás seguro de que deseas crear este autobús?')
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          matricula, marca, modelo, plazas, conductor
+          matricula, marca, modelo, plazas, employeeId
         })
       })
         .then(response => response.json())

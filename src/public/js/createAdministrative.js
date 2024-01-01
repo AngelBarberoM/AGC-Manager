@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sexo = e.target.elements.sexo.value
     const fechaNacimiento = e.target.elements.fechaNacimiento.value
     const direccion = e.target.elements.direccion.value
-    const contrato = e.target.elements.contrato.value
+    const contractId = e.target.elements.contractId.value
 
     const confirmCreate = window.confirm('¿Estás seguro de que deseas crear este administrativo?')
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, contrato
+          dni, nombre, apellidos, email, telefono, sexo, fechaNacimiento, direccion, contractId
         })
       })
         .then(response => response.json())

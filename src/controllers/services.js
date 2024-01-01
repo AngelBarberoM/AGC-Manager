@@ -34,6 +34,13 @@ export class ServicesController {
       return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el servicio' })
     }
 
+    // Comprobamos que si se le pasa un uuid no correcto por el formato salte el error
+    const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/
+
+    if (validate.data.clientId !== 'NULL' && !uuidRegex.test(validate.data.clientId)) {
+      return res.status(400).json({ status: 'Error', message: 'El clientId no es un UUID válido' })
+    }
+
     if (validate.data.clientId !== 'NULL') {
       const validateClientId = await ClientsModel.getClientById({ id: validate.data.clientId })
 

@@ -86,8 +86,14 @@ export class AdministrativesController {
       return res.status(400).json({ status: 'Error', message: 'Este administrativo ya exisite' })
     }
 
-    // Comprobamos que cuando creamos un administrativo sin contrato no pete
+    // Comprobamos que si se le pasa un uuid no correcto por el formato salte el error
+    const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/
 
+    if (validate.data.contractId !== 'NULL' && !uuidRegex.test(validate.data.contractId)) {
+      return res.status(400).json({ status: 'Error', message: 'El contractId no es un UUID válido' })
+    }
+
+    // Comprobamos que cuando creamos un administrativo sin contrato no pete
     if (validate.data.contractId !== 'NULL') {
       const validateContractId = await ContractsModel.getContractById({ id: validate.data.contractId })
 

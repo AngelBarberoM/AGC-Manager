@@ -51,6 +51,13 @@ export class BusController {
       return res.status(400).json({ status: 'Error', message: 'Este autobus ya exisite' })
     }
 
+    // Comprobamos que si se le pasa un uuid no correcto por el formato salte el error
+    const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/
+
+    if (validate.data.employeeId !== 'NULL' && !uuidRegex.test(validate.data.employeeId)) {
+      return res.status(400).json({ status: 'Error', message: 'El employeeId no es un UUID válido' })
+    }
+
     if (validate.data.employeeId !== 'NULL') {
       const validateEmployeeId = await DriversModel.getDriverById({ id: validate.data.employeeId })
 

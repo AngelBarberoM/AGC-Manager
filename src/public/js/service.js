@@ -201,7 +201,11 @@ fetch(`/services/details/${serviceId}`)
       viewDetailsButton.textContent = 'Ver Cliente'
 
       viewDetailsButton.addEventListener('click', () => {
-        window.location.href = `/clients/${data.clientId}`
+        if (data.clientId === null) {
+          window.alert('El conductor no existe.')
+        } else {
+          window.location.href = `/clients/${data.clientId}`
+        }
       })
 
       viewDetailsClientCell.appendChild(viewDetailsButton)

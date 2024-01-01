@@ -43,7 +43,7 @@ CREATE TABLE clients (
 );
 CREATE TABLE services (
 	serviceId BINARY(16) PRIMARY KEY DEFAULT(UUID_TO_BIN(UUID())),
-    tipoServicio ENUM('ruta','transfer','escolar','excursion','turismo','largaDistancia','transportePublicoLocal','eventos','eventosEspeciales','eventosDeportivos','alquilerAutobus','transporteCrucero') NOT NULL,
+    tipoServicio ENUM('ruta','transfer','escolar','excursion','turismo','largaDistancia','eventos','eventosEspeciales','eventosDeportivos','alquilerAutobus','transporteCrucero') NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
     fechaServicio DATE NOT NULL,
     fechaCreacion DATE DEFAULT(DATE(NOW())),

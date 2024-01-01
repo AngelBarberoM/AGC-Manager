@@ -4,6 +4,7 @@ USE AGCdb;
 -- Insertamos datos en las tablas
 INSERT INTO users (userId, username, email, password, tipoUsuario) VALUES 
 (UUID_TO_BIN(UUID()), "a", "a@a.com", "$2a$05$RXErlhYGHDuLHhG/LnfAXOj4NcnMaPrsJhX1V309U.eu00GfgWksC", "admin"),
+(UUID_TO_BIN(UUID()), "b", "b@b.com", "$2a$05$6aVGZfUyzSRu9SIUeKCmfOi.Tqx88uLL1h2y6HgURf4ezdoumOvGa", "normal"),
 (UUID_TO_BIN(UUID()), "hola", "hola@hola.com", "$2a$05$RXErlhYGHDuLHhG/LnfAXOj4NcnMaPrsJhX1V309U.eu00GfgWksC", "autorizado");
 
 INSERT INTO clients (clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion) VALUES
@@ -27,7 +28,6 @@ INSERT INTO services (serviceId, tipoServicio, descripcion, fechaServicio, fecha
 (UUID_TO_BIN("51c04e18-9c0a-11ee-bdce-5e4951bbb96b"), "excursion", "Excursión Barcelona", "2024-01-18", "2023-12-15", UUID_TO_BIN("7bda38b6-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("5647b5a5-9c0a-11ee-bdce-5e4951bbb96b"), "turismo", "Transporte El Rincón", "2023-12-28", "2023-11-10", UUID_TO_BIN("7bda3999-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("5ada61a5-9c0a-11ee-bdce-5e4951bbb96b"), "largaDistancia", "Transporte París", "2023-12-05", NULL, UUID_TO_BIN("7bda39ef-9356-11ee-a3af-d0c5d3070aa6")),
-(UUID_TO_BIN("60116c7b-9c0a-11ee-bdce-5e4951bbb96b"), "transportePublicoLocal", "Marbella-Torre del Mar", "2024-02-14", "2023-11-30", UUID_TO_BIN("7bda3a3f-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("6414bca2-9c0a-11ee-bdce-5e4951bbb96b"), "eventos", "Transporte Feria Málaga", "2024-01-29", "2023-12-11", UUID_TO_BIN("7bda3a8a-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("672a88a3-9c0a-11ee-bdce-5e4951bbb96b"), "eventosEspeciales", "Transporte Latin Grammys", "2023-11-16", NULL, UUID_TO_BIN("7bda3ad7-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("6eb0306f-9c0a-11ee-bdce-5e4951bbb96b"), "eventosDeportivos", "Transporte Málaga CF-Córdoba CF", "2023-12-12", "2023-10-23", UUID_TO_BIN("7bda3b1c-9356-11ee-a3af-d0c5d3070aa6")),

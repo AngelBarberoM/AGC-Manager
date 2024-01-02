@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch src/index.js",
-    "build-css": "tailwindcss -i ./src/public/css/tailwind.css -o ./src/public/css/tailwind.css"
+    "dev": "node --watch src/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +26,6 @@
   },
   "homepage": "https://github.com/AngelBarberoM/AGC-Manager#readme",
   "devDependencies": {
-    "nodemon": "3.0.1",
     "standard": "17.1.0"
   },
   "eslintConfig": {

@@ -6,18 +6,18 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(contractsData => {
       const defaultOption = document.createElement('option')
       defaultOption.value = ''
-      defaultOption.textContent = 'Selecciona un cliente'
+      defaultOption.textContent = 'Selecciona un contrato'
       contractIdSelect.appendChild(defaultOption)
 
       contractsData.forEach(client => {
         const option = document.createElement('option')
         option.value = client.contractId
-        option.textContent = `${client.fechaInicio} ${client.fechaFin}`
+        option.textContent = `${client.fechaInicio} - ${client.fechaFin}`
         contractIdSelect.appendChild(option)
       })
     })
     .catch(error => {
-      console.error('Error al obtener los clientes del sistema', error)
+      console.error('Error al obtener los contratos del sistema', error)
     })
 
   document.getElementById('createAdministrative-form').addEventListener('submit', async (e) => {

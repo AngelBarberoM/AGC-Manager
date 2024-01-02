@@ -87,7 +87,7 @@ CREATE TABLE drivers (
     sexo ENUM('masculino','femenino','otros') NOT NULL,
     fechaNacimiento DATE NOT NULL,
     direccion VARCHAR(100) NOT NULL,
-    permisoConducir ENUM('AM','A1','A2','A','B','C1','C','D1','D','BE','C1E','D1E','DE') NOT NULL,
+    permisoConducir ENUM('B','C1','C','D1','D','BE','C1E','D1E','DE') NOT NULL,
     tarjetaCAP ENUM('Si','No') NOT NULL,
     tarjetaTacografo ENUM('Si','No') NOT NULL,
     certificadoAntecedentes ENUM('Si','No') NOT NULL,

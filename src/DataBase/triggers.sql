@@ -11,5 +11,3 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-
--- Conductor sin certificado antecedentes no puede conducir escolar

@@ -5,7 +5,7 @@ USE AGCdb;
 INSERT INTO users (userId, username, email, password, tipoUsuario) VALUES 
 (UUID_TO_BIN(UUID()), "a", "a@a.com", "$2a$05$RXErlhYGHDuLHhG/LnfAXOj4NcnMaPrsJhX1V309U.eu00GfgWksC", "admin"),
 (UUID_TO_BIN(UUID()), "b", "b@b.com", "$2a$05$6aVGZfUyzSRu9SIUeKCmfOi.Tqx88uLL1h2y6HgURf4ezdoumOvGa", "normal"),
-(UUID_TO_BIN(UUID()), "hola", "hola@hola.com", "$2a$05$RXErlhYGHDuLHhG/LnfAXOj4NcnMaPrsJhX1V309U.eu00GfgWksC", "autorizado");
+(UUID_TO_BIN(UUID()), "c", "c@c.com", "$2a$05$8SnFmUFmp0pRYNqafO52LORjEdFXudzYDtM19kS6tvkeETMcvQk56", "autorizado");
 
 INSERT INTO clients (clientId, nombreEmpresa, dni, nombre, apellidos, email, telefono, fechaNacimiento, direccion) VALUES
 (UUID_TO_BIN("ff37fc9e-7fac-11ee-920d-d0c5d3070aa6"), "Empresa1", "12345678A", "Carlos", "Gómez Muñoz", "carlos@gmail.com", "724623523", "2000-02-14", "C/Juan de Haro, 9, 3a, 12421"),
@@ -27,11 +27,11 @@ INSERT INTO services (serviceId, tipoServicio, descripcion, fechaServicio, fecha
 (UUID_TO_BIN("339b66e2-7fe3-11ee-83f6-d0c5d3070aa6"), "escolar", "Transporte escolar colegio Almudena", "2023-12-20", "2023-11-15", UUID_TO_BIN("ff3804e5-7fac-11ee-920d-d0c5d3070aa6")),
 (UUID_TO_BIN("51c04e18-9c0a-11ee-bdce-5e4951bbb96b"), "excursion", "Excursión Barcelona", "2024-01-18", "2023-12-15", UUID_TO_BIN("7bda38b6-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("5647b5a5-9c0a-11ee-bdce-5e4951bbb96b"), "turismo", "Transporte El Rincón", "2023-12-28", "2023-11-10", UUID_TO_BIN("7bda3999-9356-11ee-a3af-d0c5d3070aa6")),
-(UUID_TO_BIN("5ada61a5-9c0a-11ee-bdce-5e4951bbb96b"), "largaDistancia", "Transporte París", "2023-12-05", NULL, UUID_TO_BIN("7bda39ef-9356-11ee-a3af-d0c5d3070aa6")),
+(UUID_TO_BIN("5ada61a5-9c0a-11ee-bdce-5e4951bbb96b"), "largaDistancia", "Transporte París", "2023-12-05", "2024-01-01", UUID_TO_BIN("7bda39ef-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("6414bca2-9c0a-11ee-bdce-5e4951bbb96b"), "eventos", "Transporte Feria Málaga", "2024-01-29", "2023-12-11", UUID_TO_BIN("7bda3a8a-9356-11ee-a3af-d0c5d3070aa6")),
-(UUID_TO_BIN("672a88a3-9c0a-11ee-bdce-5e4951bbb96b"), "eventosEspeciales", "Transporte Latin Grammys", "2023-11-16", NULL, UUID_TO_BIN("7bda3ad7-9356-11ee-a3af-d0c5d3070aa6")),
+(UUID_TO_BIN("672a88a3-9c0a-11ee-bdce-5e4951bbb96b"), "eventosEspeciales", "Transporte Latin Grammys", "2023-11-16", "2024-01-02", UUID_TO_BIN("7bda3ad7-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("6eb0306f-9c0a-11ee-bdce-5e4951bbb96b"), "eventosDeportivos", "Transporte Málaga CF-Córdoba CF", "2023-12-12", "2023-10-23", UUID_TO_BIN("7bda3b1c-9356-11ee-a3af-d0c5d3070aa6")),
-(UUID_TO_BIN("7474c7d3-9c0a-11ee-bdce-5e4951bbb96b"), "alquilerAutobus", "Alquiler Junta Andalucía", "2023-10-25", NULL, UUID_TO_BIN("7bda3b6a-9356-11ee-a3af-d0c5d3070aa6")),
+(UUID_TO_BIN("7474c7d3-9c0a-11ee-bdce-5e4951bbb96b"), "alquilerAutobus", "Alquiler Junta Andalucía", "2023-10-25", "2024-01-01", UUID_TO_BIN("7bda3b6a-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("78b1a0f7-9c0a-11ee-bdce-5e4951bbb96b"), "transporteCrucero", "Crucero 5stars Caribean", "2024-01-09", "2023-09-11", UUID_TO_BIN("243c6a77-999f-11ee-a0c8-387a0e9dbbb9")),
 (UUID_TO_BIN("9e41929c-9c0a-11ee-bdce-5e4951bbb96b"), "transfer", "Transfer Granada", "2024-02-13", "2023-05-01", UUID_TO_BIN("7bda3bbb-9356-11ee-a3af-d0c5d3070aa6")),
 (UUID_TO_BIN("a126cc86-9c0a-11ee-bdce-5e4951bbb96b"), "escolar", "Transporte Escolar colegio Los Olivos", "2024-02-22", "2023-10-22", UUID_TO_BIN("7bda3c01-9356-11ee-a3af-d0c5d3070aa6"));

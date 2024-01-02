@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const clientIdSelect = document.getElementById('clientId')
+
+  fetch('/clients/allClients')
+    .then(response => response.json())
+    .then(clientsData => {
+      const defaultOption = document.createElement('option')
+      defaultOption.value = ''
+      defaultOption.textContent = 'Selecciona un cliente'
+      clientIdSelect.appendChild(defaultOption)
+
+      clientsData.forEach(client => {
+        const option = document.createElement('option')
+        option.value = client.clientId
+        option.textContent = `${client.nombre} ${client.apellidos}`
+        clientIdSelect.appendChild(option)
+      })
+    })
+    .catch(error => {
+      console.error('Error al obtener los clientes del sistema', error)
+    })
+
   document.getElementById('createService-form').addEventListener('submit', async (e) => {
     e.preventDefault()
 

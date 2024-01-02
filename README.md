@@ -1,17 +1,26 @@
 # AGC-Manager
 
-### Versiones
+#### VERSIONES
 
   - Versión de NodeJS -> 20.9.0 : https://nodejs.org/en  
   - Versión de NPM -> 6.14.6 : https://www.npmjs.com/  
 
-### BASE DE DATOS  
+#### BASE DE DATOS  
 
   - Lenguaje MySQL  
   - MySQL Workbench 8.0 CE : https://www.mysql.com/products/workbench/  
-  - Laragon : https://laragon.org/index.html  
+  - Laragon : https://laragon.org/index.html
 
-### PUESTA EN MARCHA  --> DESARROLLO
+#### CAMBIO DE NOMBRE A LA CARPETA
+Si la carpeta donde se encuentra todo el código se llama de otra forma que no sea AGC-Manager, se debe cambiar el nombre del directorio a este para evitar que puedan surgir fallos por las rutas.
+
+#### INSTALAR LAS DEPENDENCIAS NECESARIAS Y EXTENSIONES
+1. Acceder a VisualStudioCode en el repositorio donde se encuentre la totalidad del código en "AGC-Manager/"
+2. Abrir la terminal y ejecutar el comando: "npm install", automáticamente, todas las dependencias habrán sido instaladas correctamente.
+3. Aquí se muestran algunas de las extensiones que han sido utilizadas durante el desarrollo de la Aplicación Web:
+  - ESLint, Auto Rename Tag, Indenticator, JavaScript (ES6) code snippets, Live Preview, node-snippets, REST Client.
+
+#### PUESTA EN MARCHA  --> DESARROLLO
 El desarrollo de la página se ha llevado a cabo con las versiones especificadas anteriormente, para el correcto funcionamiento, se deben tener instaladas las mismas versiones, ya que otras versiones pueden generar fallos o incompatibilidades.  
 
 1. Abrir Laragon y pulsar el botón de Iniciar.
@@ -22,7 +31,7 @@ El desarrollo de la página se ha llevado a cabo con las versiones especificadas
 6. Ejecutar en la terminal el comando "npm run dev" o "node --watch src/index.js". El comando "npm run dev" es un script que lanza "node --watch src/index.js", pero si no se tiene una versión de NPM correcta, puede fallar.
 7. Pinchar en la ruta que aparece una vez se ejecuta el comando, es una ruta de localhost.
 
-### DATOS DE ACCESO  
+#### DATOS DE ACCESO  
 
 Para acceder a la aplicación web habrá que utilizar un email registrado con contraseña. Hay tres tipos de usuarios diferentes:
   - Usuario Administrador, puede acceder a todas las funcionalidades del sistema. A diferencia del usuario Normal, este puede gestionar todos los usuarios que hay en el sistema y poder visualizarlos. Además, puede crear un usuario Autorizado, si así se le pide.

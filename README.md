@@ -11,6 +11,11 @@
   - MySQL Workbench 8.0 CE : https://www.mysql.com/products/workbench/  
   - Laragon : https://laragon.org/index.html  
 
+###### INSTALAR LAS DEPENDENCIAS NECESARIAS 
+1. Acceder a VisualStudioCode en el repositorio donde se encuentre la totalidad del código en "AGC-Manager/"
+2. Abrir la terminal y ejecutar el comando: "npm install",
+3. Automáticamente, todas las dependencias han sido instaladas.
+
 ### PUESTA EN MARCHA  --> DESARROLLO
 El desarrollo de la página se ha llevado a cabo con las versiones especificadas anteriormente, para el correcto funcionamiento, se deben tener instaladas las mismas versiones, ya que otras versiones pueden generar fallos o incompatibilidades.  
 

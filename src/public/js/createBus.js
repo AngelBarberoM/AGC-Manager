@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const employeeIdSelect = document.getElementById('employeeId')
+
+  fetch('/drivers/allDrivers')
+    .then(response => response.json())
+    .then(clientsData => {
+      const defaultOption = document.createElement('option')
+      defaultOption.value = ''
+      defaultOption.textContent = 'Selecciona un conductor'
+      employeeIdSelect.appendChild(defaultOption)
+
+      clientsData.forEach(client => {
+        const option = document.createElement('option')
+        option.value = client.employeeId
+        option.textContent = `${client.nombre} ${client.apellidos}`
+        employeeIdSelect.appendChild(option)
+      })
+    })
+    .catch(error => {
+      console.error('Error al obtener los conductores del sistema', error)
+    })
+
   document.getElementById('createBus-form').addEventListener('submit', async (e) => {
     e.preventDefault()
 

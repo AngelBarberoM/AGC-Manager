@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const contractIdSelect = document.getElementById('contractId')
+
+  fetch('/contracts/allContracts')
+    .then(response => response.json())
+    .then(contractsData => {
+      const defaultOption = document.createElement('option')
+      defaultOption.value = ''
+      defaultOption.textContent = 'Selecciona un contrato'
+      contractIdSelect.appendChild(defaultOption)
+
+      contractsData.forEach(client => {
+        const option = document.createElement('option')
+        option.value = client.contractId
+        option.textContent = `${client.fechaInicio} - ${client.fechaFin}`
+        contractIdSelect.appendChild(option)
+      })
+    })
+    .catch(error => {
+      console.error('Error al obtener los contratos del sistema', error)
+    })
+
   document.getElementById('createDriver-form').addEventListener('submit', async (e) => {
     e.preventDefault()
 

@@ -102,7 +102,7 @@ const contractSchema = z.object({
   horasSemana: z.number({
     invalid_type_error: 'Horas Semana must be a int',
     required_error: 'Horas Semana is required'
-  }).int().min(40, { message: 'Horas Semana must be equal than 40' }).max(40, { message: 'Sueldo Hora must be equal than 40' })
+  }).int()
 })
 
 const administrativeSchema = z.object({
@@ -136,6 +136,8 @@ const administrativeSchema = z.object({
     required_error: 'Fecha Nacimiento is required'
   }).refine(value => new Date(value) >= new Date('1900-01-01'), {
     message: 'Fecha Nacimiento must be greater than 1900-01-01.'
+  }).refine(value => new Date(value) <= new Date('2023-01-01'), {
+    message: 'Fecha Nacimiento must be lower than 2023-01-01.'
   }),
   direccion: z.string({
     invalid_type_error: 'Direccion must be a string',

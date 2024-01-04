@@ -64,7 +64,7 @@ export class AdministrativesController {
     const validate = validateAdministrative(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el administrativo' })
     }
 
     // Comprobamos si existe administrativo por DNI, email y telefono

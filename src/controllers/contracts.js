@@ -29,6 +29,14 @@ export class ContractsController {
       return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el contrato' })
     }
 
+    if (validate.data.fechaInicio > validate.data.fechaFin) {
+      return res.status(400).json({ status: 'Error', message: 'La fecha de inicio de contrato no puede ser mayor que la fecha fin' })
+    }
+
+    if (validate.data.horasSemana !== 40 && validate.data.horasSemana !== 20) {
+      return res.status(400).json({ status: 'Error', message: 'Solo se pueden crear contratos con 20 o 40 horas' })
+    }
+
     const newContract = await ContractsModel.createContract({ input: validate.data })
 
     if (newContract) {

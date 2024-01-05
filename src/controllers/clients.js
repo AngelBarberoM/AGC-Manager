@@ -63,23 +63,23 @@ export class ClientsController {
       return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el cliente' })
     }
 
-    // Comprobamos si existe conductor por DNI, email y telefono
+    // Comprobamos si existe cliente por DNI, email y telefono
     const existeClienteDNI = await ClientsModel.getClientByDNI({ dni: validate.data.dni })
 
     if (existeClienteDNI) {
-      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este cliente ya existe' })
     }
 
     const existeClienteEmail = await ClientsModel.getClientByEmail({ email: validate.data.email })
 
     if (existeClienteEmail) {
-      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este cliente ya existe' })
     }
 
     const existeClienteTelefono = await ClientsModel.getClientByTelefono({ telefono: validate.data.telefono })
 
     if (existeClienteTelefono) {
-      return res.status(400).json({ status: 'Error', message: 'Este conductor ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este cliente ya existe' })
     }
 
     const newClient = await ClientsModel.createClient({ input: validate.data })

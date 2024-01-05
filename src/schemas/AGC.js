@@ -48,6 +48,8 @@ const clientSchema = z.object({
     required_error: 'Fecha Nacimiento is required'
   }).refine(value => new Date(value) >= new Date('1900-01-01'), {
     message: 'Fecha Nacimiento must be greater than 1900-01-01.'
+  }).refine(value => new Date(value) <= new Date('2023-01-01'), {
+    message: 'Fecha Nacimiento must be lower than 2023-01-01.'
   }),
   direccion: z.string({
     invalid_type_error: 'Direccion must be a string',
@@ -75,7 +77,7 @@ const serviceSchema = z.object({
     invalid_type_error: 'Fecha Creacion must be a string',
     required_error: 'Fecha Creacion is required'
   }).refine(value => new Date(value) >= new Date('2020-01-01'), {
-    message: 'Fecha Creacion must be greater than 2020-01-01.'
+    message: 'Fecha Creacion must be greater than 2000-01-01.'
   }),
   clientId: z.string({
     required_error: 'clientId is required'

@@ -179,6 +179,8 @@ const driverSchema = z.object({
     required_error: 'Fecha Nacimiento is required'
   }).refine(value => new Date(value) >= new Date('1900-01-01'), {
     message: 'Fecha Nacimiento must be greater than 1900-01-01.'
+  }).refine(value => new Date(value) <= new Date('2023-01-01'), {
+    message: 'Fecha Nacimiento must be lower than 2023-01-01.'
   }),
   direccion: z.string({
     invalid_type_error: 'Direccion must be a string',

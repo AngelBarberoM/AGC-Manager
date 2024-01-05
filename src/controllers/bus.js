@@ -7,7 +7,7 @@ export class BusController {
     const bus = await BusModel.getAllBus()
 
     if (!bus) {
-      return res.status(400).json({ status: 'Error', message: 'No existen autobuss para mostrar' })
+      return res.status(400).json({ status: 'Error', message: 'No existen autobúss para mostrar' })
     }
     res.json(bus)
   }
@@ -18,7 +18,7 @@ export class BusController {
     const bus = await BusModel.getBusById({ id })
 
     if (!bus) {
-      return res.status(400).json({ status: 'Error', message: 'No existe autobus para mostrar' })
+      return res.status(400).json({ status: 'Error', message: 'No existe autobús para mostrar' })
     }
     res.json(bus)
   }
@@ -29,7 +29,7 @@ export class BusController {
     const bus = await BusModel.getBusById({ matricula })
 
     if (!bus) {
-      return res.status(400).json({ status: 'Error', message: 'No existe autobus para mostrar' })
+      return res.status(400).json({ status: 'Error', message: 'No existe autobús para mostrar' })
     }
     res.json(bus)
   }
@@ -42,13 +42,13 @@ export class BusController {
     const validate = validateBus(req.body)
 
     if (!validate.success) {
-      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el autobus' })
+      return res.status(400).json({ status: 'Error', error: JSON.parse(validate.error.message), message: 'No se ha podido crear el autobús' })
     }
 
     const existeBusMatricula = await BusModel.getBusByMatricula({ matricula: validate.data.matricula })
 
     if (existeBusMatricula) {
-      return res.status(400).json({ status: 'Error', message: 'Este autobus ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este autobús ya exisite' })
     }
 
     // Comprobamos que si se le pasa un uuid no correcto por el formato salte el error
@@ -62,7 +62,7 @@ export class BusController {
       const validateEmployeeId = await DriversModel.getDriverById({ id: validate.data.employeeId })
 
       if (!validateEmployeeId) {
-        return res.status(400).json({ status: 'Error', message: `El autobus ${validate.data.matricula} no ha sido creado correctamente por que el employeeId no es correcto ` })
+        return res.status(400).json({ status: 'Error', message: `El autobús ${validate.data.matricula} no ha sido creado correctamente por que el employeeId no es correcto ` })
       }
     }
     const newBus = await BusModel.createBus({ input: validate.data })
@@ -70,7 +70,7 @@ export class BusController {
     if (newBus) {
       return res.status(201).json({ status: 'ok', message: `Bus ${newBus.matricula} con id ${newBus.busId} creado correctamente`, redirect: '/bus' })
     } else {
-      return res.status(400).json({ status: 'Error', message: `El autobus ${validate.data.matricula} no ha sido creado correctamente ` })
+      return res.status(400).json({ status: 'Error', message: `El autobús ${validate.data.matricula} no ha sido creado correctamente ` })
     }
   }
 
@@ -86,7 +86,7 @@ export class BusController {
     const bus = await BusModel.getBusById({ id })
 
     if (!bus) {
-      return res.status(400).json({ status: 'Error', message: 'No existe autobus para actualizar' })
+      return res.status(400).json({ status: 'Error', message: 'No existe autobús para actualizar' })
     }
 
     const updatedBus = await BusModel.updateBus({ id, input: validate.data })
@@ -104,7 +104,7 @@ export class BusController {
     const bus = await BusModel.getBusById({ id })
 
     if (!bus) {
-      return res.status(400).json({ status: 'Error', message: 'No existe autobus para eliminar' })
+      return res.status(400).json({ status: 'Error', message: 'No existe autobús para eliminar' })
     }
 
     const deletedBus = await BusModel.deleteBus({ id })

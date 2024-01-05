@@ -71,19 +71,19 @@ export class AdministrativesController {
     const existeAdministrativoDNI = await AdministrativesModel.getAdministrativeByDNI({ dni: validate.data.dni })
 
     if (existeAdministrativoDNI) {
-      return res.status(400).json({ status: 'Error', message: 'Este administrativo ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este administrativo ya existe' })
     }
 
     const existeAdministrativoEmail = await AdministrativesModel.getAdministrativeByEmail({ email: validate.data.email })
 
     if (existeAdministrativoEmail) {
-      return res.status(400).json({ status: 'Error', message: 'Este administrativo ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este administrativo ya existe' })
     }
 
     const existeAdministrativoTelefono = await AdministrativesModel.getAdministrativeByTelefono({ telefono: validate.data.telefono })
 
     if (existeAdministrativoTelefono) {
-      return res.status(400).json({ status: 'Error', message: 'Este administrativo ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este administrativo ya existe' })
     }
 
     // Comprobamos que si se le pasa un uuid no correcto por el formato salte el error

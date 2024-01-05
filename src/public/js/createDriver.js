@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
       contractsData.forEach(client => {
         const option = document.createElement('option')
         option.value = client.contractId
-        option.textContent = `${client.fechaInicio} - ${client.fechaFin}`
+        option.textContent = `${client.fechaInicio} / ${client.fechaFin}`
         contractIdSelect.appendChild(option)
       })
     })

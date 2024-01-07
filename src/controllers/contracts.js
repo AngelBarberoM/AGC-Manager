@@ -61,6 +61,11 @@ export class ContractsController {
       return res.status(400).json({ status: 'Error', message: 'No existe contrato para actualizar' })
     }
 
+    if (validate.data.horasSemana) {
+      if (validate.data.horasSemana !== 40 && validate.data.horasSemana !== 20) {
+        return res.status(400).json({ status: 'Error', message: 'Solo se pueden actualizar el contrato a 20 o 40 horas' })
+      }
+    }
     const updatedContract = await ContractsModel.updateContract({ id, input: validate.data })
 
     if (!updatedContract) {

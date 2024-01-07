@@ -62,13 +62,13 @@ export class UsersController {
     const existeUsuarioUsername = await UsersModel.getUserByUsername({ username })
 
     if (existeUsuarioUsername) {
-      return res.status(400).json({ status: 'Error', message: 'Este usuario ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este usuario ya existe' })
     }
 
     const existeUsuarioEmail = await UsersModel.getUserByEmail({ email })
 
     if (existeUsuarioEmail) {
-      return res.status(400).json({ status: 'Error', message: 'Este usuario ya exisite' })
+      return res.status(400).json({ status: 'Error', message: 'Este usuario ya existe' })
     }
 
     // Creamos el nuevo usuario

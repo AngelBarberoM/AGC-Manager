@@ -208,7 +208,7 @@ fetch(`/bus/details/${busId}`)
             <table>
             <thead>
               <tr>
-                <th><label for="plazas">Nuevo Plazas</label></th>
+                <th><label for="plazas">Nuevas Plazas</label></th>
                 <th></th>
               </tr>
             </thead>
@@ -247,7 +247,7 @@ fetch(`/bus/details/${busId}`)
               .then(response => response.json())
               .then(patchData => {
                 if (patchData.status === 'ok') {
-                  window.alert('Plazas actualizado correctamente.')
+                  window.alert('Plazas actualizadas correctamente.')
 
                   updateFormContainer.removeChild(updateForm)
 

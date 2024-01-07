@@ -36,7 +36,7 @@ fetch(`/services/details/${serviceId}`)
             <table>
             <thead>
               <tr>
-                <th><label for="descripcion">Nuevo Descripcion</label></th>
+                <th><label for="descripcion">Nueva Descripción</label></th>
                 <th></th>
               </tr>
             </thead>
@@ -75,7 +75,7 @@ fetch(`/services/details/${serviceId}`)
               .then(response => response.json())
               .then(patchData => {
                 if (patchData.status === 'ok') {
-                  window.alert('Descripcion actualizado correctamente.')
+                  window.alert('Descripcion actualizada correctamente.')
 
                   updateFormContainer.removeChild(updateForm)
 

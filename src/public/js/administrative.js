@@ -235,7 +235,11 @@ fetch(`/administratives/details/${employeeId}`)
             <tbody>
               <tr>
                 <td>
-                  <input type="text" id="sexo" name="sexo" value="${data.sexo}" required>
+                  <select id="sexo" name="sexo" required>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otros">Otro</option>
+                  </select>
                 </td>
                 <td>
                   <button type="button" id="submitUpdate">Actualizar</button>

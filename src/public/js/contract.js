@@ -191,6 +191,88 @@ fetch(`/contracts/details/${contractId}`)
 
       const horasSemanaCell = document.createElement('td')
       horasSemanaCell.textContent = data.horasSemana
+
+      // Botón de Actualizar HorasSemana
+      const updateHorasSemanaButton = document.createElement('img')
+
+      updateHorasSemanaButton.src = '/img/editar.png'
+      updateHorasSemanaButton.alt = 'Actualizar Horas Semana'
+      updateHorasSemanaButton.className = 'chiquito separado'
+
+      // Funcionalidad Botón Actualizar
+      updateHorasSemanaButton.addEventListener('click', () => {
+        const updateForm = document.createElement('form')
+        const updateFormContainer = document.querySelector('.updateFormContainer')
+
+        updateForm.innerHTML = `
+            <table>
+            <thead>
+              <tr>
+                <th><label for="horasSemana">Nuevas Horas Semana</label></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="number" id="horasSemana" name="horasSemana" value="${data.horasSemana}" required>
+                </td>
+                <td>
+                  <button type="button" id="submitUpdate">Actualizar</button>
+                  <button type="button" class="rojo" id="cancelarUpdate">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        `
+
+        const submitUpdateButton = updateForm.querySelector('#submitUpdate')
+        const cancelarUpdateButton = updateForm.querySelector('#cancelarUpdate')
+
+        submitUpdateButton.addEventListener('click', () => {
+          const updatedData = {
+            horasSemana: Number(updateForm.querySelector('#horasSemana').value)
+          }
+
+          const confirmUpdate = window.confirm(`¿Estás seguro de que deseas actualizar las horas semana: ${data.horasSemana}?`)
+
+          if (confirmUpdate) {
+            fetch(`/contracts/${contractId}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedData)
+            })
+              .then(response => response.json())
+              .then(patchData => {
+                if (patchData.status === 'ok') {
+                  window.alert('Horas Semana actualizado correctamente.')
+
+                  updateFormContainer.removeChild(updateForm)
+
+                  window.location.reload()
+                } else {
+                  window.alert(`${patchData.message}`)
+
+                  console.error('Error al actualizar:', patchData.message)
+                }
+              })
+              .catch(error => {
+                console.error('Error al actualizar:', error)
+              })
+          }
+        })
+
+        cancelarUpdateButton.addEventListener('click', () => {
+          updateFormContainer.removeChild(updateForm)
+        })
+
+        updateFormContainer.innerHTML = ''
+        updateFormContainer.appendChild(updateForm)
+      })
+
+      horasSemanaCell.appendChild(updateHorasSemanaButton)
       row.appendChild(horasSemanaCell)
 
       // Botón y Eliminar

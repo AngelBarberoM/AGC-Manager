@@ -3,7 +3,7 @@
 #### VERSIONES
 
   - Versión de NodeJS -> 20.9.0 : https://nodejs.org/en  
-  - Versión de NPM -> 6.14.6 : https://www.npmjs.com/  
+  - Versión de NPM -> 10.2.4 : https://www.npmjs.com/  
 
 #### BASE DE DATOS  
 

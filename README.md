@@ -3,7 +3,7 @@
 #### VERSIONES
 
   - Versión de NodeJS -> 20.9.0 : https://nodejs.org/en  
-  - Versión de NPM -> 6.14.6 : https://www.npmjs.com/  
+  - Versión de NPM -> 10.2.4 : https://www.npmjs.com/  
 
 #### BASE DE DATOS  
 
@@ -28,7 +28,7 @@ El desarrollo de la página se ha llevado a cabo con las versiones especificadas
 3. Abrir todos los scripts de la Base de datos que se pueden encontrar en el directorio "AGC-Manager/src/DataBase".  
 4. Ejecutar los scripts tables.sql, triggers.sql y populate.sql. Si se quiere comprobar, ejecutar las consultas del selects.sql.
 5. Acceder a VisualStudioCode.
-6. Ejecutar en la terminal el comando "npm run dev" o "node --watch src/index.js". El comando "npm run dev" es un script que lanza "node --watch src/index.js", pero si no se tiene una versión de NPM correcta, puede fallar.
+6. Ejecutar en la terminal el comando "node --watch src/index.js".
 7. Pinchar en la ruta que aparece una vez se ejecuta el comando, es una ruta de localhost.
 8. Una vez se accede a la ruta de localhost en el navegador, preferiblemente en Google Chrome ya que se ha programado en este navegador, se puede acceder a la aplicación web con los siguientes datos.
 

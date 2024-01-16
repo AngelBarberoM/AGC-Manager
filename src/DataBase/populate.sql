@@ -38,13 +38,13 @@ INSERT INTO services (serviceId, tipoServicio, descripcion, fechaServicio, fecha
 
 INSERT INTO contracts (contractId, fechaInicio, fechaFin, sueldoHora, horasSemana) VALUES
 (UUID_TO_BIN("9f0310e1-7fe3-11ee-83f6-d0c5d3070aa6"), "2015-05-01", "2030-12-31", "7", 40),
-(UUID_TO_BIN("262c9439-9c0c-11ee-bdce-5e4951bbb96b"), "2017-10-01", "2028-10-31", "7.5", 40),
+(UUID_TO_BIN("262c9439-9c0c-11ee-bdce-5e4951bbb96b"), "2017-10-01", "2028-10-31", "7.5", 20),
 (UUID_TO_BIN("d5ff8c8a-9c0c-11ee-bdce-5e4951bbb96b"), "2018-09-01", "2026-09-30", "9", 40),
 (UUID_TO_BIN("36ef83bf-9c0c-11ee-bdce-5e4951bbb96b"), "2022-03-01", "2029-03-31", "8", 40),
-(UUID_TO_BIN("3a92789b-9c0c-11ee-bdce-5e4951bbb96b"), "2021-11-01", "2050-11-30", "7.75", 40),
+(UUID_TO_BIN("3a92789b-9c0c-11ee-bdce-5e4951bbb96b"), "2021-11-01", "2050-11-30", "7.75", 20),
 (UUID_TO_BIN("9f03157e-7fe3-11ee-83f6-d0c5d3070aa6"), "2022-02-01", "2027-12-31", "6.75", 40),
 (UUID_TO_BIN("9f03169a-7fe3-11ee-83f6-d0c5d3070aa6"), "2009-09-01", "2040-12-31", "8.25", 40),
-(UUID_TO_BIN("fc755f17-9c0d-11ee-bdce-5e4951bbb96b"), "2022-01-01", "2029-01-31", "8", 40),
+(UUID_TO_BIN("fc755f17-9c0d-11ee-bdce-5e4951bbb96b"), "2022-01-01", "2029-01-31", "8", 20),
 (UUID_TO_BIN("062ffe42-9c0e-11ee-bdce-5e4951bbb96b"), "2021-05-01", "2050-05-31", "7.75", 40),
 (UUID_TO_BIN("0ce79029-9c0e-11ee-bdce-5e4951bbb96b"), "2022-07-01", "2027-07-31", "6.75", 40),
 (UUID_TO_BIN("13e4db43-9c0e-11ee-bdce-5e4951bbb96b"), "2019-08-01", "2040-08-31", "8.25", 40);

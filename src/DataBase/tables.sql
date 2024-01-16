@@ -44,7 +44,7 @@ CREATE TABLE clients (
 CREATE TABLE services (
 	serviceId BINARY(16) PRIMARY KEY DEFAULT(UUID_TO_BIN(UUID())),
     tipoServicio ENUM('ruta','transfer','escolar','excursion','turismo','largaDistancia','eventos','eventosEspeciales','eventosDeportivos','alquilerAutobus','transporteCrucero') NOT NULL,
-    descripcion VARCHAR(200) NOT NULL,
+    descripcion VARCHAR(500) NOT NULL,
     fechaServicio DATE NOT NULL,
     fechaCreacion DATE DEFAULT(DATE(NOW())),
     clientId BINARY(16) DEFAULT NULL,
@@ -57,8 +57,7 @@ CREATE TABLE contracts (
     sueldoHora DOUBLE NOT NULL DEFAULT(6.75),
     horasSemana INT NOT NULL DEFAULT(40),
     CONSTRAINT sueldoHoraMinimo CHECK (sueldoHora >= 6.75),
-    CONSTRAINT sueldoMinimo CHECK (sueldoHora*horasSemana*4*14 >= 15120),
-	CONSTRAINT horasSemanaMax CHECK (horasSemana = 40)
+	CONSTRAINT horasSemanaMax CHECK (horasSemana = 40 OR horasSemana = 20)
 );
 CREATE TABLE administratives (
 	employeeId BINARY(16) PRIMARY KEY DEFAULT(UUID_TO_BIN(UUID())),

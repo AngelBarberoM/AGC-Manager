@@ -11,9 +11,6 @@
   - MySQL Workbench 8.0 CE : https://www.mysql.com/products/workbench/  
   - Laragon : https://laragon.org/index.html
 
-#### CAMBIO DE NOMBRE A LA CARPETA
-Si la carpeta donde se encuentra todo el código se llama de otra forma que no sea AGC-Manager, se debe cambiar el nombre del directorio a este para evitar que puedan surgir fallos por las rutas.
-
 #### INSTALAR LAS DEPENDENCIAS NECESARIAS Y EXTENSIONES
 1. Acceder a VisualStudioCode en el repositorio donde se encuentre la totalidad del código en "AGC-Manager/"
 2. Abrir la terminal y ejecutar el comando: "npm install", automáticamente, todas las dependencias habrán sido instaladas correctamente.
@@ -32,14 +29,14 @@ El desarrollo de la página se ha llevado a cabo con las versiones especificadas
 7. Pinchar en la ruta que aparece una vez se ejecuta el comando, es una ruta de localhost.
 8. Una vez se accede a la ruta de localhost en el navegador, preferiblemente en Google Chrome ya que se ha programado en este navegador, se puede acceder a la aplicación web con los siguientes datos.
 
-#### DATOS DE ACCESO  
+#### CUENTAS DE PRUEBA  
 
 Para acceder a la aplicación web habrá que utilizar un email registrado con contraseña. Hay tres tipos de usuarios diferentes:
   - Usuario Administrador, puede acceder a todas las funcionalidades del sistema. A diferencia del usuario Normal, este puede gestionar todos los usuarios que hay en el sistema y poder visualizarlos. Además, puede crear un usuario Autorizado, si así se le pide.
   - Usuario Normal, puede acceder a todas las funcionalidades del sistema, excepto las que son únicamente para el usuario Administrador.
   - Usuario Autorizado, puede acceder con un email y una contraseña provisional proporcionada por el administrador, una vez que inicia sesión, automaticamente se le pide que cambie dicha contraseña por una más segura. Una vez que se cambia la contraseña, el usuario autorizado pasa a ser un usuario Normal.
 
-Aquí se muestran los diferentes tipos de accesos en el sistema con sus correspondientes emails y contraseñas:
+Aquí se muestran los diferentes tipos de accesos de prueba en el sistema con sus correspondientes emails y contraseñas:
 
 Acceder como usuario Administrador:  
   - Email: a@a.com
